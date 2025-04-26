@@ -1,4 +1,4 @@
-# Dokumentasi Awak Sisaku
+# Dokumentasi Awal Sisaku
 
 Dokumentasi ini memberikan petunjuk instalasi dan panduan migrasi database untuk Aplikasi Tabungan Siswa, sistem berbasis Laravel untuk mengelola tabungan siswa dengan peran pengguna yang berbeda (admin, guru, siswa).
 
