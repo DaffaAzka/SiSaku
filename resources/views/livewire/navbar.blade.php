@@ -58,61 +58,113 @@
                 @endif
 
                 @if (Auth::check())
-                    @if (Auth::user()->hasRole('teacher'))
-                        <a class="font-semibold text-sm dark:font-medium text-white hover:underline focus:outline-hidden focus:text-gray-100"
-                            href="#">Catat Tabungan</a>
-                    @endif
 
-                    <div class="hs-dropdown relative inline-flex">
-                        <button id="hs-dropdown-with-dividers" type="button"
-                            class="hs-dropdown-toggle inline-flex items-center gap-x-2 text-sm font-semibold dark:font-medium text-white disabled:opacity-50 disabled:pointer-events-none"
-                            aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                            Opsi
-                            <svg class="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m6 9 6 6 6-6" />
-                            </svg>
-                        </button>
+                    @if (!Auth::user()->hasRoles('admin'))
+                        @if (Auth::user()->role == 'teacher')
+                            <a class="flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-white  focus:outline-hidden dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                href="#">
+                                <x-lucide-file-input class="sm:hidden w-4 h-4" />
+                                Catat Tabungan
+                            </a>
+                        @endif
 
-                        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 divide-y divide-gray-200 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700"
-                            role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-with-dividers">
-                            <div class="p-1 space-y-0.5">
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Newsletter
-                                </a>
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Purchases
-                                </a>
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Downloads
-                                </a>
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Team Account
-                                </a>
-                            </div>
-                            <div class="p-1 space-y-0.5">
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Upgrade License
-                                </a>
-                            </div>
-                            <div class="p-1 space-y-0.5">
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Account Settings
-                                </a>
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                    href="#">
-                                    Sign out
-                                </a>
+                        <div class="hs-dropdown relative hidden sm:inline-flex">
+                            <button id="hs-dropdown-with-dividers" type="button"
+                                class="hs-dropdown-toggle inline-flex items-center gap-x-2 text-sm font-semibold dark:font-medium text-white disabled:opacity-50 disabled:pointer-events-none"
+                                aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                Opsi
+                                <svg class="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            </button>
+
+                            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 divide-y divide-gray-200 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700"
+                                role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-with-dividers">
+                                <div class="p-1 space-y-0.5">
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                        href="#">
+                                        <x-lucide-bell class="w-4 h-4" />
+                                        Notifikasi
+                                    </a>
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                        href="#">
+                                        <x-lucide-printer class="w-4 h-4" />
+                                        Cetak Laporan
+                                    </a>
+                                </div>
+
+                                @if (Auth::user()->role == 'teacher')
+                                    <div class="p-1 space-y-0.5">
+                                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                            href="#">
+                                            <x-lucide-users class="w-4 h-4" />
+                                            Manajemen Siswa
+                                        </a>
+
+                                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                            href="#">
+                                            <x-lucide-files class="w-4 h-4" />
+                                            Manajemen Tabungan
+                                        </a>
+                                    </div>
+                                @endif
+
+                                <div class="p-1 space-y-0.5">
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                        href="#">
+                                        <x-lucide-settings class="w-4 h-4" />
+                                        Setelan Akun
+                                    </a>
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                                        href="#">
+                                        <x-lucide-log-out class="w-4 h-4" />
+                                        Keluar
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+
+                        <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-white  focus:outline-hidden dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                            href="#">
+                            <x-lucide-bell class="w-4 h-4" />
+                            Notifikasi
+                        </a>
+                        <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-white  focus:outline-hidden dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                            href="#">
+                            <x-lucide-printer class="w-4 h-4" />
+                            Cetak Laporan
+                        </a>
+
+                        @if (Auth::user()->role == 'teacher')
+                            <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-white  focus:outline-hidden dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                href="#">
+                                <x-lucide-users class="w-4 h-4" />
+                                Manajemen Siswa
+                            </a>
+
+                            <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-white  focus:outline-hidden dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                href="#">
+                                <x-lucide-files class="w-4 h-4" />
+                                Manajemen Tabungan
+                            </a>
+                        @endif
+
+                        <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-white  focus:outline-hidden dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                            href="#">
+                            <x-lucide-settings class="w-4 h-4" />
+                            Setelan Akun
+                        </a>
+                        <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-red-500 focus:outline-hidden dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                            href="#">
+                            <x-lucide-log-out class="w-4 h-4" />
+                            Keluar
+                        </a>
+                    @endif
+
 
                     <span
                         class="hidden sm:inline-flex items-center justify-center size-10 rounded-full bg-white font-semibold">
