@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use Illuminate\Http\Request;
 
 class ClassesController extends Controller
@@ -35,7 +36,7 @@ class ClassesController extends Controller
         ]);
         $class = Classes::create([
             'majors' => $validated['majors'],
-            'class' => $valitaded['class'],
+            'class' => $validated['class'],
             'teacher_id' => $validated['teacher_id'],
         ]);
         $class->students()->attach($validated['students']);
@@ -43,7 +44,7 @@ class ClassesController extends Controller
             'message' => 'Class berhasil ditambahkan',
             'data' => $class,
         ])->setStatusCode(201);
-        
+
     }
 
     /**
@@ -83,7 +84,7 @@ class ClassesController extends Controller
             'message' => 'class berhasil diupdate',
             'data' => $class,
         ])->setStatusCode(200,);
-        
+
     }
 
     /**
@@ -99,6 +100,6 @@ class ClassesController extends Controller
             'message' => 'berhasil dihapus',
             'data' => $class,
         ])->setStatuscode(200,);
-        
+
     }
 }
