@@ -40,10 +40,7 @@ class ClassesController extends Controller
             'teacher_id' => $validated['teacher_id'],
         ]);
         $class->students()->attach($validated['students']);
-        return response()->json([
-            'message' => 'Class berhasil ditambahkan',
-            'data' => $class,
-        ])->setStatusCode(201);
+        return $Log;
 
     }
 
@@ -80,11 +77,7 @@ class ClassesController extends Controller
         $class->teacher_id = $validated['teacher_id'];
         $class->students()->sync($validated['students']);
         $class->save();
-        return response()->json([
-            'message' => 'class berhasil diupdate',
-            'data' => $class,
-        ])->setStatusCode(200,);
-
+        return $class; 
     }
 
     /**
@@ -96,10 +89,6 @@ class ClassesController extends Controller
         $class = Classes::findorfail($id);
         $class->students()->detach();
         $class->delete();
-        return response()->json([
-            'message' => 'berhasil dihapus',
-            'data' => $class,
-        ])->setStatuscode(200,);
-
+        return $class;
     }
 }

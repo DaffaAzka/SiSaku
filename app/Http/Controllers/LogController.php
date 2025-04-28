@@ -27,7 +27,20 @@ class LogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valited = $request->validate([
+            'user_id' => 'requaired/exists:users,id',
+            'action' => 'requaired',
+            'description' => 'requaired',
+        ]);
+        $Log = Log::create([
+            'user_id' => $valited['user_id'],
+            'action' => $valited['action'],
+            'description' => $valited['description'],
+        ]);
+
+
+        return $Log;
+
     }
 
     /**
@@ -52,6 +65,18 @@ class LogController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $valited = $request->validate([
+            'user_id' => 'requaired/exists:users,id',
+            'action' => 'requaired',
+            'description' => 'requaired',
+        ]);
+        $Log = Log::find($id);
+        $Log->user_id = $valited['user_id'];
+        $Log->action = $valited['action'];
+        $Log->description = $valited['description'];
+        $Log->save();
+        return $Log;
+        
     }
 
     /**
@@ -60,5 +85,8 @@ class LogController extends Controller
     public function destroy(string $id)
     {
         //
+        $Log = Log::find($id);
+        $Log->delete();
+        return $Log;
     }
 }
