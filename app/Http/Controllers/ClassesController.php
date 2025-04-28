@@ -28,6 +28,22 @@ class ClassesController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+          'majors'=>'requaired /exists:majors,id',
+          'class'=>'requaired /exists:classes,id',
+          'teacher_id'=>'requaired /exists:users,id',
+        ]);
+        $class = Classes::create([
+            'majors' => $validated['majors'],
+            'class' => $valitaded['class'],
+            'teacher_id' => $validated['teacher_id'],
+        ]);
+        $class->students()->attach($validated['students']);
+        return response()->json([
+            'message' => 'Class berhasil ditambahkan',
+            'data' => $class,
+        ])->setStatusCode(201);
+        
     }
 
     /**
@@ -52,6 +68,22 @@ class ClassesController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validated = $request->validate([
+            'majors'=>'requaired /exists:majors,id',
+            'class'=>'requaired /exists:classes,id',
+            'teacher_id'=>'requaired /exists:users,id',
+        ]);
+        $class = Classes::findorfail($id);
+        $class->majors = $validated['majors'];
+        $class->class = $validated['class'];
+        $class->teacher_id = $validated['teacher_id'];
+        $class->students()->sync($validated['students']);
+        $class->save();
+        return response()->json([
+            'message' => 'class berhasil diupdate',
+            'data' => $class,
+        ])->setStatusCode(200,);
+        
     }
 
     /**
@@ -60,5 +92,13 @@ class ClassesController extends Controller
     public function destroy(string $id)
     {
         //
+        $class = Classes::findorfail($id);
+        $class->students()->detach();
+        $class->delete();
+        return response()->json([
+            'message' => 'berhasil dihapus',
+            'data' => $class,
+        ])->setStatuscode(200,);
+        
     }
 }
