@@ -29,9 +29,9 @@
 
 <body class="bg-neutral-50 dark:bg-neutral-900">
 
-    {{-- @if (!request()->is('login') && !request()->is('register') && !request()->is('/') && !request()->is('register') && !request()->is('verify')) --}}
+    @if (!request()->is('signin') && !request()->is('verify'))
     <livewire:navbar />
-    {{-- @endif --}}
+    @endif
 
     <div class="mx-6 sm:mx-36">
         {{ $slot }}
