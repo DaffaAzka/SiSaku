@@ -33,7 +33,11 @@
     <livewire:navbar />
     @endif
 
-    <div class="mx-6 sm:mx-36">
+    @if (!request()->is('signin') && !request()->is('verify'))
+    <div class="px-6 sm:px-36">
+    @else
+    <div>
+    @endif
         {{ $slot }}
     </div>
 
