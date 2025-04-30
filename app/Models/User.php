@@ -19,9 +19,16 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+
         'name',
         'email',
         'password',
+        'phone_number',
+        'birth_date',
+        'nip',
+        'nisn',
+        'gender'
+
     ];
 
     public function studentClasses()
