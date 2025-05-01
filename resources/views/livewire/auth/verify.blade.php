@@ -8,7 +8,7 @@
 
         <form action="#" method="POST" class="space-y-4">
           <div class="flex items-center border rounded px-3 py-2 space-x-2">
-            <x-lucide-mail class="w-3.5  h-3.5" />
+            <x-lucide-mail class="w-4 h-4" />
             <input type="text" name="code" placeholder="" class="w-full focus:outline-none">
           </div>
           <button type="submit" class="w-full bg-teal-700 hover:bg-teal-500 text-white font-semibold py-2 px-4 rounded text-sm">
