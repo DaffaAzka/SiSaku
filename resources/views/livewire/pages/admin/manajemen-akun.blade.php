@@ -1,4 +1,4 @@
-<div class="p-6 bg-gray-50 min-h-screen font-sans">
+<div class="p-6 min-h-screen font-sans">
     <h1 class="text-3xl font-semibold mb-6">Selamat pagi, Guru</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">

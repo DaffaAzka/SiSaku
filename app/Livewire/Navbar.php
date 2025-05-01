@@ -11,6 +11,13 @@ class Navbar extends Component
 
     public function render()
     {
+        // dd(Auth::user()->role);
         return view('livewire.navbar');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('welcome');
     }
 }

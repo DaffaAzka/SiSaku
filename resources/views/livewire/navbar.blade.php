@@ -50,7 +50,7 @@
                         href="#">Docs</a>
                     <a class="font-semibold text-sm dark:font-medium text-white hover:underline focus:outline-hidden focus:text-gray-100"
                         href="#">Cek Akun Siswa</a>
-                    <a href=""
+                    <a href="{{ route('signin') }}"
                         class="py-3 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-white  hover:bg-gray-50 focus:outline-hidden  disabled:opacity-50 disabled:pointer-events-none">
                         <x-lucide-log-in class="w-4 h-4" />
                         Sign In
@@ -59,8 +59,8 @@
 
                 @if (Auth::check())
 
-                    @if (!Auth::user()->hasRoles('admin'))
-                        @if (Auth::user()->role == 'teacher')
+                    @if (!Auth::user()->hasRole('admin'))
+                        @if (Auth::user()->hasRole('teacher'))
                             <a class="flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-white  focus:outline-hidden dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
                                 href="#">
                                 <x-lucide-file-input class="sm:hidden w-4 h-4" />
@@ -96,7 +96,7 @@
                                     </a>
                                 </div>
 
-                                @if (Auth::user()->role == 'teacher')
+                                @if (Auth::user()->hasRole('teacher'))
                                     <div class="p-1 space-y-0.5">
                                         <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
                                             href="#">
@@ -119,7 +119,7 @@
                                         Setelan Akun
                                     </a>
                                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                        href="#">
+                                        wire:click="logout">
                                         <x-lucide-log-out class="w-4 h-4" />
                                         Keluar
                                     </a>
@@ -158,11 +158,11 @@
                             <x-lucide-settings class="w-4 h-4" />
                             Setelan Akun
                         </a>
-                        <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-red-500 focus:outline-hidden dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                            href="#">
+                        <button class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-red-500 focus:outline-hidden dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                            wire:click="logout">
                             <x-lucide-log-out class="w-4 h-4" />
                             Keluar
-                        </a>
+                        </button>
                     @endif
 
 
