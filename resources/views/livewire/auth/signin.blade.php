@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-teal-500 flex items-center justify-center px-4">
     <div class="bg-white rounded-lg shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 w-full max-w-4xl">
 
-        <!-- Form Section -->
+        <!-- Form -->
         <div class="p-8 flex flex-col justify-center sm:h-[50vh]">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Sign In</h2>
 
@@ -51,7 +51,7 @@
             </p>
         </div>
 
-        <!-- Image Section -->
+        <!-- Foto -->
         <div class="hidden sm:block">
             <img src="{{ asset('assets/signin.jpg') }}" alt="Login Image" class="w-full h-full object-cover" />
         </div>
