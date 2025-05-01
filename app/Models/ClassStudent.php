@@ -22,7 +22,11 @@ class ClassStudent extends Model
 
     public function class()
     {
-        return $this->belongsTo(Classes::class, 'class_id');
+        return $this->belongsTo(Classes::class, 'class_id')if ($this->user->hasRole('student')) {
+    $this->transaction = Transaction::with('teacher')->where('student_id', $this->user->id)->get();
+} elseif ($this->user->hasRole('teacher')) {
+    $this->transaction = Transaction::with('student')->where('teacher_id', $this->user->id)->get();
+};
     }
 
 }

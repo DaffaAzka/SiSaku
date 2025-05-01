@@ -10,15 +10,15 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'student_id',
         'amount',
-        'transaction_type',
+        'type',
         'description',
     ];
 
     public function student()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'student_id');
     }
 
     public function teacher()
