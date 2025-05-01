@@ -32,9 +32,9 @@ class User extends Authenticatable
     ];
 
     public function studentClasses()
-    {
-        return $this->belongsToMany(Classes::class, 'class_students');
-    }
+{
+    return $this->belongsToMany(Classes::class, 'class_students', 'student_id', 'class_id');
+}
 
     public function teacherClasses()
     {

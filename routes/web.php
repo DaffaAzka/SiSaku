@@ -3,9 +3,9 @@
 use App\Livewire\Auth\Signin;
 use App\Livewire\Auth\Verify;
 use App\Livewire\Pages\Admin\ManajemenAkun;
-use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\Teacher\ManajemenSiswa;
 use App\Livewire\Pages\Teacher\MonitoringTabungan;
+use App\Livewire\Sites\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
