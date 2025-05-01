@@ -1,16 +1,12 @@
 <div class="font-sagoe bg-white p-4 sm:p-6">
-    <!-- Heading -->
     <h1 class="text-lg sm:text-xl font-semibold mb-4">Selamat pagi, Guru</h1>
 
-    <!-- Grid Atas -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <!-- Grafik Statistik -->
       <div class="bg-white rounded-xl shadow p-4 lg:col-span-2">
         <h2 class="text-sm font-bold mb-4">Statistik Tabungan XI RPL 3</h2>
         <div id="hs-single-area-chart" class="h-64 w-full"></div>
       </div>
 
-      <!-- Kartu Profil -->
       <div class="bg-white rounded-xl shadow flex flex-col overflow-hidden">
         <div class="bg-teal-700 text-white text-center p-4">
           <div class="w-16 h-16 bg-red-300 rounded-full mx-auto mb-2"></div>
@@ -29,9 +25,7 @@
       </div>
     </div>
 
-   <!-- Grid Bawah -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-    <!-- Informasi Terakhir -->
     <div class="bg-white rounded-xl shadow p-4 min-h-[150px]">
       <h2 class="text-sm font-semibold mb-2">Informasi Terakhir</h2>
       <table class="w-full divide-y divide-gray-200 rounded-lg border border-gray-200 table-auto">
@@ -72,7 +66,6 @@
       </table>
     </div>
 
-      <!-- Peringkat Siswa -->
       <div class="bg-white rounded-xl shadow p-4">
         <h2 class="text-sm font-semibold mb-2">Peringkat Siswa</h2>
         <div class="overflow-x-auto">
