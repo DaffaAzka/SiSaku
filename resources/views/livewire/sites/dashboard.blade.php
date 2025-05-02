@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+@endphp
+
 <div class="font-sagoe p-4 sm:p-6 text-gray-800 dark:text-gray-200">
     <h1 class="text-lg sm:text-xl font-semibold mb-4 dark:text-white">Selamat pagi, {{ Auth::user()->name }}</h1>
 
@@ -115,6 +119,9 @@
                                     Transaksi</th>
                                 <th
                                     class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                    Tanggal</th>
+                                <th
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                                     Nominal</th>
                                 <th
                                     class="px-6 py-3 text-end text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
@@ -126,6 +133,9 @@
                                 <tr>
                                     <td class="px-6 py-4 text-sm text-gray-800 dark:text-gray-300">
                                         {{ Str::upper($tr->type) }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-800 dark:text-gray-300">
+                                        {{ Carbon::parse($tr->created_at)->translatedFormat('d F Y') }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-800 dark:text-gray-300">Rp.
                                         {{ number_format($tr->amount, 0, ',', '.') }}</td>

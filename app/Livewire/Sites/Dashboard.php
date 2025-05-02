@@ -19,7 +19,7 @@ class Dashboard extends Component
         // $this->transaction = $this->user->transactionsStudent ?? $this->user->transactionsTeacher;
 
         if ($this->user->hasRole('student')) {
-            $this->transaction = Transaction::with('teacher')->where('student_id', $this->user->id)->get();
+            $this->transaction = Transaction::with('teacher')->where('student_id', $this->user->id)->get()->sortByDesc('created_at');
         } elseif ($this->user->hasRole('teacher')) {
             $this->transaction = Transaction::with('student')->where('teacher_id', $this->user->id)->get();
         }

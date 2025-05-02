@@ -26,19 +26,7 @@
             });
 
             function initAreaChart(chartData) {
-                // Check for empty data
-                if (!chartData || !chartData.series || !chartData.categories) {
-                    console.error('Chart data is invalid:', chartData);
-                    return;
-                }
-
-
-                // Verify DOM element exists
                 const chartElement = document.querySelector("#student-balance-chart");
-                if (!chartElement) {
-                    console.error('Chart element #student-balance-chart not found!');
-                    return;
-                }
 
                 var options = {
                     chart: {

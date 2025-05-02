@@ -20,9 +20,11 @@ class StudentBalanceChart extends Component
 
     public function loadChartData()
     {
+        // Menginisialisasi tanggal awal dan akhir
         $endDate = Carbon::today();
         $startDate = Carbon::today()->subDays($this->dateRange - 1);
 
+        // Mengambil data tanggal di 12 hari terakhir untuk chart
         $dateRange = [];
         $currentDate = clone $startDate;
 
@@ -36,9 +38,11 @@ class StudentBalanceChart extends Component
             ->orderBy('created_at')
             ->get();
 
+        // Membuat data array untuk tabungan perhari nya
         $savingsData = array_fill(0, count($dateRange), 0);
         $dailyBalance = [];
 
+        // Mencari saldo setiap tanggal, jika di transaksi tidak ada tanggal tersebut maka saldo yang digenerate akan 0
         foreach ($transactions as $transaction) {
             $dayKey = Carbon::parse($transaction->created_at)->format('d M');
 
@@ -53,6 +57,7 @@ class StudentBalanceChart extends Component
             }
         }
 
+        // Mengisi data tabungan harian ke dalam array berdasarkan tanggal
         foreach($dailyBalance as $day => $balance) {
             $index = array_search($day, $dateRange);
             if ($index !== false) {
@@ -60,6 +65,7 @@ class StudentBalanceChart extends Component
             }
         }
 
+        // Menghitung total tabungan harian
         $runningTotal = 0;
         foreach ($savingsData as $key => $value) {
             $runningTotal += $value;
