@@ -25,21 +25,26 @@
         }
     </style>
 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
 </head>
 
 <body class="bg-neutral-50 dark:bg-neutral-900">
 
     @if (!request()->is('signin') && !request()->is('verify'))
-    <livewire:navbar />
+        <livewire:navbar />
     @endif
 
     @if (!request()->is('signin') && !request()->is('verify'))
-    <div class="px-6 sm:px-36">
-    @else
-    <div>
+        <div class="px-6 sm:px-36">
+        @else
+            <div>
     @endif
-        {{ $slot }}
+    {{ $slot }}
     </div>
+
+    @stack('scripts')
 
 </body>
 

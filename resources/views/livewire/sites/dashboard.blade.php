@@ -8,10 +8,11 @@
             @endif
 
             @if ($user->hasRole('student'))
-                <h2 class="text-sm font-bold mb-4 dark:text-gray-200">Statistik Tabungan</h2>
+                {{-- <h2 class="text-sm font-bold mb-4 dark:text-gray-200">Statistik Tabungan</h2> --}}
+                <livewire:charts.student-balance-chart />
             @endif
 
-            <div id="hs-single-area-chart" class="h-64 w-full"></div>
+            {{-- <div id="hs-single-area-chart" class="h-64 w-full"></div> --}}
         </div>
 
         <div class="bg-white dark:bg-neutral-800 rounded-xl shadow flex flex-col overflow-hidden">
@@ -189,136 +190,5 @@
     </div>
 
     <!-- ApexChart Script -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var options = {
-                chart: {
-                    height: 300,
-                    type: 'area',
-                    toolbar: {
-                        show: false
-                    },
-                    zoom: {
-                        enabled: false
-                    },
-                    background: 'transparent',
-                    foreColor: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280'
-                },
-                series: [{
-                    name: 'Tabungan',
-                    data: [180, 51, 60, 38, 88, 50, 40, 52, 88, 80, 60, 70]
-                }],
-                xaxis: {
-                    categories: ['25 Jan', '26 Jan', '27 Jan', '28 Jan', '29 Jan', '30 Jan', '31 Jan', '1 Feb',
-                        '2 Feb', '3 Feb', '4 Feb', '5 Feb'
-                    ],
-                    labels: {
-                        style: {
-                            colors: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280',
-                            fontSize: '13px',
-                            fontFamily: 'Inter',
-                            fontWeight: 400
-                        }
-                    }
-                },
-                yaxis: {
-                    labels: {
-                        formatter: (value) => value >= 1000 ? `${value / 1000}k` : value,
-                        style: {
-                            colors: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280',
-                            fontSize: '13px',
-                            fontFamily: 'Inter',
-                            fontWeight: 400
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'smooth',
-                    width: 2
-                },
-                fill: {
-                    type: 'gradient',
-                    gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.1,
-                        opacityTo: 0.6,
-                        stops: [0, 90, 100]
-                    }
-                },
-                grid: {
-                    strokeDashArray: 2,
-                    borderColor: document.documentElement.classList.contains('dark') ? '#374151' : '#e5e7eb'
-                },
-                tooltip: {
-                    x: {
-                        format: 'dd MMM'
-                    }
-                },
-                responsive: [{
-                    breakpoint: 768,
-                    options: {
-                        chart: {
-                            height: 250
-                        },
-                        xaxis: {
-                            labels: {
-                                style: {
-                                    fontSize: '11px'
-                                }
-                            }
-                        },
-                        yaxis: {
-                            labels: {
-                                style: {
-                                    fontSize: '11px'
-                                }
-                            }
-                        }
-                    }
-                }]
-            };
 
-            var chart = new ApexCharts(document.querySelector("#hs-single-area-chart"), options);
-            chart.render();
-
-            // Update chart colors when dark mode changes
-            const observer = new MutationObserver(() => {
-                chart.updateOptions({
-                    chart: {
-                        foreColor: document.documentElement.classList.contains('dark') ? '#9ca3af' :
-                            '#6b7280'
-                    },
-                    xaxis: {
-                        labels: {
-                            style: {
-                                colors: document.documentElement.classList.contains('dark') ?
-                                    '#9ca3af' : '#6b7280'
-                            }
-                        }
-                    },
-                    yaxis: {
-                        labels: {
-                            style: {
-                                colors: document.documentElement.classList.contains('dark') ?
-                                    '#9ca3af' : '#6b7280'
-                            }
-                        }
-                    },
-                    grid: {
-                        borderColor: document.documentElement.classList.contains('dark') ?
-                            '#374151' : '#e5e7eb'
-                    }
-                });
-            });
-
-            observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['class']
-            });
-        });
-    </script>
 </div>
