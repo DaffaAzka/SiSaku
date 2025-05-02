@@ -161,4 +161,6 @@
             }
         </script>
     @endpush
+
+    <x-utilities.loading />
 </div>

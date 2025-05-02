@@ -56,4 +56,6 @@
             <img src="{{ asset('assets/signin.jpg') }}" alt="Login Image" class="w-full h-full object-cover" />
         </div>
     </div>
+
+    <x-utilities.loading />
 </div>
