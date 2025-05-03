@@ -40,7 +40,7 @@ class ClassesController extends Controller
             'teacher_id' => $validated['teacher_id'],
         ]);
         $class->students()->attach($validated['students']);
-        return $Log;
+        return $class;
 
     }
 
@@ -72,14 +72,14 @@ class ClassesController extends Controller
             'teacher_id'=>'requaired /exists:users,id',
         ]);
         $class = Classes::findorfail($id);
-        $ckass->update([
+        $class->update([
             'majors' => $validated['majors'],
-            'class' => validated['class'],
-            'teacher_id' =>validated['teacher_id'],
+            'class' => $validated['class'],
+            'teacher_id' => $validated['teacher_id'],
         ]);
         $class->students()->sync($validated['students']);
         $class->save();
-        return $class; 
+        return $class;
     }
 
     /**

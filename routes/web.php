@@ -11,6 +11,7 @@ use App\Livewire\Pages\Notifikasi;
 use App\Livewire\Pages\Teacher\ManajemenSiswa;
 use App\Livewire\Pages\Teacher\MonitoringTabungan;
 use App\Livewire\Sites\Dashboard;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
@@ -18,7 +19,7 @@ Route::middleware(['guest'])->group(function () {
         return view('welcome');
     })->name('welcome');
 
-    // Raw routes
+    // Development routes
     Route::get('manajemen-siswa', ManajemenSiswa::class)->name('manajemen-siswa');
     Route::get('manajemen-akun', ManajemenAkun::class)->name('manajemen-siswa');
     Route::get('monitoring-tabungan', MonitoringTabungan::class)->name('monitoring-tabungan');
@@ -29,8 +30,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('notifikasi', Notifikasi::class)->name('notifikasi');
 
 
-
-
+    // Production routes
     Route::get('/signin', Signin::class)->name('signin');
     Route::get('/verify', Verify::class)->name('verify');
 });
