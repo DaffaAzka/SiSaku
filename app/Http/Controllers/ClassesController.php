@@ -31,7 +31,7 @@ class ClassesController extends Controller
         //
         $validated = $request->validate([
           'majors'=>'requaired /exists:majors,id',
-          'class'=>'requaired /exists:classes,id',
+          'class'=>'requaired /string',
           'teacher_id'=>'requaired /exists:users,id',
         ]);
         $class = Classes::create([
@@ -72,9 +72,11 @@ class ClassesController extends Controller
             'teacher_id'=>'requaired /exists:users,id',
         ]);
         $class = Classes::findorfail($id);
-        $class->majors = $validated['majors'];
-        $class->class = $validated['class'];
-        $class->teacher_id = $validated['teacher_id'];
+        $ckass->update([
+            'majors' => $validated['majors'],
+            'class' => validated['class'],
+            'teacher_id' =>validated['teacher_id'],
+        ]);
         $class->students()->sync($validated['students']);
         $class->save();
         return $class; 
