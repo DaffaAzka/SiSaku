@@ -32,7 +32,7 @@
 
 <body class="bg-neutral-50 dark:bg-neutral-900">
 
-    @if (!request()->is('signin') && !request()->is('verify'))
+    @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
         <livewire:navbar />
     @endif
 
