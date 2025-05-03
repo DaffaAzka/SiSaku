@@ -24,7 +24,7 @@
 
       <div class="col-span-1 flex sm:justify-end items-center">
         <button
-        class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 min-w-[150px] rounded-lg text-sm font-medium whitespace-nowrap">
+        class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2 min-w-[150px] rounded-md text-sm font-medium whitespace-nowrap">
         Tambah Akun
         </button>
       </div>
@@ -41,58 +41,58 @@
                   <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Teacher</th>
                   <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Count</th>
                   <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Balanace</th>
-                  <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Action</th>
+                  <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Action</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
                 <tr>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-800">John Brown</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">admin@gmail.com</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">0009321234</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">Teacher</td>
-                  <td class="px-6 py-4 text-end text-sm font-medium">
-                    <div class="flex justify-end gap-2">
-                    <a href="#" class="text-blue-600 hover:underline">More</a>
-                    <a href="#" class="text-blue-600 hover:underline">Update</a>
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800">XI RPL 3</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">H. Syamsuni S.Pd</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">32</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">Rp. 100.000</td>
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800  text-right">
+                    <div class="flex justify-end items-center gap-4">
+                      <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Lihat Kelas</a>
+                      <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Cetak Laporan</a>
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-800">Jim Green</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">admin@gmail.com</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">0009321234</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">Teacher</td>
-                  <td class="px-6 py-4 text-end text-sm font-medium">
-                    <div class="flex justify-end gap-2">
-                    <a href="#" class="text-blue-600 hover:underline">More</a>
-                    <a href="#" class="text-blue-600 hover:underline">Update</a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-800">Joe Black</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">admin@gmail.com</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">0009321234</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">Admin</td>
-                  <td class="px-6 py-4 text-end text-sm font-medium">
-                    <div class="flex justify-end gap-2">
-                    <a href="#" class="text-blue-600 hover:underline">More</a>
-                    <a href="#" class="text-blue-600 hover:underline">Update</a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-800">Edward King</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">admin@gmail.com</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">0009321234</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">Admin</td>
-                  <td class="px-6 py-4 text-end text-sm font-medium">
-                    <div class="flex justify-end gap-2">
-                    <a href="#" class="text-blue-600 hover:underline">More</a>
-                    <a href="#" class="text-blue-600 hover:underline">Update</a>
-                    </div>
-                  </td>
-                </tr>
+                    <tr>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-800">XI RPL 3</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">H. Syamsuni S.Pd</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">32</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">Rp. 100.000</td>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-800 text-right">
+                        <div class="flex justify-end items-center gap-4">
+                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Lihat Kelas</a>
+                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Cetak Laporan</a>
+                        </div>
+                      </td>
+                  </tr>
+                   <tr>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-800">XI RPL 3</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">H. Syamsuni S.Pd</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">32</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">Rp. 100.000</td>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-800 text-right">
+                        <div class="flex justify-end items-center gap-4">
+                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Lihat Kelas</a>
+                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Cetak Laporan</a>
+                        </div>
+                      </td>
+                  </tr>
+                    <tr>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-800">XI RPL 3</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">H. Syamsuni S.Pd</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">32</td>
+                    <td class="px-6 py-4 text-sm text-gray-800">Rp. 100.000</td>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-800 text-right">
+                        <div class="flex justify-end items-center gap-4">
+                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Lihat Kelas</a>
+                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Cetak Laporan</a>
+                        </div>
+                      </td>
+                  </tr>
               </tbody>
             </table>
           </div>
@@ -100,11 +100,19 @@
       </div>
     </div>
 
-    <div class="flex justify-between items-center mt-6 text-sm text-gray-600">
-      <div>
-        <span class="cursor-pointer hover:text-gray-800">«</span>
-        <span class="mx-2 font-semibold text-gray-800">1</span>
-        <span class="cursor-pointer hover:text-gray-800">of 3 »</span>
-      </div>
+    <div class="flex justify-start p-4 border-t border-gray-300 bg-white">
+        <nav class="inline-flex items-center gap-2 text-sm text-gray-700">
+            <button class="px-2 py-1 border border-gray-300 rounded-md hover:bg-gray-100">
+                &laquo;
+            </button>
+            <button class="px-3 py-1 rounded-md border border-gray-300 bg-gray-100 font-medium text-emerald-700">
+                1
+            </button>
+            <span class="text-gray-500">of</span>
+            <span class="text-gray-700 font-medium">3</span>
+            <button class="px-2 py-1 border border-gray-300 rounded-md hover:bg-gray-100">
+                &raquo;
+            </button>
+        </nav>
     </div>
   </div>
