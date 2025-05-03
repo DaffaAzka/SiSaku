@@ -6,6 +6,7 @@ use App\Mail\VerificationEmail;
 use App\Models\User;
 use App\Models\VerificationCode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Validate;
@@ -46,6 +47,8 @@ class Signin extends Component
                 'email' => $this->email,
                 'expires_at' => now()->addMinutes(15),
             ]);
+
+            Cache::put('email' . request()->ip(), $this->email, now()->addMinutes(30));
 
             // Mail::to($this->email)->send(new VerificationEmail($code->code));
 

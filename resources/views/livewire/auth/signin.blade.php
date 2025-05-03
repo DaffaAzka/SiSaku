@@ -1,4 +1,7 @@
-<div class="min-h-screen bg-teal-500 flex items-center justify-center px-4">
+<div class="min-h-screen flex items-center justify-center px-4">
+
+    <x-particles.green/>
+
     <div class="bg-white rounded-lg shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 w-full max-w-4xl">
 
         <!-- Form -->
@@ -58,4 +61,5 @@
     </div>
 
     <x-utilities.loading />
+
 </div>

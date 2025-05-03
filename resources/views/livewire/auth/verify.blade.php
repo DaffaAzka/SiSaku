@@ -1,17 +1,20 @@
-<div class="min-h-screen bg-teal-500 flex items-center justify-center p-4">
-    <div class="grid bg-white rounded-lg shadow-lg overflow-hidden max-w-2xl w-full grid-cols-1 sm:grid-cols-2">
+<div class="min-h-screen flex items-center justify-center p-4">
+
+    <x-particles.green/>
+
+    <div class="grid bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl w-full grid-cols-1 sm:grid-cols-2">
 
         <!-- Form Verifikasi -->
-        <div class="p-8 flex flex-col justify-center">
+        <div class="p-8 flex flex-col justify-center sm:h-[50vh]">
             <h2 class="text-2xl sm:text-4xl font-black text-black mb-6 font-sagoe">Verifikasi Email</h2>
-            <p class="text-xs sm:text-sm text-gray-600 mb-4">Kode telah dikirimkan ke perangkat anda, silahkan cek inbox
+            <p class="text-xs sm:text-sm text-gray-600 mb-4">Kode telah dikirimkan ke perangkat anda, silahkan cek inbox spam email anda
                 email</p>
 
             <form method="POST" class="space-y-4" wire:submit.prevent="verification">
                 <div class="relative">
                     <div class="flex items-center border rounded px-3 py-2 space-x-2">
                         <x-lucide-mail class="w-4 h-4" />
-                        <input type="text" wire:model='code' name="code" placeholder=""
+                        <input type="text" wire:model='code' name="code" placeholder="• • • • • •"
                             class="w-full focus:outline-none">
                     </div>
 

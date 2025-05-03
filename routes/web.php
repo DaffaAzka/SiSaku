@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\VerificationCodePage;
 use App\Livewire\Auth\Signin;
 use App\Livewire\Auth\Verify;
 use App\Livewire\Pages\Admin\Logs;
@@ -32,7 +33,7 @@ Route::middleware(['guest'])->group(function () {
 
     // Production routes
     Route::get('/signin', Signin::class)->name('signin');
-    Route::get('/verify', Verify::class)->name('verify');
+    Route::get('/verify', Verify::class)->name('verify')->middleware(VerificationCodePage::class);
 });
 
 Route::middleware(['auth'])->group(function () {
