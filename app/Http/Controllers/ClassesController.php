@@ -67,11 +67,11 @@ class ClassesController extends Controller
     {
         //
         $validated = $request->validate([
-            'majors'=>'requaired /exists:majors,id',
-            'class'=>'requaired /exists:classes,id',
-            'teacher_id'=>'requaired /exists:users,id',
+            'majors'=>'required /exists:majors,id',
+            'class'=>'required /exists:classes,id',
+            'teacher_id'=>'required /exists:users,id',
         ]);
-        $class = Classes::findorfail($id);
+        $class = Classes::findOrFail($id);
         $class->update([
             'majors' => $validated['majors'],
             'class' => $validated['class'],
@@ -88,7 +88,7 @@ class ClassesController extends Controller
     public function destroy(string $id)
     {
         //
-        $class = Classes::findorfail($id);
+        $class = Classes::findOrFail($id);
         $class->students()->detach();
         $class->delete();
         return $class;

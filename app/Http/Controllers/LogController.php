@@ -29,9 +29,9 @@ class LogController extends Controller
     public function store(Request $request)
     {
         $valited = $request->validate([
-            'user_id' => 'requaired/exists:users,id',
-            'action' => 'requaired',
-            'description' => 'requaired',
+            'user_id' => 'required/exists:users,id',
+            'action' => 'required',
+            'description' => 'required',
         ]);
         $Log = Log::create([
             'user_id' => $valited['user_id'],
@@ -67,9 +67,9 @@ class LogController extends Controller
     {
         //
         $valited = $request->validate([
-            'user_id' => 'requaired/exists:users,id',
-            'action' => 'requaired',
-            'description' => 'requaired',
+            'user_id' => 'required/exists:users,id',
+            'action' => 'required',
+            'description' => 'required',
         ]);
         $Log = Log::find($id);
         $Log->user_id = $valited['user_id'];

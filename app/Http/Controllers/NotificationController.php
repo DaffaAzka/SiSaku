@@ -28,6 +28,18 @@ class NotificationController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'user_id' => 'required/integer',
+            'message' => 'required/string',
+            'is_read' => 'required/boolean',
+        ]);
+
+        Notification::create([
+            'user_id' => $request->user_id,
+            'message' => $request->title,
+            'is_read' => $request->is_read,
+        ]);
+        return back();
     }
 
     /**
@@ -52,6 +64,13 @@ class NotificationController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'user_id' => 'required/integer',
+            'message' => 'required/string',
+            'is_read' => 'required/boolean',
+        ]);
+        $notification::findorFail($id)->update(request->only('user_id', 'message', 'is_read'));
+        return back();
     }
 
     /**
@@ -60,5 +79,7 @@ class NotificationController extends Controller
     public function destroy(string $id)
     {
         //
+        $notification::findOrFail($id)->delete();
+        return back();
     }
 }
