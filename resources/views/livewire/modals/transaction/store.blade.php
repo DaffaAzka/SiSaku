@@ -29,7 +29,7 @@
                     <x-utilities.error />
 
                     @csrf
-                    @if ($user->hasRole('teacher'))
+                    @if ($user->hasRole('teacher') && $alreadySelected == null)
                         <div class="">
                             <div class="relative z-[200]" wire:ignore>
                             <select wire:model='student_id'
@@ -86,7 +86,7 @@
                         <div class="relative">
                             <select id="hs-select-transaction" wire:model='type'
                                 class="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
-                                <option selected disabled>Tipe Transaksi</option>
+                                <option selected>Tipe Transaksi</option>
                                 <option value="deposit">Pemasukan</option>
                                 <option value="withdrawal">Pengeluaran</option>
                             </select>

@@ -1,10 +1,10 @@
 {{-- resources/views/components/particles/green.blade.php --}}
 
-<div id="tsparticles"></div>
+<div id="tsparticles" wire:ignore></div>
 
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 
-<script>
+<script wire:ignore>
     document.addEventListener("DOMContentLoaded", function() {
         if (!document.getElementById("tsparticles")) {
             console.error("Element dengan id 'tsparticles' tidak ditemukan");

@@ -5,6 +5,7 @@ namespace App\Livewire\Modals\Transaction;
 use App\Models\Transaction;
 use App\Services\BalanceService;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -19,6 +20,7 @@ class Store extends Component
 
     #[Validate('required|exists:users,id')]
     public $student_id;
+    public $alreadySelected;
 
     #[Validate('required|numeric|min:0')]
     public $amount;
@@ -39,11 +41,21 @@ class Store extends Component
             $this->studentClass = $class->students;
         }
 
-        // dd($this->studentClass);
+    }
+
+    #[On('studentSelected')]
+    public function studentSelected($studentId)
+    {
+        $this->alreadySelected = $studentId;
     }
 
     public function storeTransaction()
     {
+        // check if student_id is already selected
+        if($this->alreadySelected) {
+            $this->student_id = $this->alreadySelected;
+        }
+
         $this->validate();
 
         // check if transaction is a withdrawal
@@ -67,6 +79,10 @@ class Store extends Component
         ]);
 
         if ($transaction) {
+            $this->amount = 0;
+            $this->description = "";
+
+
             return session()->flash('success', [
                 'title' => 'Berhasil',
                 'message' => 'Transaksi telah dibuat'

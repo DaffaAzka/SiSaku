@@ -2,10 +2,10 @@
     class="relative flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-teal-500 text-sm py-3 dark:bg-neutral-800">
     <nav class="max-w-[100rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
         <div class="flex items-center justify-between">
-            <a class="flex-none text-xl font-semibold text-white focus:outline-hidden focus:opacity-80" href="#"
+            <a class="flex-none text-xl font-semibold text-white focus:outline-hidden focus:opacity-80" href="/"
                 aria-label="Brand">
                 <span class="inline-flex items-center text-xl font-semibold text-white">
-                    <img class="w-10 h-10" src="{{ asset('logo_transparant.svg') }}" alt="Logo">
+                    <img class="w-10 h-10" src="{{ asset('logo_transparant.svg') }}" >
                     SiSaku
                 </span>
             </a>
@@ -60,13 +60,6 @@
                 @if (Auth::check())
 
                     @if (!Auth::user()->hasRole('admin'))
-                        @if (Auth::user()->hasRole('teacher'))
-                            <a class="flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-white  focus:outline-hidden dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                href="#">
-                                <x-lucide-file-input class="sm:hidden w-4 h-4" />
-                                Catat Tabungan
-                            </a>
-                        @endif
 
                         <div class="hs-dropdown relative hidden sm:inline-flex">
                             <button id="hs-dropdown-with-dividers" type="button"
@@ -89,17 +82,21 @@
                                         <x-lucide-bell class="w-4 h-4" />
                                         Notifikasi
                                     </a>
-                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                        href="#">
-                                        <x-lucide-printer class="w-4 h-4" />
-                                        Cetak Laporan
-                                    </a>
+
+                                    @if (!Auth::user()->hasRole('teacher'))
+                                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                                            href="#">
+                                            <x-lucide-printer class="w-4 h-4" />
+                                            Cetak Laporan
+                                        </a>
+                                    @endif
+
                                 </div>
 
                                 @if (Auth::user()->hasRole('teacher'))
                                     <div class="p-1 space-y-0.5">
                                         <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
-                                            href="#">
+                                            href="{{ route('management-students') }}">
                                             <x-lucide-users class="w-4 h-4" />
                                             Manajemen Siswa
                                         </a>
@@ -107,7 +104,7 @@
                                         <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
                                             href="#">
                                             <x-lucide-files class="w-4 h-4" />
-                                            Manajemen Tabungan
+                                            Monitoring Tabungan
                                         </a>
                                     </div>
                                 @endif
@@ -158,7 +155,8 @@
                             <x-lucide-settings class="w-4 h-4" />
                             Setelan Akun
                         </a>
-                        <button class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-red-500 focus:outline-hidden dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                        <button
+                            class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm dark:font-medium hover:underline text-red-500 focus:outline-hidden dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
                             wire:click="logout">
                             <x-lucide-log-out class="w-4 h-4" />
                             Keluar

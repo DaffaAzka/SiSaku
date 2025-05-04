@@ -2,19 +2,21 @@
 
 namespace App\Livewire\Sites;
 
+use App\Models\Classes;
 use App\Models\Transaction;
 use App\Services\BalanceService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class Dashboard extends Component
 {
+    use WithPagination, WithoutUrlPagination;
     public $user;
     public $class;
 
     public $balance = 0;
-
-    public $transaction = [];
 
     public function mount()
     {
@@ -23,19 +25,50 @@ class Dashboard extends Component
         $this->class = $this->user->studentClasses->first() ?? $this->user->teacherClasses->first();
 
         if ($this->user->hasRole('student')) {
-            $this->transaction = Transaction::with('teacher')->where('student_id', $this->user->id)->get()->sortByDesc('created_at');
             $this->balance = $balanceService->getStudentBalance($this->user->id);
-        } elseif ($this->user->hasRole('teacher')) {
+        } else if ($this->user->hasRole('teacher')) {
             $class = $this->user->teacherClasses->first();
             $this->balance = $balanceService->getClassBalance($class->id);
-            $this->transaction = Transaction::with('student')->where('teacher_id', $this->user->id)->get();
+        } else if ($this->user->hasRole('admin')) {
+
+            $class = Classes::get();
+            $balance = 0;
+            foreach ($class as $c) {
+                $balance += $balanceService->getClassBalance($c->id);
+            }
+            $this->balance = $balance / count($class);
+
+
         }
-
-        // dd($this->transaction);
-
     }
+
+    function logout() {
+        Auth::logout();
+        return redirect()->route('welcome');
+    }
+
     public function render()
-    {
-        return view('livewire.sites.dashboard');
+{
+    if ($this->user->hasRole('student')) {
+        $transaction = Transaction::with('teacher')
+            ->where('student_id', $this->user->id)
+            ->orderByDesc('created_at')
+            ->paginate(5);
     }
+    else if ($this->user->hasRole('teacher')) {
+        $transaction = Transaction::with('student')
+            ->where('teacher_id', $this->user->id)
+            ->orderByDesc('created_at')
+            ->paginate(5);
+    }
+    else if ($this->user->hasRole('admin')) {
+        $transaction = Transaction::with(['student', 'teacher'])
+            ->orderByDesc('created_at')
+            ->paginate(5);
+    }
+
+    return view('livewire.sites.dashboard', [
+        'transaction' => $transaction,
+    ]);
+}
 }
