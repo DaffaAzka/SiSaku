@@ -6,7 +6,7 @@
     <h1 class="text-lg sm:text-xl font-semibold mb-4 dark:text-white">Selamat pagi, {{ Auth::user()->name }}</h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div class="bg-white dark:bg-neutral-800 rounded-xl shadow p-4 lg:col-span-2">
+        <div class="bg-white dark:bg-neutral-800 rounded-xl shadow p-4 lg:col-span-2" wire:ignore>
             @if ($user->hasRole('teacher'))
                 {{-- <h2 class="text-sm font-bold mb-4 dark:text-gray-200">Statistik Tabungan XI RPL 3</h2> --}}
                 <livewire:charts.class-balance-chart />
