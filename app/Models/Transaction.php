@@ -14,6 +14,7 @@ class Transaction extends Model
         'amount',
         'type',
         'description',
+        'teacher_id',
     ];
 
     public function student()

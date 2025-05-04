@@ -22,7 +22,7 @@
             <div class="bg-teal-700 text-white text-center p-4">
                 <div class="w-16 h-16 bg-red-300 rounded-full mx-auto mb-2"></div>
                 <p class="font-semibold">{{ Auth::user()->name }}</p>
-                <p class="text-sm">{{ $class->class . " " . $class->majors }}</p>
+                <p class="text-sm">{{ $class->class . ' ' . $class->majors }}</p>
             </div>
             <div class="text-center p-4">
 
@@ -46,8 +46,10 @@
                 @endif
 
                 @if ($user->hasRole('teacher'))
-                    <button class="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-md font-semibold">
-                        Tambah Tabungan
+                    <button class="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-md font-semibold"
+                        aria-haspopup="dialog" aria-expanded="false" aria-controls="transaction-add-modal"
+                        data-hs-overlay="#transaction-add-modal">
+                        Tambah Transaksi
                     </button>
                 @endif
             </div>
@@ -181,6 +183,9 @@
 
 </div>
 
+<livewire:modals.transaction.store />
+
+{{-- Loading Spinner --}}
 <x-utilities.loading />
 
 </div>

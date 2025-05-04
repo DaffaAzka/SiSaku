@@ -29,8 +29,9 @@ class Dashboard extends Component
             $class = $this->user->teacherClasses->first();
             $this->balance = $balanceService->getClassBalance($class->id);
             $this->transaction = Transaction::with('student')->where('teacher_id', $this->user->id)->get();
-
         }
+
+        // dd($this->transaction);
 
     }
     public function render()
