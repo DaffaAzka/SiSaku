@@ -28,6 +28,15 @@ class ClassStudentController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'class_id' => 'required/exists:classes,id',
+            'student_id' => 'required/exists:users,id',
+        ]);
+        $classStudent = ClassStudent::create([
+            'class_id' => $request->class_id,
+            'student_id' => $request->student_id,
+        ]);
+        return $classStudent;
     }
 
     /**
@@ -52,6 +61,16 @@ class ClassStudentController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'class_id' => 'required/exists:classes,id',
+            'student_id' => 'required/exists:users,id',
+        ]);
+        $classStudent = ClassStudent::findOrFail($id);
+        $classStudent->update([
+            'class_id' => $request->class_id,
+            'student_id' => $request->student_id,
+        ]);
+        return $classStudent;
     }
 
     /**
@@ -60,5 +79,8 @@ class ClassStudentController extends Controller
     public function destroy(string $id)
     {
         //
+        $classStudent = ClassStudent::findOrFail($id);
+        $classStudent->delete();
+        return $classStudent;
     }
 }
