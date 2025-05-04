@@ -3,6 +3,7 @@
 use App\Http\Middleware\VerificationCodePage;
 use App\Livewire\Auth\Signin;
 use App\Livewire\Auth\Verify;
+use App\Livewire\Modals\Transaction\Monitoring;
 use App\Livewire\Pages\Admin\Logs;
 use App\Livewire\Pages\Admin\ManajemenAkun;
 use App\Livewire\Pages\Admin\ManajemenKelas;
@@ -13,6 +14,7 @@ use App\Livewire\Pages\Teacher\ManajemenSiswa;
 use App\Livewire\Pages\Teacher\MonitoringTabungan;
 use App\Livewire\Sites\Dashboard;
 use App\Livewire\Sites\Management\Students;
+use App\Livewire\Sites\Monitoring\Balance;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('management-students', Students::class)->name('management-students');
+    Route::get('monitoring-balance', Balance::class)->name('monitoring-balance');
 
 
 });

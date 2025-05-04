@@ -29,7 +29,7 @@ class LogController extends Controller
     public function store(Request $request)
     {
         $valited = $request->validate([
-            'user_id' => 'required/exists:users,id',
+            'user_id' => 'required|exists:users,id',
             'action' => 'required',
             'description' => 'required',
         ]);
@@ -67,7 +67,7 @@ class LogController extends Controller
     {
         //
         $valited = $request->validate([
-            'user_id' => 'required/exists:users,id',
+            'user_id' => 'required|exists:users,id',
             'action' => 'required',
             'description' => 'required',
         ]);

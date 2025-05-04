@@ -8,25 +8,30 @@
 
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('livewire:initialized', function() {
+                console.log('Livewire initialized');
 
+                if (@this.chartData) {
+                    console.log('Initial chart data found:', @this.chartData);
+                    initAreaChart(@this.chartData);
+                } else {
+                    console.log('No initial chart data found');
+                }
 
-                document.addEventListener('livewire:initialized', function() {
-                    console.log('Livewire initialized');
-
-
-                    if (@this.chartData) {
-                        initAreaChart(@this.chartData);
-                    }
-
-                    Livewire.on('tabunganDataUpdated', (data) => {
-                        initAreaChart(data);
-                    });
+                @this.on('tabunganDataUpdated', (data) => {
+                    console.log('Chart data updated:', data);
+                    initAreaChart(data);
                 });
             });
 
             function initAreaChart(chartData) {
+                console.log('Initializing chart with data:', chartData);
                 const chartElement = document.querySelector("#student-balance-chart");
+
+                if (!chartElement) {
+                    console.error('Chart element not found');
+                    return;
+                }
 
                 var options = {
                     chart: {
@@ -119,9 +124,11 @@
                 };
 
                 if (window.studentBalanceChart) {
+                    console.log('Updating existing chart');
                     window.studentBalanceChart.updateOptions(options);
                 } else {
-                    window.studentBalanceChart = new ApexCharts(document.querySelector("#student-balance-chart"), options);
+                    console.log('Creating new chart');
+                    window.studentBalanceChart = new ApexCharts(chartElement, options);
                     window.studentBalanceChart.render();
                 }
 

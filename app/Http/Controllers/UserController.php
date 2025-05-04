@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -27,16 +29,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
+         $data = $request->validate([
              'name' => 'required|string|max:255',
              'email' => 'required|string|email|max:255|unique:users',
              'password' => 'required|string|min:8|confirmed',
-             'phone_number' => 'required/string/max:15',
-             'birth_date' => 'required/date',
-             'nip' => 'required/string/max:20',
-             'nisn' => 'required/string/max:20',
-             'gender' => 'required/string/max:10',
+             'phone_number' => 'required|string|max:15',
+             'birth_date' => 'required|date',
+             'nip' => 'required|string|max:20',
+             'nisn' => 'required|string|max:20',
+             'gender' => 'required|string|max:10',
             ]);
+
+
             $data['password'] = Hash::make($data['password']);
             return User::create($data);
     }
@@ -63,17 +67,17 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $user = User::findOrFail('id$');
+        $user = User::findOrFail($id);
 
         $data = $request->validate([
-            'name' => 'required/string/max:255',
-            'email' => 'required/string/email/max:255/unique:users,email,' . $id,
-            'password' => 'nullable/string/min:8/confirmed',
-            'phone_number' => 'required/string/max:15',
-            'birth_date' => 'required/date',
-            'nip' => 'required/string/max:20',
-            'nisn' => 'required/string/max:20',
-            'gender' => 'required/string/max:10',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'nullable|string|min:8|confirmed',
+            'phone_number' => 'required|string|max:15',
+            'birth_date' => 'required|date',
+            'nip' => 'required|string|max:20',
+            'nisn' => 'required|string|max:20',
+            'gender' => 'required|string|max:10',
         ]);
 
         if ($request->filled('password')) {

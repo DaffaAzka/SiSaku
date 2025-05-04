@@ -18,6 +18,8 @@ class StudentBalanceChart extends Component
         $this->loadChartData();
     }
 
+    protected $listeners = ['refreshChart' => 'loadChartData'];
+
     public function loadChartData()
     {
         // Menginisialisasi tanggal awal dan akhir
@@ -82,7 +84,8 @@ class StudentBalanceChart extends Component
             'categories' => $dateRange
         ];
 
-        $this->dispatch('tabunganDataUpdated', data: $this->chartData);
+        // Dispatch event with data
+        $this->dispatch('tabunganDataUpdated', $this->chartData);
     }
 
     public function updateDateRange($days)

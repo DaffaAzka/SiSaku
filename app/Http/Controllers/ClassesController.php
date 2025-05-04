@@ -30,9 +30,9 @@ class ClassesController extends Controller
     {
         //
         $validated = $request->validate([
-          'majors'=>'requaired /exists:majors,id',
-          'class'=>'requaired /string',
-          'teacher_id'=>'requaired /exists:users,id',
+          'majors'=>'requaired',
+          'class'=>'requaired',
+          'teacher_id'=>'requaired|exists:users,id',
         ]);
         $class = Classes::create([
             'majors' => $validated['majors'],
@@ -67,9 +67,9 @@ class ClassesController extends Controller
     {
         //
         $validated = $request->validate([
-            'majors'=>'required /exists:majors,id',
-            'class'=>'required /exists:classes,id',
-            'teacher_id'=>'required /exists:users,id',
+            'majors'=>'required',
+            'class'=>'required',
+            'teacher_id'=>'required|exists:users,id',
         ]);
         $class = Classes::findOrFail($id);
         $class->update([

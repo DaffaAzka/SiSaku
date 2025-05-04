@@ -36,17 +36,28 @@
 
 <body class="bg-neutral-50 dark:bg-neutral-900">
 
-    @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
-        <livewire:navbar />
-    @endif
+    @if (Auth::user()->hasRole('admin'))
+        @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
+            <livewire:sidebar />
+        @endif
+        <div class="mt-16 lg:mt-0 lg:ms-64">
+            {{ $slot }}
+        </div>
+    @else
+        @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
+            <livewire:navbar />
+        @endif
 
-    @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
-        <div class="px-6 sm:px-36">
-        @else
-            <div>
+        @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
+            <div class="px-6 sm:px-36">
+            @else
+                <div>
+        @endif
+
+        {{ $slot }}
+        </div>
+
     @endif
-    {{ $slot }}
-    </div>
 
     @stack('scripts')
 

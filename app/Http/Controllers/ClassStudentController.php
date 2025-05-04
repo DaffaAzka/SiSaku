@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassStudent;
 use Illuminate\Http\Request;
 
 class ClassStudentController extends Controller
@@ -29,8 +30,8 @@ class ClassStudentController extends Controller
     {
         //
         $request->validate([
-            'class_id' => 'required/exists:classes,id',
-            'student_id' => 'required/exists:users,id',
+            'class_id' => 'required|exists:classes,id',
+            'student_id' => 'required|exists:users,id',
         ]);
         $classStudent = ClassStudent::create([
             'class_id' => $request->class_id,
@@ -62,8 +63,8 @@ class ClassStudentController extends Controller
     {
         //
         $request->validate([
-            'class_id' => 'required/exists:classes,id',
-            'student_id' => 'required/exists:users,id',
+            'class_id' => 'required|exists:classes,id',
+            'student_id' => 'required|exists:users,id',
         ]);
         $classStudent = ClassStudent::findOrFail($id);
         $classStudent->update([

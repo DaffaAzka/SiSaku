@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -29,9 +30,9 @@ class NotificationController extends Controller
     {
         //
         $request->validate([
-            'user_id' => 'required/integer',
-            'message' => 'required/string',
-            'is_read' => 'required/boolean',
+            'user_id' => 'required|integer',
+            'message' => 'required|string',
+            'is_read' => 'required|boolean',
         ]);
 
         Notification::create([
@@ -65,12 +66,12 @@ class NotificationController extends Controller
     {
         //
         $request->validate([
-            'user_id' => 'required/integer',
-            'message' => 'required/string',
-            'is_read' => 'required/boolean',
+            'user_id' => 'required|integer',
+            'message' => 'required|string',
+            'is_read' => 'required|boolean',
         ]);
-        $notification::findorFail($id)->update(request->only('user_id', 'message', 'is_read'));
-        return back();
+        $notification = Notification::findorFail($id)->update($request->only('user_id', 'message', 'is_read'));
+        return $notification;
     }
 
     /**
@@ -79,7 +80,7 @@ class NotificationController extends Controller
     public function destroy(string $id)
     {
         //
-        $notification::findOrFail($id)->delete();
-        return back();
+        $notification = Notification::findOrFail($id)->delete();
+        return $notification;
     }
 }
