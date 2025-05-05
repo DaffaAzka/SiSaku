@@ -48,7 +48,7 @@
             <livewire:navbar />
         @endif
 
-        @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
+        @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa') && request()->is('welcome'))
             <div class="px-6 sm:px-36">
             @else
                 <div>
