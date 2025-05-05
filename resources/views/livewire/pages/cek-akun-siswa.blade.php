@@ -8,7 +8,7 @@
         <div class="p-8 flex flex-col justify-center">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Cek Akun Anak Anda</h2>
             <p class="text-center text-sm text-gray-600 mb-6">
-                Fitur ini ada untuk membantu orang tua dalam melihat data tabungan siswa< meskipun tidak seluruhnya ditampilkan
+                Fitur ini ada untuk membantu orang tua dalam melihat data tabungan siswa meskipun tidak seluruhnya ditampilkan
             </p>
 
             <form action="#" method="POST" class="space-y-4" wire:submit.prevent="login">
