@@ -10,15 +10,15 @@ class Classes extends Model
     use HasFactory;
 
     protected $fillable = [
-        'majors',
+        'majors_id',
         'class',
         'teacher_id',
     ];
 
-    // public function majors()
-    // {
-    //     return $this->belongsTo(Majors::class, 'majors');
-    // }
+    public function majors()
+    {
+        return $this->belongsTo(Major::class, 'majors_id');
+    }
 
     public function teacher()
     {
