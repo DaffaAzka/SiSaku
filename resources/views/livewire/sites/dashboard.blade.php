@@ -70,7 +70,7 @@
                 <p class="font-semibold">{{ Auth::user()->name }}</p>
 
                 @if (!$user->hasRole('admin'))
-                    <p class="text-sm">{{ $class->class . ' ' . $class->majors }}</p>
+                    <p class="text-sm">{{ $class->grade . ' ' . $class->majors->name . ' ' . $class->class }}</p>
                 @endif
 
             </div>
