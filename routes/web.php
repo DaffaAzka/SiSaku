@@ -10,6 +10,7 @@ use App\Livewire\Pages\Admin\ManajemenKelas;
 use App\Livewire\Pages\Admin\ManajemenNotifikasi;
 use App\Livewire\Pages\CekAkunSiswa;
 use App\Livewire\Pages\Notifikasi;
+use App\Livewire\Pages\Setting;
 use App\Livewire\Pages\Teacher\ManajemenSiswa;
 use App\Livewire\Pages\Teacher\MonitoringTabungan;
 use App\Livewire\Sites\Dashboard;
@@ -32,6 +33,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('manajemen-notifikasi', ManajemenNotifikasi::class)->name('manajemen-notifikasi');
     Route::get('cek-akun-siswa', CekAkunSiswa::class)->name('cek-akun-siswa');
     Route::get('notifikasi', Notifikasi::class)->name('notifikasi');
+    Route::get('setting', Setting::class)->name('setting');
 
 
     // Production routes

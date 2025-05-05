@@ -12,7 +12,7 @@
                 class="w-full pl-9 pr-4 py-1.5 rounded-md border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
         </div>
         <div>
-            <button
+            <button aria-expanded="false" aria-controls="user-store-modal" data-hs-overlay="#user-store-modal"
                 class="w-full md:w-auto bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-md text-sm font-medium">
                 Tambah Siswa
             </button>

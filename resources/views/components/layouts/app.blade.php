@@ -36,7 +36,7 @@
 
 <body class="bg-neutral-50 dark:bg-neutral-900">
 
-    @if (Auth::user()->hasRole('admin'))
+    @if (Auth::user() != null && Auth::user()->hasRole('admin'))
         @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
             <livewire:sidebar />
         @endif

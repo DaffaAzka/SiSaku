@@ -41,7 +41,7 @@ class UserController extends Controller
             ]);
 
 
-            $data['password'] = Hash::make($data['password']);
+            $data['password'] = bcrypt($data['password']);
             return User::create($data);
     }
 
