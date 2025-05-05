@@ -13,6 +13,7 @@
         </div>
         <div>
             <button aria-expanded="false" aria-controls="user-store-modal" data-hs-overlay="#user-store-modal"
+                wire:click="$dispatch('studentSelected', { studentId: null })"
                 class="w-full md:w-auto bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-md text-sm font-medium">
                 Tambah Siswa
             </button>

@@ -29,18 +29,18 @@ class ClassesController extends Controller
     public function store(Request $request)
     {
         //
-        $validated = $request->validate([
-          'majors'=>'requaired',
-          'class'=>'requaired',
-          'teacher_id'=>'requaired|exists:users,id',
-        ]);
-        $class = Classes::create([
-            'majors' => $validated['majors'],
-            'class' => $validated['class'],
-            'teacher_id' => $validated['teacher_id'],
-        ]);
-        $class->students()->attach($validated['students']);
-        return $class;
+        // $validated = $request->validate([
+        //   'majors'=>'requaired',
+        //   'class'=>'requaired',
+        //   'teacher_id'=>'requaired|exists:users,id',
+        // ]);
+        // $class = Classes::create([
+        //     'majors' => $validated['majors'],
+        //     'class' => $validated['class'],
+        //     'teacher_id' => $validated['teacher_id'],
+        // ]);
+        // $class->students()->attach($validated['students']);
+        // return $class;
 
     }
 
@@ -66,20 +66,20 @@ class ClassesController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $validated = $request->validate([
-            'majors'=>'required',
-            'class'=>'required',
-            'teacher_id'=>'required|exists:users,id',
-        ]);
-        $class = Classes::findOrFail($id);
-        $class->update([
-            'majors' => $validated['majors'],
-            'class' => $validated['class'],
-            'teacher_id' => $validated['teacher_id'],
-        ]);
-        $class->students()->sync($validated['students']);
-        $class->save();
-        return $class;
+        // $validated = $request->validate([
+        //     'majors'=>'required',
+        //     'class'=>'required',
+        //     'teacher_id'=>'required|exists:users,id',
+        // ]);
+        // $class = Classes::findOrFail($id);
+        // $class->update([
+        //     'majors' => $validated['majors'],
+        //     'class' => $validated['class'],
+        //     'teacher_id' => $validated['teacher_id'],
+        // ]);
+        // $class->students()->sync($validated['students']);
+        // $class->save();
+        // return $class;
     }
 
     /**

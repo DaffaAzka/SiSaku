@@ -14,11 +14,11 @@ class Classes extends Model
         'class',
         'teacher_id',
     ];
-    
-    public function majors()
-    {
-        return $this->belongsTo(Majors::class, 'majors');
-    }
+
+    // public function majors()
+    // {
+    //     return $this->belongsTo(Majors::class, 'majors');
+    // }
 
     public function teacher()
     {

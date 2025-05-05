@@ -84,7 +84,7 @@ class StudentBalanceChart extends Component
             'categories' => $dateRange
         ];
 
-        // Dispatch event with data
+        // Dispatch event ke javascriptnya
         $this->dispatch('tabunganDataUpdated', $this->chartData);
     }
 
