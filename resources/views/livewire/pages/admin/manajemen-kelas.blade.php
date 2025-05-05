@@ -1,11 +1,11 @@
 <div class="p-6 min-h-screen font-sans">
-    <h1 class="text-3xl font-semibold mb-6">Manajemen Kelas</h1>
+    <h1 class="text-2xl font-semibold mb-6">Manajemen Kelas</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
       <div class="relative col-span-1">
         <x-lucide-search class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input type="text" placeholder="Search"
-          class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm w-full focus:outline-none focus:ring-2 focus:ring-emerald-600" />
       </div>
 
       <div class="col-span-1">
@@ -30,76 +30,35 @@
       </div>
     </div>
 
-    <div class="flex flex-col">
-      <div class="-m-1.5 overflow-x-auto">
-        <div class="p-1.5 min-w-full inline-block align-middle">
-          <div class="border border-gray-200 rounded-lg overflow-hidden dark:border-neutral-700">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-              <thead>
+    <!-- Tabel -->
+   <div class="overflow-x-auto border border-gray-300 rounded-md">
+    <table class="min-w-full text-sm text-left text-gray-700">
+        <thead class="bg-gray-150 text-gray-600 font-medium">
+            <tr>
+                <th class="px-3 py-3">Name</th>
+                <th class="px-3 py-3">Teacher</th>
+                <th class="px-3 py-3">Count</th>
+                <th class="px-3 py-3">Balance</th>
+                <th class="px-3 py-3">Action</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @for ($i = 0; $i < 4; $i++)
                 <tr>
-                  <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Name</th>
-                  <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Teacher</th>
-                  <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Count</th>
-                  <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Balanace</th>
-                  <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Action</th>
+                    <td class="px-3 py-3">XI MIPA 2</td>
+                    <td class="px-3 py-3">Anas Chaerudin S.Kom</td>
+                    <td class="px-3 py-3">32</td>
+                    <td class="px-3 py-3">Rp. 100.000</td>
+                    <td class="px-3 py-3 space-x-2 whitespace-nowrap">
+                        <a href="#" class="text-blue-600 hover:underline">Lihat Kelas</a>
+                        <a href="#" class="text-blue-600 hover:underline">Cetak Laporan</a>
+                    </td>
                 </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200">
-                <tr>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-800">XI RPL 3</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">H. Syamsuni S.Pd</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">32</td>
-                  <td class="px-6 py-4 text-sm text-gray-800">Rp. 100.000</td>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-800  text-right">
-                    <div class="flex justify-end items-center gap-4">
-                      <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Lihat Kelas</a>
-                      <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Cetak Laporan</a>
-                    </div>
-                  </td>
-                </tr>
-                    <tr>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-800">XI RPL 3</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">H. Syamsuni S.Pd</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">32</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">Rp. 100.000</td>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-800 text-right">
-                        <div class="flex justify-end items-center gap-4">
-                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Lihat Kelas</a>
-                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Cetak Laporan</a>
-                        </div>
-                      </td>
-                  </tr>
-                   <tr>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-800">XI RPL 3</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">H. Syamsuni S.Pd</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">32</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">Rp. 100.000</td>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-800 text-right">
-                        <div class="flex justify-end items-center gap-4">
-                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Lihat Kelas</a>
-                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Cetak Laporan</a>
-                        </div>
-                      </td>
-                  </tr>
-                    <tr>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-800">XI RPL 3</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">H. Syamsuni S.Pd</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">32</td>
-                    <td class="px-6 py-4 text-sm text-gray-800">Rp. 100.000</td>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-800 text-right">
-                        <div class="flex justify-end items-center gap-4">
-                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Lihat Kelas</a>
-                          <a href="#" class="text-blue-600 hover:underline whitespace-nowrap">Cetak Laporan</a>
-                        </div>
-                      </td>
-                  </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+            @endfor
+        </tbody>
+    </table>
 
+    <!-- Paginate -->
     <div class="flex justify-start p-4 border-t border-gray-300 bg-white">
         <nav class="inline-flex items-center gap-2 text-sm text-gray-700">
             <button class="px-2 py-1 border border-gray-300 rounded-md hover:bg-gray-100">
@@ -114,5 +73,6 @@
                 &raquo;
             </button>
         </nav>
+        </div>
     </div>
   </div>
