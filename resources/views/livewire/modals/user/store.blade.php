@@ -150,4 +150,6 @@
             </div>
         </div>
     </div>
+
+    <x-utilities.loading />
 </div>

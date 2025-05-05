@@ -32,8 +32,8 @@
                     @if ($user->hasRole('teacher') && $alreadySelected == null)
                         <div class="">
                             <div class="relative z-[200]" wire:ignore>
-                            <select wire:model='student_id'
-                                data-hs-select='{
+                                <select wire:model='student_id'
+                                    data-hs-select='{
                                 "hasSearch": true,
                                 "searchLimit": 5,
                                 "searchPlaceholder": "Search...",
@@ -47,19 +47,19 @@
                                 "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
                                 "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
                                 }'
-                                class="hidden focus:border-teal-500 focus:ring-teal-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
-                                <option selected>Pilih Siswa...</option>
-                                @foreach ($studentClass as $student)
-                                    <option value="{{ $student->id }}">{{ $student->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                    class="hidden focus:border-teal-500 focus:ring-teal-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
+                                    <option selected>Pilih Siswa...</option>
+                                    @foreach ($studentClass as $student)
+                                        <option value="{{ $student->id }}">{{ $student->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                        @error('student_id')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                {{ $message }}
-                            </p>
-                        @enderror
+                            @error('student_id')
+                                <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                     @endif
 
@@ -127,4 +127,6 @@
             </div>
         </div>
     </div>
+
+    <x-utilities.loading />
 </div>

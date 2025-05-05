@@ -62,12 +62,12 @@
                         <td class="px-3 py-3">{{ $s->birth_date }}</td>
                         <td class="px-3 py-3">
                             {{ number_format($this->getBalance($s->id), 0, ',', thousands_separator: '.') }}</td>
-                        <td class="px-3 py-3 space-x-2 whitespace-nowrap">
+                        <td class="px-3 py-3 space-x-4 whitespace-nowrap">
                             <button class="text-emerald-600 hover:underline" aria-haspopup="dialog"
                                 wire:click="$dispatch('studentSelected', { studentId: '{{ $s->id }}' })"
                                 aria-expanded="false" aria-controls="transaction-add-modal"
                                 data-hs-overlay="#transaction-add-modal">
-                                Tambah Saldo
+                                Tambah Transaksi
                             </button>
                             <button class="text-blue-600 hover:underline">Laporan</button>
                         </td>

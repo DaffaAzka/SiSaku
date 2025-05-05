@@ -31,7 +31,6 @@
                     <th class="px-3 py-3">Email</th>
                     <th class="px-3 py-3">NISN</th>
                     <th class="px-3 py-3">Birth Date</th>
-                    <th class="px-3 py-3">Balance</th>
                     <th class="px-3 py-3">Action</th>
                 </tr>
             </thead>
@@ -42,19 +41,17 @@
                         <td class="px-3 py-3">{{ $s->email }}</td>
                         <td class="px-3 py-3">{{ $s->nisn }}</td>
                         <td class="px-3 py-3">{{ $s->birth_date }}</td>
-                        <td class="px-3 py-3">
-                            {{ number_format($this->getBalance($s->id), 0, ',', thousands_separator: '.') }}</td>
-                        <td class="px-3 py-3 space-x-2 whitespace-nowrap">
-                            <button class="text-emerald-600 hover:underline" aria-haspopup="dialog"
-                                wire:click="$dispatch('studentSelected', { studentId: '{{ $s->id }}' })"
-                                aria-expanded="false" aria-controls="transaction-add-modal"
-                                data-hs-overlay="#transaction-add-modal">
-                                Tambah Saldo
-                            </button>
+                        <td class="px-3 py-3 space-x-6 whitespace-nowrap">
+
                             <button class="text-blue-600 hover:underline"
                                 wire:click="$dispatch('studentSelected', { studentId: '{{ $s->id }}' })"
                                 aria-expanded="false" aria-controls="user-store-modal"
                                 data-hs-overlay="#user-store-modal">Update</button>
+
+                            <button class="text-red-600 hover:underline"
+                                wire:click="$dispatch('deleteSelected', { studentId: '{{ $s->id }}' })"
+                                aria-expanded="false" aria-controls="user-delete-modal"
+                                data-hs-overlay="#user-delete-modal">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -66,7 +63,6 @@
         {{ $studentClass->links('vendor.pagination.tailwind') }}
     </div>
 
-    <livewire:modals.transaction.store />
-
     <livewire:modals.user.store />
+    <livewire:modals.user.delete />
 </div>
