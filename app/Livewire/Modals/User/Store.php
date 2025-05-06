@@ -16,6 +16,7 @@ class Store extends Component
 {
     public $user;
     public $student;
+    public $roleOption;
 
     // Field
     public $name;
@@ -41,6 +42,7 @@ class Store extends Component
 
         if($this->user->hasRole('teacher')) {
             $this->classes = $this->user->teacherClasses()->first();
+            $this->roleOption = '1';
         } else {
             $this->classes = Classes::get();
         }
@@ -48,10 +50,10 @@ class Store extends Component
 
     public function store() {
 
-        if($this->classes) {
-            $this->storeStudent();
+        if($this->roleOption == '2' || $this->roleOption == '3') {
+            $this->storeUser();
         } else {
-
+            $this->storeStudent();
         }
 
 
@@ -63,9 +65,6 @@ class Store extends Component
 
         if ($this->student) {
             // Update Student
-            if($this->classes) {
-                $this->class = $this->classes->id;
-            }
 
             $request = new Request([
                 'name' => $this->name,
@@ -73,7 +72,7 @@ class Store extends Component
                 'password' => $this->password,
                 'phone_number' => $this->phone,
                 'birth_date' => $this->birth,
-                'nip' => 'string|max:20',
+                'nip' => $this->nip,
                 'nisn' => $this->nisn,
                 'gender' => $this->gender,
             ]);
@@ -103,7 +102,7 @@ class Store extends Component
                 'password' => $this->password,
                 'phone_number' => $this->phone,
                 'birth_date' => $this->birth,
-                'nip' => 'string|max:20',
+                'nip' => $this->nip,
                 'nisn' => $this->nisn,
                 'gender' => $this->gender,
             ]);
@@ -123,6 +122,7 @@ class Store extends Component
 
 
                 if($user && $class) {
+                    $this->resetForm();
                     return session()->flash('success', [
                         'title' => 'Berhasil',
                         'message' => 'Siswa telah dibuat'
@@ -142,6 +142,82 @@ class Store extends Component
         }
     }
 
+    public function storeUser() {
+        $this->userController = new UserController();
+
+        if ($this->student) {
+            // Update User
+
+            $request = new Request([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => $this->password,
+                'phone_number' => $this->phone,
+                'birth_date' => $this->birth,
+                'nip' => $this->nip,
+                'nisn' => $this->nisn,
+                'gender' => $this->gender,
+            ]);
+
+            $user = $this->userController->update($request, $this->student->id);
+            if($user) {
+                return session()->flash('success', [
+                    'title' => 'Berhasil',
+                    'message' => 'User telah diupdate'
+                ]);
+            } else {
+                return session()->flash('error', [
+                    'title' => 'Gagal',
+                    'message' => 'User gagal diupdate'
+                ]);
+            }
+
+        } else {
+            // Create User
+
+            $request = new Request([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => $this->password,
+                'phone_number' => $this->phone,
+                'birth_date' => $this->birth,
+                'nip' => $this->nip,
+                'nisn' => $this->nisn,
+                'gender' => $this->gender,
+            ]);
+
+            if($this->roleOption) {
+                $user = $this->userController->store($request);
+
+                if($this->roleOption == '2') {
+                    $user->assignRole('teacher');
+                }
+
+                if($this->roleOption == '3') {
+                    $user->assignRole('admin');
+                }
+
+                if($user) {
+                    $this->resetForm();
+                    return session()->flash('success', [
+                        'title' => 'Berhasil',
+                        'message' => 'User telah dibuat'
+                    ]);
+                } else {
+                    return session()->flash('error', [
+                        'title' => 'Gagal',
+                        'message' => 'User telah dibuat'
+                    ]);
+                }
+            } else {
+                return session()->flash('error', [
+                    'title' => 'Gagal',
+                    'message' => 'Role belum dipilih'
+                ]);
+            }
+        }
+    }
+
     #[On('studentSelected')]
     public function studentSelected($studentId)
     {
@@ -155,6 +231,8 @@ class Store extends Component
             $this->nip = $this->student->nip;
             $this->nisn = $this->student->nisn;
             $this->gender = $this->student->gender;
+
+            $this->roleOption = $this->student->roles()->first()->id;;
         } else {
             $this->student = null;
             $this->resetForm();

@@ -28,58 +28,29 @@
                     <x-utilities.success />
                     <x-utilities.error />
 
-                    <div class="relative">
-                        <input wire:model='name' type="text" id="hs-inline-leading-pricing-select-label"
-                            name="name"
-                            class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
-                            placeholder="Nama Siswa">
-
-                        @error('name')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-
-                    <div class="relative">
-                        <input wire:model='email' type="email" id="hs-inline-leading-pricing-select-label"
-                            name="email"
-                            class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
-                            placeholder="Email">
-
-                        @error('email')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-
-                    @if (!$student)
+                    @if ($user->hasRole('admin'))
                         <div class="relative">
-                            <input wire:model='password' type="password" id="hs-inline-leading-pricing-select-label"
-                                name="password"
-                                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
-                                placeholder="Password">
+                            <select wire:model.live='roleOption'
+                                class="border border-gray-300 rounded-lg px-4 py-3 text-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option selected value="">Role</option>
+                                <option selected value="3">Admin</option>
+                                <option selected value="2">Teacher</option>
+                                <option selected value="1">Student</option>
 
-                            @error('password')
-                                <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                    {{ $message }}
-                                </p>
-                            @enderror
+                            </select>
                         </div>
                     @endif
 
+                    @if ($roleOption)
 
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
 
                         <div class="relative">
-                            <input wire:model='nisn' type="text" id="hs-inline-leading-pricing-select-label"
-                                name="nisn"
+                            <input wire:model='name' type="text" id="hs-inline-leading-pricing-select-label"
+                                name="name"
                                 class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
-                                placeholder="NISN Siswa">
+                                placeholder="Nama">
 
-                            @error('nisn')
+                            @error('name')
                                 <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                     {{ $message }}
                                 </p>
@@ -87,28 +58,74 @@
                         </div>
 
                         <div class="relative">
-                            <input wire:model='birth' type="date" id="hs-inline-leading-pricing-select-label"
-                                name="birth"
-                                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
+                            <input wire:model='email' type="email" id="hs-inline-leading-pricing-select-label"
+                                name="email"
+                                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
+                                placeholder="Email">
 
-                            @error('birth')
+                            @error('email')
                                 <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
-                    </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-[100]">
-
-                        <div class="">
+                        @if (!$student)
                             <div class="relative">
-                                <input wire:model='phone' type="text" id="hs-inline-leading-pricing-select-label"
-                                    name="phone"
+                                <input wire:model='password' type="password" id="hs-inline-leading-pricing-select-label"
+                                    name="password"
                                     class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
-                                    placeholder="Nomor Telepon">
+                                    placeholder="Password">
 
-                                @error('phone')
+                                @error('password')
+                                    <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        @endif
+
+
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+
+                            @if ($roleOption == 1)
+                                <div class="relative">
+                                    <input wire:model='nisn' type="text" id="hs-inline-leading-pricing-select-label"
+                                        name="nisn"
+                                        class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
+                                        placeholder="NISN Siswa">
+
+                                    @error('nisn')
+                                        <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            @endif
+
+                            @if ($roleOption == 2)
+                                <div class="relative">
+                                    <input wire:model='nip' type="text" id="hs-inline-leading-pricing-select-label"
+                                        name="nip"
+                                        class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
+                                        placeholder="NIP Guru">
+
+                                    @error('nip')
+                                        <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            @endif
+
+
+                            <div class="relative">
+                                <input wire:model='birth' type="date" id="hs-inline-leading-pricing-select-label"
+                                    name="birth"
+                                    class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
+
+                                @error('birth')
                                     <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                         {{ $message }}
                                     </p>
@@ -116,34 +133,53 @@
                             </div>
                         </div>
 
-                        <div class="relative">
-                            <select id="hs-select-gender" wire:model='gender'
-                                class="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
-                                <option selected>Jenis Kelamin</option>
-                                <option value="male">Laki-Laki</option>
-                                <option value="female">Perempuan</option>
-                            </select>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-[100]">
 
-                            @error('gender')
-                                <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                    {{ $message }}
-                                </p>
-                            @enderror
+                            <div class="">
+                                <div class="relative">
+                                    <input wire:model='phone' type="text" id="hs-inline-leading-pricing-select-label"
+                                        name="phone"
+                                        class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
+                                        placeholder="Nomor Telepon">
+
+                                    @error('phone')
+                                        <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="relative">
+                                <select id="hs-select-gender" wire:model='gender'
+                                    class="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
+                                    <option selected>Jenis Kelamin</option>
+                                    <option value="male">Laki-Laki</option>
+                                    <option value="female">Perempuan</option>
+                                </select>
+
+                                @error('gender')
+                                    <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
-                    <div
-                        class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
-                        <button type="button"
-                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 "
-                            data-hs-overlay="#user-store-modal">
-                            Close
-                        </button>
-                        <button type="submit"
-                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none">
-                            Save
-                        </button>
-                    </div>
+                        <div
+                            class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+                            <button type="button"
+                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 "
+                                data-hs-overlay="#user-store-modal">
+                                Close
+                            </button>
+                            <button type="submit"
+                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none">
+                                Save
+                            </button>
+                        </div>
+
+                    @endif
 
                 </form>
 

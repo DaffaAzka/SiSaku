@@ -35,8 +35,8 @@ class UserController extends Controller
              'password' => 'required|string|min:8',
              'phone_number' => 'required|string|max:15',
              'birth_date' => 'required|date',
-             'nip' => 'string|max:20',
-             'nisn' => 'string|max:20',
+             'nip' => 'max:20',
+             'nisn' => 'max:20',
              'gender' => 'required|string|max:10',
             ]);
 
@@ -75,8 +75,8 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
             'phone_number' => 'required|string|max:15',
             'birth_date' => 'required|date',
-            'nip' => 'string|max:20',
-            'nisn' => 'string|max:20',
+            'nip' => 'max:20',
+            'nisn' => 'max:20',
             'gender' => 'required|string|max:10',
         ]);
 

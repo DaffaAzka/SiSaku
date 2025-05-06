@@ -38,7 +38,7 @@ class Users extends Component
             END
         ");
 
-        if ($this->role) {
+        if ($this->role != '') {
             $users = $users->whereHas('roles', function($query) {
                 $query->where('id', $this->role);
             });
