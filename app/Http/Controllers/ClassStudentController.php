@@ -66,7 +66,9 @@ class ClassStudentController extends Controller
             'class_id' => 'required|exists:classes,id',
             'student_id' => 'required|exists:users,id',
         ]);
+        
         $classStudent = ClassStudent::findOrFail($id);
+
         $classStudent->update([
             'class_id' => $request->class_id,
             'student_id' => $request->student_id,

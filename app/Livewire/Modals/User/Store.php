@@ -5,6 +5,7 @@ namespace App\Livewire\Modals\User;
 use App\Http\Controllers\ClassStudentController;
 use App\Http\Controllers\UserController;
 use App\Models\Classes;
+use App\Models\ClassStudent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,7 +79,37 @@ class Store extends Component
             ]);
 
             $user = $this->userController->update($request, $this->student->id);
-            if($user ) {
+
+            if ($this->class != $this->student->studentClasses()->first()->id) {
+
+
+                $request2 = new Request([
+                    'class_id' => $this->class,
+                    'student_id' => $user->id
+                ]);
+
+                $studentClasses = ClassStudent::where('class_id', 'like', $this->student->studentClasses()->first()->id)->where('student_id', 'like', $user->id)->first();
+
+                $this->classStudentController->destroy($studentClasses->id);
+
+                $class = $this->classStudentController->store($request2);
+
+
+                if($class) {
+                    return session()->flash('success', [
+                        'title' => 'Berhasil',
+                        'message' => 'Kelas telah diupdate'
+                    ]);
+                } else {
+                    return session()->flash('error', [
+                        'title' => 'Gagal',
+                        'message' => 'Kelas gagal diupdate'
+                    ]);
+                }
+
+            }
+
+            if($user) {
                 return session()->flash('success', [
                     'title' => 'Berhasil',
                     'message' => 'Siswa telah diupdate'
@@ -92,7 +123,7 @@ class Store extends Component
 
         } else {
             // Create Student
-            if($this->classes) {
+            if($this->classes && !$this->class) {
                 $this->class = $this->classes->id;
             }
 
@@ -231,7 +262,7 @@ class Store extends Component
             $this->nip = $this->student->nip;
             $this->nisn = $this->student->nisn;
             $this->gender = $this->student->gender;
-
+            $this->class = $this->student->studentClasses()->first()->id ?? null;
             $this->roleOption = $this->student->roles()->first()->id;;
         } else {
             $this->student = null;
