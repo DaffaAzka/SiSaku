@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Sites\Management;
 
+use App\Models\Classes;
 use App\Services\BalanceService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -17,10 +18,16 @@ class Students extends Component
     public $search = '';
 
 
-    public function mount()
+    public function mount($id = null)
     {
         $this->user = Auth::user()->load('studentClasses', 'teacherClasses');
-        $this->class = $this->user->teacherClasses->first();
+
+        if($this->user->hasRole('admin')) {
+            $this->class = Classes::findOrFail($id);
+        } else {
+            $this->class = $this->user->teacherClasses->first();
+        }
+
     }
 
     public function getBalance($student_id)

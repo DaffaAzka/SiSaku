@@ -70,7 +70,6 @@ class Store extends Component
             $request = new Request([
                 'name' => $this->name,
                 'email' => $this->email,
-                'password' => $this->password,
                 'phone_number' => $this->phone,
                 'birth_date' => $this->birth,
                 'nip' => $this->nip,
@@ -182,7 +181,6 @@ class Store extends Component
             $request = new Request([
                 'name' => $this->name,
                 'email' => $this->email,
-                'password' => $this->password,
                 'phone_number' => $this->phone,
                 'birth_date' => $this->birth,
                 'nip' => $this->nip,

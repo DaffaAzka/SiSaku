@@ -46,7 +46,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::get('dashboard', Dashboard::class)->name('dashboard');
-    Route::get('management-students', Students::class)->name('management-students');
+    Route::get('management-students/{id?}', Students::class)->name('management-students');
     Route::get('monitoring-balance/{id?}', Balance::class)->name(name: 'monitoring-balance');
 
     Route::get('management-users', Users::class)->name('management-users');

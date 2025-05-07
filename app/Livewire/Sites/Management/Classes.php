@@ -8,7 +8,8 @@ use Livewire\Component;
 
 class Classes extends Component
 {
-     public function getBalance($class_id)
+    public $searchs;
+    public function getBalance($class_id)
     {
         $balanceService = new BalanceService();
         return $balanceService->getClassBalance($class_id);
