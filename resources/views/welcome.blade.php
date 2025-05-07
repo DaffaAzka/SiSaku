@@ -1,7 +1,7 @@
 <x-layouts.app>
 
     <!-- Hero Section -->
-    <div class="w-full bg-white grid grid-cols-1 sm:grid-cols-2 min-h-screen items-center px-4 sm:px-6 py-12 gap-8">
+    <div class="w-full grid grid-cols-1 sm:grid-cols-2 min-h-screen items-center px-4 sm:px-6 py-12 gap-8">
         <!-- Gambar -->
         <div class="order-2 sm:order-1 flex justify-center">
             <img src="{{ asset('assets/char.png') }}"

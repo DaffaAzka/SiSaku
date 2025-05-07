@@ -13,14 +13,15 @@ class ClassBalanceChart extends Component
     public $chartData;
     public $dateRange = 12;
     public $teacherId;
+    public $adminId;
 
     public $isDay = true;
 
     public $date;
 
-    public function mount($teacherId = null)
+    public function mount()
     {
-        $this->teacherId = $teacherId ?? Auth::id();
+        $this->teacherId = $this->adminId ?? Auth::id();
         $this->loadChartData();
     }
 

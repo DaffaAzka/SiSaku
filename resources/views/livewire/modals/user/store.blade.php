@@ -7,7 +7,11 @@
             class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
             <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
                 <h3 id="user-store-modal-label" class="font-bold text-gray-800 dark:text-white">
-                    {{ $student->name ?? 'Tambah siswa baru' }}
+                    @if ($roleOption == '1')
+                        {{ $student->name ?? 'Tambah siswa baru' }}
+                    @else
+                        {{ $student->name ?? 'Tambah user baru' }}
+                    @endif
                 </h3>
                 <button type="button"
                     class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600"
@@ -91,7 +95,8 @@
                                 <option selected>Pilih Kelas</option>
 
                                 @foreach ($classes as $cl)
-                                    <option value="{{ $cl->id }}">{{ $cl->grade . ' ' . $cl->majors->name . ' ' . $cl->class }}</option>
+                                    <option value="{{ $cl->id }}">
+                                        {{ $cl->grade . ' ' . $cl->majors->name . ' ' . $cl->class }}</option>
                                 @endforeach
                             </select>
                         @endif

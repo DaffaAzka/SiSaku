@@ -4,7 +4,8 @@
 <div class="p-6 space-y-6">
     <!-- Judul dan tgl -->
     <div>
-        <h1 class="text-2xl font-semibold text-gray-800">Monitoring Tabungan {{ $class->grade . ' ' . $class->majors->name . ' ' . $class->class }}</h1>
+        <h1 class="text-2xl font-semibold text-gray-800">Monitoring Tabungan
+            {{ $class->grade . ' ' . $class->majors->name . ' ' . $class->class }}</h1>
         {{-- <div class="relative w-64 mt-3">
             <x-lucide-calendar
                 class="absolute w-4 h-4 left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
@@ -15,7 +16,13 @@
 
     <!-- Grafik -->
     <div class="bg-white border border-gray-300 rounded-md p-4">
-        <livewire:charts.class-balance-chart :isDay="false" />
+
+        @if ($user->hasRole('admin'))
+            <livewire:charts.class-balance-chart :isDay="false" :adminId="$class->teacher->id" />
+        @else
+            <livewire:charts.class-balance-chart :isDay="false" />
+        @endif
+
     </div>
 
     <!-- Search dan laporan -->
@@ -35,7 +42,8 @@
         </div>
     </div>
 
-    <p>{{$date}}</p>    <p>{{$date}}</p>
+    <p>{{ $date }}</p>
+    <p>{{ $date }}</p>
 
 
 

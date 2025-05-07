@@ -14,6 +14,7 @@ use App\Livewire\Pages\Setting;
 use App\Livewire\Pages\Teacher\ManajemenSiswa;
 use App\Livewire\Pages\Teacher\MonitoringTabungan;
 use App\Livewire\Sites\Dashboard;
+use App\Livewire\Sites\Management\Classes;
 use App\Livewire\Sites\Management\Students;
 use App\Livewire\Sites\Management\Users;
 use App\Livewire\Sites\Monitoring\Balance;
@@ -46,9 +47,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('management-students', Students::class)->name('management-students');
-    Route::get('monitoring-balance', Balance::class)->name('monitoring-balance');
+    Route::get('monitoring-balance/{id?}', Balance::class)->name(name: 'monitoring-balance');
 
     Route::get('management-users', Users::class)->name('management-users');
+    Route::get('management-classes', Classes::class)->name('management-classes');
 
 
 });
