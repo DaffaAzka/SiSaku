@@ -46,7 +46,7 @@ class Store extends Component
             $this->teacher_id =  $this->classes->teacher_id;
         } else {
             $this->warningTeacher = false;
-                    $this->reset(['classes', 'major_id', 'teacher_id', 'class', 'grade']);
+            $this->reset(['classes', 'major_id', 'teacher_id', 'class', 'grade']);
 
         }
     }
@@ -60,7 +60,6 @@ class Store extends Component
             } else {
                 $this->warningTeacher = false;
             }
-
         }
 
         return view('livewire.modals.classes.store');
