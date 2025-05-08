@@ -29,19 +29,21 @@ class ClassesController extends Controller
     public function store(Request $request)
     {
 
-        $validated = $request->validate([
+        $request->validate([
           'majors_id'=>'required|exists:majors,id',
           'class'=>'required',
           'grade'=>'required',
           'teacher_id'=>'required|exists:users,id',
         ]);
+
         $class = Classes::create([
-            'majors_id' => $validated['majors_id'],
-            'class' => $validated['class'],
-            'grade'=> $validated['grade'],
-            'teacher_id' => $validated['teacher_id'],
+            'majors_id' => $request['majors_id'],
+            'class' => $request['class'],
+            'grade'=> $request['grade'],
+            'teacher_id' => $request['teacher_id'],
         ]);
-        $class->students()->attach($validated['students']);
+        // $class->students()->attach($validated['students']);
+
         return $class;
 
     }

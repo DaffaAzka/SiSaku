@@ -2,26 +2,85 @@
 
 namespace App\Livewire\Modals\Classes;
 
+use App\Http\Controllers\ClassesController;
 use App\Models\Classes;
 use App\Models\Major;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Store extends Component
 {
     public $majors;
+    public $classes;
+    public $teachers;
+    public $warningTeacher = false;
 
-    public $major_id;
+
+    // Input form
+    public $majors_id;
     public $class;
     public $grade;
 
-    public $teachers;
 
     public $teacher_id;
-    public $warningTeacher = false;
 
-    public $classes;
+    public function store() {
+        $classesController = new ClassesController();
+
+        if ($this->classes) {
+
+            // Update
+
+            $request = new Request([
+                'majors_id' => $this->majors_id,
+                'class' => $this->class,
+                'teacher_id' => $this->teacher_id,
+                'grade' => $this->grade
+            ]);
+
+            // if () {
+
+            // }
+
+        } else {
+
+            $request = new Request([
+                'majors_id' => $this->majors_id,
+                'class' => $this->class,
+                'teacher_id' => $this->teacher_id,
+                'grade' => $this->grade
+            ]);
+
+            if ($this->warningTeacher) {
+                $temp = Classes::where('teacher_id', 'like', $this->teacher_id)->first();
+
+                $t = new Request([
+                    'majors_id' => $this->majors_id,
+                    'class' => $this->class,
+                    'teacher_id' => null,
+                    'grade' => $this->grade
+                ]);
+
+                $classesController->update($t, $temp->id);
+            }
+
+            $cl = $classesController->store($request);
+
+            if($cl) {
+                return session()->flash('success', [
+                    'title' => 'Berhasil',
+                    'message' => 'Kelas telah dibuat'
+                ]);
+            } else {
+                return session()->flash('error', [
+                    'title' => 'Gagal',
+                    'message' => 'Kelas gagal dibuat'
+                ]);
+            }
+        }
+    }
 
     public function mount() {
         $this->majors = Major::get();
@@ -32,21 +91,20 @@ class Store extends Component
             ->get();
     }
 
-    public function store() {
 
-    }
 
     #[On('classSelected')]
     public function classSelected($id) {
         if($id) {
             $this->classes = Classes::findOrFail(id: $id);
-            $this->major_id =  $this->classes->majors_id;
+            $this->majors_id =  $this->classes->majors_id;
             $this->class =  $this->classes->class;
             $this->grade =  $this->classes->grade;
             $this->teacher_id =  $this->classes->teacher_id;
+            $this->warningTeacher = false;
         } else {
             $this->warningTeacher = false;
-            $this->reset(['classes', 'major_id', 'teacher_id', 'class', 'grade']);
+            $this->reset(['classes', 'majors_id', 'teacher_id', 'class', 'grade']);
 
         }
     }
@@ -55,6 +113,7 @@ class Store extends Component
     {
         if($this->teacher_id != null) {
             $temp = User::findOrFail($this->teacher_id)->load('teacherClasses');
+
             if($temp->teacherClasses()->count() != 0) {
                 $this->warningTeacher = true;
             } else {

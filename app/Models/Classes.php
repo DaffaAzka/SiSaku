@@ -13,6 +13,7 @@ class Classes extends Model
         'majors_id',
         'class',
         'teacher_id',
+        'grade'
     ];
 
     public function majors()

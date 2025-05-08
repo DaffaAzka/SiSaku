@@ -7,7 +7,7 @@
             class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
             <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
                 <h3 id="classes-add-modal-label" class="font-bold text-gray-800 dark:text-white">
-                    {{ $classes ? $classes->grade . ' ' . $classes->majors->name . ' ' . $classes->class : "Tambah Kelas" }}
+                    {{ $classes ? $classes->grade . ' ' . $classes->majors->name . ' ' . $classes->class : 'Tambah Kelas' }}
                 </h3>
                 <button type="button"
                     class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600"
@@ -57,37 +57,51 @@
 
                     {{-- @if ($classes) --}}
 
-                        <div class="{{ !$classes ? 'hidden' : 'block' }} space-y-4">
-                            <div class="relative z-[300] max-h-20 overflow-x">
-                                <select wire:model.live="major_id"
-                                    class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 border">
-                                    <option value="">Pilih Jurusan...</option>
-                                    @foreach ($majors as $m)
-                                        <option value="{{ $m->id }}" @selected($m->id == $major_id)>
-                                            {{ $m->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="relative z-[200] max-h-20 overflow-x">
-                                <select wire:model.live="teacher_id"
-                                    class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 border">
-                                    <option value="">Pilih Wali Kelas...</option>
-                                    @foreach ($teachers as $t)
-                                        <option value="{{ $t->id }}" @selected($t->id == $teacher_id)>
-                                            {{ $t->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                    <div class="{{ !$classes ? 'hidden' : 'block' }} space-y-4">
+                        <div class="relative z-[300] max-h-20 overflow-x">
+                            <select wire:model.live="majors_id"
+                                class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 border">
+                                <option value="">Pilih Jurusan...</option>
+                                @foreach ($majors as $m)
+                                    <option value="{{ $m->id }}" @selected($m->id == $majors_id)>
+                                        {{ $m->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        {{-- @else --}}
-                        <div class="{{ $classes ? 'hidden' : 'block' }}">
-                            <div class="relative z-[300]" wire:ignore>
-                                <select wire:model.live='major_id'
-                                    data-hs-select='{
+                        @error('majors_id')
+                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    <div class="{{ !$classes ? 'hidden' : 'block' }}">
+                        <div class="relative z-[200] max-h-20 overflow-x">
+                            <select wire:model.live="teacher_id"
+                                class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 border">
+                                <option value="">Pilih Wali Kelas...</option>
+                                @foreach ($teachers as $t)
+                                    <option value="{{ $t->id }}" @selected($t->id == $teacher_id)>
+                                        {{ $t->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        @error('teacher_id')
+                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- @else --}}
+                    <div class="{{ $classes ? 'hidden' : 'block' }}">
+                        <div class="relative z-[300]" wire:ignore>
+                            <select wire:model.live='majors_id'
+                                data-hs-select='{
                                 "hasSearch": true,
                                 "searchLimit": 5,
                                 "searchPlaceholder": "Search...",
@@ -101,27 +115,25 @@
                                 "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
                                 "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
                                 }'
-                                    class="hidden focus:border-teal-500 focus:ring-teal-500 dark:focus:border-teal-600 dark:focus:ring-teal-600 z-[400]">
-                                    <option>Pilih Jurusan...</option>
-                                    @foreach ($majors as $m)
-                                        <option value="{{ $m->id }}">{{ $m->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            @error('major_id')
-                                <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                    {{ $message }}
-                                </p>
-                            @enderror
+                                class="hidden focus:border-teal-500 focus:ring-teal-500 dark:focus:border-teal-600 dark:focus:ring-teal-600 z-[400]">
+                                <option>Pilih Jurusan...</option>
+                                @foreach ($majors as $m)
+                                    <option value="{{ $m->id }}">{{ $m->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
+                        @error('majors_id')
+                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
 
-
-                        <div class="">
-                            <div class="relative z-[200]" wire:ignore>
-                                <select wire:model.live='teacher_id'
-                                    data-hs-select='{
+                    <div class="{{ $classes ? 'hidden' : 'block' }}">
+                        <div class="relative z-[200]" wire:ignore>
+                            <select wire:model.live='teacher_id'
+                                data-hs-select='{
                                 "hasSearch": true,
                                 "searchLimit": 5,
                                 "searchPlaceholder": "Search...",
@@ -135,71 +147,71 @@
                                 "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
                                 "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
                                 }'
-                                    class="hidden focus:border-teal-500 focus:ring-teal-500 dark:focus:border-teal-600 dark:focus:ring-teal-600 z-[400]">
-                                    <option>Pilih Wali Kelas...</option>
-                                    @foreach ($teachers as $m)
-                                        <option value="{{ $m->id }}">{{ $m->name }}</option>
-                                    @endforeach
-                                </select>
+                                class="hidden focus:border-teal-500 focus:ring-teal-500 dark:focus:border-teal-600 dark:focus:ring-teal-600 z-[400]">
+                                <option>Pilih Wali Kelas...</option>
+                                @foreach ($teachers as $m)
+                                    <option value="{{ $m->id }}">{{ $m->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        @error('teacher_id')
+                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- @endif --}}
+
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-[100]">
+
+                        <div class="">
+                            <div class="relative">
+                                <input wire:model='class' type="number" id="hs-inline-leading-pricing-select-label"
+                                    name="inline-add-on"
+                                    class="py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
+                                    placeholder="Pilih Kelas">
                             </div>
 
-                            @error('teacher_id')
+                            @error('class')
                                 <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
 
-                        {{-- @endif --}}
+                        <div class="relative">
+                            <select id="hs-select-transaction" wire:model='grade'
+                                class="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
+                                <option selected>Pilih Tingkat</option>
+                                <option value="X">X</option>
+                                <option value="XI">XI</option>
+                                <option value="XII">XII</option>
+                                <option value="XIII">XIII</option>
+                            </select>
 
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-[100]">
-
-                            <div class="">
-                                <div class="relative">
-                                    <input wire:model='class' type="number" id="hs-inline-leading-pricing-select-label"
-                                        name="inline-add-on"
-                                        class="py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600"
-                                        placeholder="Pilih Kelas">
-                                </div>
-
-                                @error('class')
-                                    <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                        {{ $message }}
-                                    </p>
-                                @enderror
-                            </div>
-
-                            <div class="relative">
-                                <select id="hs-select-transaction" wire:model='grade'
-                                    class="py-3 px-4 pe-9 block w-full border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:border-teal-600 dark:focus:ring-teal-600">
-                                    <option selected>Pilih Tingkat</option>
-                                    <option value="X">X</option>
-                                    <option value="XI">XI</option>
-                                    <option value="XII">XII</option>
-                                    <option value="XIII">XIII</option>
-                                </select>
-
-                                @error('grade')
-                                    <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                        {{ $message }}
-                                    </p>
-                                @enderror
-                            </div>
+                            @error('grade')
+                                <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div
-                            class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
-                            <button type="button"
-                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 "
-                                data-hs-overlay="#transaction-add-modal">
-                                Close
-                            </button>
-                            <button type="submit"
-                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none">
-                                Save
-                            </button>
-                        </div>
+                    <div
+                        class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+                        <button type="button"
+                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 "
+                            data-hs-overlay="#transaction-add-modal">
+                            Close
+                        </button>
+                        <button type="submit"
+                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none">
+                            Save
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
