@@ -33,7 +33,6 @@ class ClassesController extends Controller
           'majors_id'=>'required|exists:majors,id',
           'class'=>'required',
           'grade'=>'required',
-          'teacher_id'=>'required|exists:users,id',
         ]);
 
         $class = Classes::create([
@@ -74,18 +73,17 @@ class ClassesController extends Controller
             'majors_id'=>'required|exists:majors,id',
             'class'=>'required',
             'grade'=>'required',
-            'teacher_id'=>'required|exists:users,id',
         ]);
 
         $class = Classes::findOrFail($id);
 
         $class->update([
-            'majors_id' => $validated['majors_id'],
-            'class' => $validated['class'],
-            'grade'=> $validated['grade'],
-            'teacher_id' => $validated['teacher_id'],
+            'majors_id' => $request['majors_id'],
+            'class' => $request['class'],
+            'grade'=> $request['grade'],
+            'teacher_id' => $request['teacher_id'],
         ]);
-        $class->students()->sync($validated['students']);
+        // $class->students()->sync($validated['students']);
         $class->save();
         return $class;
     }

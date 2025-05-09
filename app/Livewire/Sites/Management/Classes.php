@@ -3,12 +3,21 @@
 namespace App\Livewire\Sites\Management;
 
 use App\Models\Classes as ModelsClasses;
+use App\Models\Major;
 use App\Services\BalanceService;
 use Livewire\Component;
 
 class Classes extends Component
 {
     public $search;
+    public $majors;
+
+    public $grades;
+
+    public function mount() {
+        $this->majors = Major::get();
+    }
+
     public function getBalance($class_id)
     {
         $balanceService = new BalanceService();

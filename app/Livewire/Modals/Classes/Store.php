@@ -40,9 +40,32 @@ class Store extends Component
                 'grade' => $this->grade
             ]);
 
-            // if () {
+            if ($this->warningTeacher) {
+                $temp = Classes::where('teacher_id', 'like', $this->teacher_id)->first();
 
-            // }
+                $t = new Request(query: [
+                    'majors_id' => $temp->majors_id,
+                    'class' => $temp->class,
+                    'teacher_id' => null,
+                    'grade' => $temp->grade
+                ]);
+
+                $classesController->update($t, $temp->id);
+            }
+
+            $cl = $classesController->update($request, $this->classes->id);
+
+            if($cl) {
+                return session()->flash('success', [
+                    'title' => 'Berhasil',
+                    'message' => 'Kelas telah diupdate'
+                ]);
+            } else {
+                return session()->flash('error', [
+                    'title' => 'Gagal',
+                    'message' => 'Kelas gagal diupdate'
+                ]);
+            }
 
         } else {
 
@@ -56,11 +79,11 @@ class Store extends Component
             if ($this->warningTeacher) {
                 $temp = Classes::where('teacher_id', 'like', $this->teacher_id)->first();
 
-                $t = new Request([
-                    'majors_id' => $this->majors_id,
-                    'class' => $this->class,
+                $t = new Request(query: [
+                    'majors_id' => $temp->majors_id,
+                    'class' => $temp->class,
                     'teacher_id' => null,
-                    'grade' => $this->grade
+                    'grade' => $temp->grade
                 ]);
 
                 $classesController->update($t, $temp->id);

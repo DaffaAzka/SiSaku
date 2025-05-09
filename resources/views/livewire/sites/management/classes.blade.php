@@ -1,12 +1,7 @@
 <div class="p-6 min-h-screen font-sans">
     <h1 class="text-2xl font-semibold mb-6">Manajemen Kelas</h1>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div class="relative col-span-1">
-            <x-lucide-search class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input type="text" placeholder="Search" wire:model.live='search'
-                class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm w-full focus:outline-none focus:ring-2 focus:ring-emerald-600" />
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
 
         <div class="col-span-1">
             <select
@@ -25,7 +20,7 @@
         <div class="col-span-1 w-full flex sm:justify-end items-center">
             <button aria-controls="classes-add-modal" data-hs-overlay="#classes-add-modal"
                 wire:click="$dispatch('classSelected', { id: null })"
-                class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2 min-w-[150px] rounded-md text-sm font-medium whitespace-nowrap">
+                class="w-full bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2 min-w-[150px] rounded-md text-sm font-medium whitespace-nowrap">
                 Tambah Kelas
             </button>
         </div>
@@ -47,7 +42,7 @@
                 @foreach ($class as $cl)
                     <tr>
                         <td class="px-3 py-3">{{ $cl->grade . ' ' . $cl->majors->name . ' ' . $cl->class }}</td>
-                        <td class="px-3 py-3">{{ $cl->teacher->name }}</td>
+                        <td class="px-3 py-3">{{ $cl->teacher->name ?? 'N/A' }}</td>
                         <td class="px-3 py-3">{{ $cl->students->count() }}</td>
                         <td class="px-3 py-3">Rp.
                             {{ number_format($this->getBalance($cl->id), 0, ',', thousands_separator: '.') }}</td>
