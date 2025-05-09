@@ -77,13 +77,13 @@
                             </div>
                         </button>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a class="flex items-center gap-x-3 py-2 px-3 text-sm font-medium text-white rounded-lg hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700"
                             href="#">
                             <x-lucide-eye class="w-4 h-4" />
                             Monitoring Tabungan
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <div class="px-2 pt-5 pb-2 text-xs uppercase text-white font-semibold">FITUR SEKUNDER</div>

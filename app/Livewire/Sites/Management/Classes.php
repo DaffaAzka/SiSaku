@@ -12,7 +12,8 @@ class Classes extends Component
     public $search;
     public $majors;
 
-    public $grades;
+    public $grade = '';
+    public $major_id = '';
 
     public function mount() {
         $this->majors = Major::get();
@@ -27,7 +28,9 @@ class Classes extends Component
 
     public function render()
     {
-        $class = ModelsClasses::paginate(10);
+        $class = ModelsClasses::where('majors_id', 'like', '%' . $this->major_id . '%')
+                     ->where('grade', 'like', '%' . $this->grade . '%')
+                     ->paginate(10);
         return view('livewire.sites.management.classes', [
             'class' => $class
         ]);

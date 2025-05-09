@@ -122,7 +122,7 @@ class Store extends Component
 
         } else {
             // Create Student
-            if($this->classes && !$this->class) {
+            if($this->classes && !$this->class && $this->user->hasRole('student')) {
                 $this->class = $this->classes->id;
             }
 

@@ -69,7 +69,7 @@
                         <td class="px-3 py-3">{{ $s->nisn }}</td>
                         <td class="px-3 py-3">{{ $s->birth_date }}</td>
                         <td class="px-3 py-3">
-                            {{ number_format($this->getBalance($s->id), 0, ',', thousands_separator: '.') }}</td>
+                          Rp.  {{ number_format($this->getBalance($s->id), 0, ',', thousands_separator: '.') }}</td>
                         <td class="px-3 py-3 space-x-4 whitespace-nowrap">
                             <button class="text-emerald-600 hover:underline" aria-haspopup="dialog"
                                 wire:click="$dispatch('studentSelected', { studentId: '{{ $s->id }}' })"
