@@ -1,5 +1,5 @@
-<div class="font-sagoe p-4 sm:p-6 text-gray-800 dark:text-gray-200 space-y-6">
-    <h1 class="text-lg sm:text-xl font-semibold mb-4 dark:text-white">Manajemen Siswa
+<div class="font-sagoe p-4 sm:p-6 text-gray-800 space-y-6">
+    <h1 class="text-lg sm:text-xl font-semibold mb-4">Manajemen Siswa
         {{ $class->grade . ' ' . $class->majors->name . ' ' . $class->class }}</h1>
 
     <!-- Search dan laporan -->

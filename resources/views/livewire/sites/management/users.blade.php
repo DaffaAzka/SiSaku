@@ -82,5 +82,6 @@
         </div>
 
         <livewire:modals.user.section />
+        <livewire:modals.user.delete />
     </div>
 </div>
