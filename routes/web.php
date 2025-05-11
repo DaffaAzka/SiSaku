@@ -20,6 +20,7 @@ use App\Livewire\Sites\Management\Classes;
 use App\Livewire\Sites\Management\Students;
 use App\Livewire\Sites\Management\Users;
 use App\Livewire\Sites\Monitoring\Balance;
+use App\Livewire\Sites\Monitoring\Logs as MonitoringLogs;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('management-users', Users::class)->name('management-users')->middleware(RoleAdmin::class);
     Route::get('management-classes', Classes::class)->name('management-classes')->middleware(RoleAdmin::class);
+    Route::get('monitoring-logs', MonitoringLogs::class)->name('monitoring-logs')->middleware(RoleAdmin::class);
 
 
 });

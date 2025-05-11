@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Major extends Model
 {
+    use LogsActivity;
 
     protected $fillable = [
         'name',

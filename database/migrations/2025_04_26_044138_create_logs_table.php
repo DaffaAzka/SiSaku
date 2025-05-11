@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('logs', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->string('model');
+            $table->unsignedBigInteger('model_id');
+            $table->string('action');
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->ipAddress('ip_address')->nullable();
-            $table->string('action', 50);
-            $table->text('description')->nullable();
+            $table->json('old_data')->nullable();
+            $table->json('new_data')->nullable();
+            $table->string('ip_address')->nullable();
+            $table->string('user_agent')->nullable();
             $table->timestamps();
         });
     }

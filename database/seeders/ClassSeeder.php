@@ -26,7 +26,7 @@ class ClassSeeder extends Seeder
             Classes::create([
                 'class' => $teacher->id,
                 'majors_id' => '1',
-                'grade' => '10',
+                'grade' => 'XI',
                 'teacher_id' => $teacher->id,
             ]);
         }

@@ -30,15 +30,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
          $data = $request->validate([
-             'name' => 'required|string|max:255',
-             'email' => 'required|string|email|max:255|unique:users',
-             'password' => 'required|string|min:8',
-             'phone_number' => 'required|string|max:15',
-             'birth_date' => 'required|date',
-             'nip' => 'max:20',
-             'nisn' => 'max:20',
-             'gender' => 'required|string|max:10',
-            ]);
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'phone_number' => 'required|string|max:15',
+            'birth_date' => 'required|date',
+            'nip' => 'max:20',
+            'nisn' => 'max:20',
+            'gender' => 'required|string|max:10',
+        ]);
 
 
             $data['password'] = bcrypt($data['password']);
