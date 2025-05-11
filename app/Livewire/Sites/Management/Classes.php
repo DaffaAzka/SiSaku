@@ -29,10 +29,17 @@ class Classes extends Component
     public function render()
     {
         $class = ModelsClasses::where('majors_id', 'like', '%' . $this->major_id . '%')
-                     ->where('grade', 'like', '%' . $this->grade . '%')
-                     ->paginate(10);
+                     ->when($this->grade, function($query, $grade){
+                        $query->where('grade', $grade);
+                     })->paginate(10);
+
         return view('livewire.sites.management.classes', [
             'class' => $class
         ]);
+
+        // where('grade', 'like', '%' . $this->grade . '%')
+        // ->when($this->student_id, function($query, $student_id) {
+        //         $query->where('student_id', $student_id); // exact match
+        //     })
     }
 }

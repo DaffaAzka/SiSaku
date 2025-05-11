@@ -12,7 +12,7 @@ class Logs extends Component
     use WithPagination, WithoutUrlPagination;
     public function render()
     {
-        $logs = Log::with('user')->paginate(10);
+        $logs = Log::with('user')->orderByDesc('created_at')->paginate(10);
         return view('livewire.sites.monitoring.logs', [
             'logs' => $logs
         ]);

@@ -20,6 +20,10 @@ class Balance extends Component
     public $class;
     public $search = '';
 
+    //
+    public $type_transaction;
+    public $student_id;
+
 
     public function mount($id = null)
     {
@@ -43,12 +47,17 @@ class Balance extends Component
     {
         $studentClass = $this->class->students()->where('name', 'like', '%' . $this->search . '%')->paginate(10);
 
-        $s = $this->class->students()->select('users.id')->pluck('id');;
-        $transaction = Transaction::whereIn('student_id', $s)->paginate(10);
+        $s = $this->class->students()->select('users.id')->pluck('id');
 
+        $transaction = Transaction::whereIn('student_id', $s)
+            ->when($this->student_id, function($query, $student_id) {
+                $query->where('student_id', $student_id); // exact match
+            })->where('type', 'like', '%' . $this->type_transaction . '%')->orderByDesc('created_at')
+            ->paginate(10);
         return view('livewire.sites.monitoring.balance', [
             'studentClass' => $studentClass,
             'transaction' => $transaction
         ]);
     }
 }
+
