@@ -3,6 +3,7 @@
 namespace App\Livewire\Sites\Monitoring;
 
 use App\Models\Classes;
+use App\Models\Transaction;
 use App\Services\BalanceService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -41,8 +42,13 @@ class Balance extends Component
     public function render()
     {
         $studentClass = $this->class->students()->where('name', 'like', '%' . $this->search . '%')->paginate(10);
+
+        $s = $this->class->students()->select('users.id')->pluck('id');;
+        $transaction = Transaction::whereIn('student_id', $s)->paginate(10);
+
         return view('livewire.sites.monitoring.balance', [
-            'studentClass' => $studentClass
+            'studentClass' => $studentClass,
+            'transaction' => $transaction
         ]);
     }
 }

@@ -1,6 +1,10 @@
 {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
 
+@php
+    use Carbon\Carbon;
+@endphp
+
 <div class="p-6 space-y-6">
     <!-- Judul dan tgl -->
     <div>
@@ -69,7 +73,7 @@
                         <td class="px-3 py-3">{{ $s->nisn }}</td>
                         <td class="px-3 py-3">{{ $s->birth_date }}</td>
                         <td class="px-3 py-3">
-                          Rp.  {{ number_format($this->getBalance($s->id), 0, ',', thousands_separator: '.') }}</td>
+                            Rp. {{ number_format($this->getBalance($s->id), 0, ',', thousands_separator: '.') }}</td>
                         <td class="px-3 py-3 space-x-4 whitespace-nowrap">
                             <button class="text-emerald-600 hover:underline" aria-haspopup="dialog"
                                 wire:click="$dispatch('studentSelected', { studentId: '{{ $s->id }}' })"
@@ -85,8 +89,48 @@
         </table>
     </div>
 
-    <div class="">
+    <div class="mt-4">
         {{ $studentClass->links('vendor.pagination.tailwind') }}
+    </div>
+
+    <div class="bg-white space-y-4 rounded-xl shadow p-4 min-h-[150px] lg:col-span-2">
+        <h2 class="text-sm font-semibold mb-2 ">Transaksi Kelas</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full divide-y divide-gray-200 rounded-lg border border-gray-200 table-auto">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                            Transaksi</th>
+                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                            Tanggal</th>
+                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                            Nominal</th>
+                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                            Siswa</th>
+                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                            Pencatat</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    @foreach ($transaction as $tr)
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-800">
+                                {{ Str::upper($tr->type) }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-800">
+                                {{ Carbon::parse($tr->created_at)->translatedFormat('d F Y') }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-800">Rp.
+                                {{ number_format($tr->amount, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-800">
+                                {{ $tr->student->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-800">
+                                {{ $tr->teacher->name ?? 'N/A' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <livewire:modals.transaction.store />
