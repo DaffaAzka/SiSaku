@@ -40,7 +40,7 @@
                 <tr>
                     <th class="px-3 py-3">Name</th>
                     <th class="px-3 py-3">Teacher</th>
-                    <th class="px-3 py-3">Count</th>
+                    <th class="px-3 py-3">Students</th>
                     <th class="px-3 py-3">Balance</th>
                     <th class="px-3 py-3">Monitoring</th>
                     <th class="px-3 py-3">Action</th>
@@ -66,7 +66,9 @@
                             <button aria-controls="classes-add-modal" data-hs-overlay="#classes-add-modal"
                                 class="text-blue-600 hover:underline"
                                 wire:click="$dispatch('classSelected', { id: '{{ $cl->id }}' })">Update</button>
-                            <a href="#" class="text-red-600 hover:underline">Delete</a>
+                            <button aria-controls="classes-delete-modal" data-hs-overlay="#classes-delete-modal"
+                                wire:click="$dispatch('deleteSelected', { classId: '{{ $cl->id }}' })"
+                            class="text-red-600 hover:underline">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -80,4 +82,5 @@
     </div>
 
     <livewire:modals.classes.store />
+    <livewire:modals.classes.delete />
 </div>

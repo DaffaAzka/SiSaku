@@ -12,11 +12,6 @@ class Delete extends Component
     public $student;
     protected $userController;
 
-    public function destroy() {
-
-
-
-    }
 
     #[On('deleteSelected')]
     public function studentSelected($studentId)
@@ -25,7 +20,6 @@ class Delete extends Component
             $this->student = User::find($studentId);
         } else {
             $this->student = null;
-            $this->resetForm();
         }
 
     }

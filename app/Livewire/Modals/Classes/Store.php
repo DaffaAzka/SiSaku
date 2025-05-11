@@ -135,10 +135,18 @@ class Store extends Component
     public function render()
     {
         if($this->teacher_id != null) {
+            // Mendapatkan guru
             $temp = User::findOrFail($this->teacher_id)->load('teacherClasses');
 
-            if($temp->teacherClasses()->count() != 0) {
-                $this->warningTeacher = true;
+            if($temp->teacherClasses()->count() > 0) {
+                // Mendapatkan kelas yang diajar guru tersebut
+                $existingClass = $temp->teacherClasses()->first();
+
+                if($this->classes && $existingClass->id == $this->classes->id) {
+                    $this->warningTeacher = false;
+                } else {
+                    $this->warningTeacher = true;
+                }
             } else {
                 $this->warningTeacher = false;
             }
