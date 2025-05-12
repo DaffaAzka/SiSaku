@@ -4,6 +4,8 @@ namespace App\Livewire\Modals\User;
 
 use App\Http\Controllers\ClassStudentController;
 use App\Http\Controllers\UserController;
+use App\Livewire\Sites\Management\Students;
+use App\Livewire\Sites\Management\Users;
 use App\Models\Classes;
 use App\Models\ClassStudent;
 use App\Models\User;
@@ -95,6 +97,8 @@ class Store extends Component
 
 
                 if($class) {
+                $this->dispatch('userUpdated')->to(Users::class);
+                $this->dispatch('studentUpdated')->to(Students::class);
                     return session()->flash('success', [
                         'title' => 'Berhasil',
                         'message' => 'Kelas telah diupdate'
@@ -109,6 +113,9 @@ class Store extends Component
             }
 
             if($user) {
+                $this->dispatch('userUpdated')->to(Users::class);
+                $this->dispatch('studentUpdated')->to(Students::class);
+
                 return session()->flash('success', [
                     'title' => 'Berhasil',
                     'message' => 'Siswa telah diupdate'
@@ -153,6 +160,8 @@ class Store extends Component
 
                 if($user && $class) {
                     $this->resetForm();
+                    $this->dispatch('userAdded')->to(Users::class);
+                    $this->dispatch('studentAdded')->to(Students::class);
                     return session()->flash('success', [
                         'title' => 'Berhasil',
                         'message' => 'Siswa telah dibuat'
@@ -190,6 +199,7 @@ class Store extends Component
 
             $user = $this->userController->update($request, $this->student->id);
             if($user) {
+                $this->dispatch('userUpdated')->to(Users::class);
                 return session()->flash('success', [
                     'title' => 'Berhasil',
                     'message' => 'User telah diupdate'
@@ -227,6 +237,7 @@ class Store extends Component
                 }
 
                 if($user) {
+                    $this->dispatch('userAdded')->to(Users::class);
                     $this->resetForm();
                     return session()->flash('success', [
                         'title' => 'Berhasil',
@@ -235,7 +246,7 @@ class Store extends Component
                 } else {
                     return session()->flash('error', [
                         'title' => 'Gagal',
-                        'message' => 'User telah dibuat'
+                        'message' => 'User gagal dibuat'
                     ]);
                 }
             } else {

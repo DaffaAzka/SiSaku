@@ -38,6 +38,10 @@
         </div>
     </div>
 
+    <div class="mb-4">
+        <x-utilities.error />
+    </div>
+
     <!-- Tabel -->
     <div class="overflow-x-auto border border-gray-300 rounded-md">
         <table class="min-w-full text-sm text-left text-gray-700">

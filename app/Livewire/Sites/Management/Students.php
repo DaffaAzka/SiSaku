@@ -17,6 +17,12 @@ class Students extends Component
     public $class;
     public $search = '';
 
+    protected $listeners = [
+        'studentAdded' => '$refresh',
+        'studentUpdated' => '$refresh',
+        'studentDeleted' => '$refresh'
+    ];
+
 
     public function mount($id = null)
     {

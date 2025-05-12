@@ -20,6 +20,8 @@
             </div>
             <div class="p-4 overflow-y-auto space-y-8">
 
+                <x-utilities.error />
+
                 <div class="relative flex items-center justify-center">
                     <div class="absolute w-20 h-20 bg-yellow-100 rounded-full opacity-50"></div>
                     <div

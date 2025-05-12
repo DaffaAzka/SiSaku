@@ -20,7 +20,9 @@
         </div>
     </div>
 
-
+    <div class="mb-4">
+        <x-utilities.error />
+    </div>
 
     <!-- Tabel -->
     <div class="overflow-x-auto border border-gray-300 rounded-md">

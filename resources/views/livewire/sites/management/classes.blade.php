@@ -33,6 +33,10 @@
         </div>
     </div>
 
+    <div class="mb-4">
+        <x-utilities.error />
+    </div>
+
     <!-- Tabel -->
     <div class="overflow-x-auto border border-gray-300 rounded-md">
         <table class="min-w-full text-sm text-left text-gray-700">
@@ -68,7 +72,7 @@
                                 wire:click="$dispatch('classSelected', { id: '{{ $cl->id }}' })">Update</button>
                             <button aria-controls="classes-delete-modal" data-hs-overlay="#classes-delete-modal"
                                 wire:click="$dispatch('deleteSelected', { classId: '{{ $cl->id }}' })"
-                            class="text-red-600 hover:underline">Delete</button>
+                                class="text-red-600 hover:underline">Delete</button>
                         </td>
                     </tr>
                 @endforeach

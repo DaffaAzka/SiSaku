@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('users')->cascadeOnDelete();
             $table->decimal('amount', 12, 2);
             $table->enum('type', ['deposit', 'withdrawal']);
-            $table->foreignId('teacher_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('teacher_id')->nullable()->constrained('users')->nullOnDelete();;
             $table->timestamps();
         });
     }

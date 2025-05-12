@@ -23,6 +23,12 @@ class Users extends Component
         $this->majors = Major::get();
     }
 
+    protected $listeners = [
+        'userAdded' => '$refresh',
+        'userUpdated' => '$refresh',
+        'userDeleted' => '$refresh'
+    ];
+
     public function render()
     {
         $users = User::where('users.name', 'like', '%' . $this->search . '%')
