@@ -3,6 +3,7 @@
 namespace App\Livewire\Modals\Classes;
 
 use App\Http\Controllers\ClassesController;
+use App\Livewire\Sites\Management\Classes as ManagementClasses;
 use App\Models\Classes;
 use App\Models\Major;
 use App\Models\User;
@@ -27,6 +28,20 @@ class Store extends Component
     public $teacher_id;
 
     public function store() {
+
+        $existingClass = Classes::where([
+            'majors_id' => $this->majors_id,
+            'class' => $this->class,
+            'grade' => $this->grade
+        ])->first();
+
+        if ($existingClass && (!$this->classes || $existingClass->id !== $this->classes->id)) {
+            return session()->flash('error', [
+                'title' => 'Gagal',
+                'message' => 'Kelas tidak boleh sama'
+            ]);
+        }
+
         $classesController = new ClassesController();
 
         if ($this->classes) {
@@ -56,6 +71,7 @@ class Store extends Component
             $cl = $classesController->update($request, $this->classes->id);
 
             if($cl) {
+                $this->dispatch('classUpdated')->to(ManagementClasses::class);
                 return session()->flash('success', [
                     'title' => 'Berhasil',
                     'message' => 'Kelas telah diupdate'
@@ -92,6 +108,7 @@ class Store extends Component
             $cl = $classesController->store($request);
 
             if($cl) {
+                $this->dispatch('classAdded')->to(ManagementClasses::class);
                 return session()->flash('success', [
                     'title' => 'Berhasil',
                     'message' => 'Kelas telah dibuat'

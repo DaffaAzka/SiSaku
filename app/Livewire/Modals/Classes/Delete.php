@@ -32,8 +32,11 @@ class Delete extends Component
         } else {
             $classes = $classesController->destroy($this->classes->id);
             if ($classes) {
-                return redirect()->route('management-classes');
-            }
+                session()->flash('error', [
+                    'title' => 'Berhasil',
+                    'message' => 'Kelas Telah Dihapus'
+                ]);
+                return $this->redirect(request()->header('Referer'));            }
         }
     }
 

@@ -25,6 +25,12 @@ class Classes extends Component
         return $balanceService->getClassBalance($class_id);
     }
 
+    protected $listeners = [
+        'classAdded' => '$refresh',
+        'classUpdated' => '$refresh',
+        'classDeleted' => '$refresh'
+    ];
+
 
     public function render()
     {

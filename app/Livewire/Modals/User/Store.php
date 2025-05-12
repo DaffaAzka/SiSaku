@@ -69,6 +69,10 @@ class Store extends Component
         if ($this->student) {
             // Update Student
 
+            $this->validate([
+                'nisn' => 'required',
+            ]);
+
             $request = new Request([
                 'name' => $this->name,
                 'email' => $this->email,
@@ -129,6 +133,11 @@ class Store extends Component
 
         } else {
             // Create Student
+
+            $this->validate([
+                'nisn' => 'required|unique:users',
+            ]);
+
             if($this->classes && !$this->class && $this->user->hasRole('teacher')) {
                 $this->class = $this->classes->id;
             }
@@ -187,6 +196,12 @@ class Store extends Component
         if ($this->student) {
             // Update User
 
+            if($this->roleOption == '2') {
+                $this->validate([
+                    'nip' => 'required',
+                ]);
+            }
+
             $request = new Request([
                 'name' => $this->name,
                 'email' => $this->email,
@@ -213,6 +228,12 @@ class Store extends Component
 
         } else {
             // Create User
+
+            if($this->roleOption == '2') {
+                $this->validate([
+                    'nip' => 'required|unique:users',
+                ]);
+            }
 
             $request = new Request([
                 'name' => $this->name,
