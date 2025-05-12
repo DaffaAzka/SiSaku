@@ -47,6 +47,7 @@
         </div>
         <div>
             <button aria-controls="transaction-export-modal" data-hs-overlay="#transaction-export-modal"
+                wire:click="$dispatch('classExportSelected', { id: {{$class->id }}})"
                 class="w-full md:w-auto bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-md text-sm font-medium">
                 Cetak Laporan Keseluruhan
             </button>
@@ -88,7 +89,10 @@
                                 data-hs-overlay="#transaction-add-modal">
                                 Tambah Transaksi
                             </button>
-                            <button class="text-blue-600 hover:underline">Laporan</button>
+                            <button class="text-blue-600 hover:underline"
+                                wire:click="$dispatch('studentExportSelected', { id: {{ $s->id }} })"
+                                aria-controls="transaction-export-modal"
+                                data-hs-overlay="#transaction-export-modal">Laporan</button>
                         </td>
                     </tr>
                 @endforeach
@@ -197,10 +201,9 @@
             </div>
         </div>
     </div>
-
+    <livewire:modals.report.index />
     <livewire:modals.transaction.store />
     <livewire:modals.transaction.delete>
-        <livewire:modals.report.index />
 
         {{-- <script>
         flatpickr("#flatpickr-tanggal", {

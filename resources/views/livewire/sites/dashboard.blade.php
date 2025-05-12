@@ -94,7 +94,9 @@
             </div>
             <div class="p-4 mt-auto">
                 @if ($user->hasRole('student'))
-                    <button class="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-md font-semibold">
+                    <button wire:click="$dispatch('studentExportSelected', { id: {{ $user->id }} })"
+                        aria-controls="transaction-export-modal" data-hs-overlay="#transaction-export-modal"
+                        class="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-md font-semibold">
                         Cetak Laporan
                     </button>
                 @endif
@@ -109,7 +111,8 @@
 
                 @if ($user->hasRole('admin'))
                     <div class="space-y-2">
-                        <button class="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-md font-semibold">
+                        <button aria-controls="transaction-export-modal" data-hs-overlay="#transaction-export-modal"
+                            class="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-md font-semibold">
                             Analisis Laporan
                         </button>
 
@@ -204,8 +207,9 @@
     @endif
 
     <livewire:modals.transaction.store />
+    <livewire:modals.report.index>
 
-    {{-- Loading Spinner --}}
-    <x-utilities.loading />
+        {{-- Loading Spinner --}}
+        <x-utilities.loading />
 
 </div>
