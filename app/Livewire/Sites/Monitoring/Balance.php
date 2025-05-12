@@ -55,6 +55,7 @@ class Balance extends Component
                 $query->where('student_id', $student_id); // exact match
             })->where('type', 'like', '%' . $this->type_transaction . '%')->orderByDesc('created_at')
             ->paginate(10);
+        
         return view('livewire.sites.monitoring.balance', [
             'studentClass' => $studentClass,
             'transaction' => $transaction

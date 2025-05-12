@@ -31,7 +31,7 @@ class ClassesController extends Controller
 
         $request->validate([
           'majors_id'=>'required|exists:majors,id',
-          'class'=>'required',
+          'class'=>'required|max:2',
           'grade'=>'required',
         ]);
 
@@ -71,7 +71,7 @@ class ClassesController extends Controller
 
         $validated = $request->validate([
             'majors_id'=>'required|exists:majors,id',
-            'class'=>'required',
+            'class'=>'required|max:2',
             'grade'=>'required',
         ]);
 
