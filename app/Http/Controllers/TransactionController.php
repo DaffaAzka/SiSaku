@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -27,19 +28,10 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
-            'user_id' => 'required/integer',
-            'amount' => 'required/integer',
-            'type' => 'required/string',
-            'description' => 'required/string',
-            'teacher_id' => 'required/integer',
-        ]);
         $transaction = Transaction::create([
             'user_id' => $request->user_id,
             'amount' => $request->amount,
             'type' => $request->type,
-            'description' => $request->description,
             'teacher_id' => $request->teacher_id,
         ]);
         return $transaction;
@@ -66,20 +58,11 @@ class TransactionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-        $request->validate([
-            'user_id' => 'required/integer',
-            'amount' => 'required/integer',
-            'type' => 'required/string',
-            'description' => 'required/string',
-            'teacher_id' => 'required/integer',
-        ]);
         $transaction = Transaction::findOrFail($id);
         $transaction->update([
             'user_id' => $request->user_id,
             'amount' => $request->amount,
             'type' => $request->type,
-            'description' => $request->description,
             'teacher_id' => $request->teacher_id,
         ]);
         return $transaction;

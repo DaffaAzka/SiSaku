@@ -18,11 +18,18 @@
         </div> --}}
     </div>
 
+    <x-utilities.error />
+
     <!-- Grafik -->
     <div class="bg-white border border-gray-300 rounded-md p-4">
 
         @if ($user->hasRole('admin'))
-            <livewire:charts.class-balance-chart :isDay="false" :adminId="$class->teacher->id" />
+            @if ($class->teacher != null)
+                <livewire:charts.class-balance-chart :isDay="false" :adminId="$class->teacher->id" />
+            @else
+                <h2 class="text-base font-medium">Cart tidak bisa diakses, dikarenakan kelas tidak memiliki wali kelas.
+                </h2>
+            @endif
         @else
             <livewire:charts.class-balance-chart :isDay="false" />
         @endif
@@ -147,6 +154,8 @@
                             Siswa</th>
                         <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                             Pencatat</th>
+                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                            Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -164,6 +173,20 @@
                                 {{ $tr->student->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">
                                 {{ $tr->teacher->name ?? 'N/A' }}</td>
+                            @if ($user->hasRole('admin') || $tr->teacher_id == $user->id)
+                                <td class="px-6 py-4 text-sm space-x-2 whitespace-nowrap">
+                                    <button class="text-blue-600 hover:underline"
+                                        wire:click="$dispatch('transactionSelected', { id: '{{ $tr->id }}' })"
+                                        aria-expanded="false" aria-controls="transaction-add-modal"
+                                        data-hs-overlay="#transaction-add-modal">Update</button>
+
+                                    <button class="text-red-600 hover:underline"
+                                        wire:click="$dispatch('deleteSelected', { id: '{{ $tr->id }}' })"
+                                        aria-expanded="false" aria-controls="transaction-delete-modal"
+                                        data-hs-overlay="#transaction-delete-modal">Delete</button>
+
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
@@ -176,6 +199,7 @@
     </div>
 
     <livewire:modals.transaction.store />
+    <livewire:modals.transaction.delete>
 
     {{-- <script>
         flatpickr("#flatpickr-tanggal", {

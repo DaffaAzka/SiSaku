@@ -45,6 +45,7 @@ class Balance extends Component
 
     public function render()
     {
+
         $studentClass = $this->class->students()->where('name', 'like', '%' . $this->search . '%')->paginate(10);
 
         $s = $this->class->students()->select('users.id')->pluck('id');

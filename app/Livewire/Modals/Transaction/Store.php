@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Modals\Transaction;
 
+use App\Http\Controllers\TransactionController;
 use App\Models\Transaction;
 use App\Services\BalanceService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -15,9 +17,9 @@ class Store extends Component
     public $user;
     public $studentClass;
 
+    public $transaction;
+
     // Form data
-
-
     #[Validate('required|exists:users,id')]
     public $student_id;
     public $alreadySelected;
@@ -49,6 +51,17 @@ class Store extends Component
         $this->alreadySelected = $studentId;
     }
 
+    #[On('transactionSelected')]
+    public function transactionSelected($id) {
+        if ($id) {
+            $t = Transaction::findOrFail($id);
+            $this->transaction = $t;
+            $this->alreadySelected = $t->student_id;
+            $this->amount = $t->amount;
+            $this->type = $t->type;
+        }
+    }
+
     public function storeTransaction()
     {
         // check if student_id is already selected
@@ -71,23 +84,53 @@ class Store extends Component
             }
         }
 
-        $transaction = Transaction::create([
-            'student_id' => $this->student_id,
-            'amount' => $this->amount,
-            'type' => $this->type,
-            'teacher_id' => Auth::id(),
-        ]);
+        if($this->transaction) {
+            // Update Transaction
 
-        if ($transaction) {
-            $this->amount = 0;
-            $this->description = "";
+            $transactionController = new TransactionController();
 
-
-            return session()->flash('success', [
-                'title' => 'Berhasil',
-                'message' => 'Transaksi telah dibuat'
+            $request = new Request([
+                'student_id' => $this->student_id,
+                'amount' => $this->amount,
+                'type' => $this->type,
+                'teacher_id' => $this->transaction->teacher_id,
             ]);
+
+            $tr = $transactionController->update($request, $this->transaction->id);
+            if($tr) {
+                return session()->flash('success', [
+                    'title' => 'Berhasil',
+                    'message' => 'Transaksi telah diupdate'
+                ]);
+            } else {
+                return session()->flash('error', [
+                    'title' => 'Gagal',
+                    'message' => 'Transaksi gagal diupdate'
+                ]);
+            }
+
+        } else {
+            // Create Transaction
+            $transaction = Transaction::create([
+                'student_id' => $this->student_id,
+                'amount' => $this->amount,
+                'type' => $this->type,
+                'teacher_id' => Auth::id(),
+            ]);
+
+            if ($transaction) {
+                $this->amount = 0;
+                $this->description = "";
+
+
+                return session()->flash('success', [
+                    'title' => 'Berhasil',
+                    'message' => 'Transaksi telah dibuat'
+                ]);
+            }
         }
+
+
     }
 
     public function render()
