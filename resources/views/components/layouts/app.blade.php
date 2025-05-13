@@ -44,11 +44,20 @@
             {{ $slot }}
         </div>
     @else
-        @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa'))
+        @if (
+            !request()->is('signin') &&
+                !request()->is(patterns: 'student') &&
+                !request()->is('verify') &&
+                !request()->is('cek-akun-siswa'))
             <livewire:navbar />
         @endif
 
-        @if (!request()->is('signin') && !request()->is('verify') && !request()->is('cek-akun-siswa') && !request()->is('/'))
+        @if (
+            !request()->is('signin') &&
+                !request()->is(patterns: 'student') &&
+                !request()->is('verify') &&
+                !request()->is('cek-akun-siswa') &&
+                !request()->is('/'))
             <div class="px-6 sm:px-36">
             @else
                 <div>

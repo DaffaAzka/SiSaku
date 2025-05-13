@@ -4,6 +4,7 @@ use App\Http\Middleware\ForNotStudent;
 use App\Http\Middleware\RoleAdmin;
 use App\Http\Middleware\VerificationCodePage;
 use App\Livewire\Auth\Signin;
+use App\Livewire\Auth\StudentCheck;
 use App\Livewire\Auth\Verify;
 use App\Livewire\Modals\Transaction\Monitoring;
 use App\Livewire\Pages\Admin\Logs;
@@ -30,21 +31,10 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('welcome');
-
-    // Development routes
-    // Route::get('manajemen-siswa', ManajemenSiswa::class)->name('manajemen-siswa');
-    // Route::get('manajemen-akun', ManajemenAkun::class)->name('manajemen-siswa');
-    // Route::get('monitoring-tabungan', MonitoringTabungan::class)->name('monitoring-tabungan');
-    // Route::get('logs', Logs::class)->name('logs');
-    // Route::get('manajemen-kelas', ManajemenKelas::class)->name('manajemen-kelas');
-    Route::get('manajemen-notifikasi', ManajemenNotifikasi::class)->name('manajemen-notifikasi');
-    Route::get('cek-akun-siswa', CekAkunSiswa::class)->name('cek-akun-siswa');
-    Route::get('notifikasi', Notifikasi::class)->name('notifikasi');
-    Route::get('setting', Setting::class)->name('setting');
-
-
+    
     // Production routes
     Route::get('/signin', Signin::class)->name('signin');
+    Route::get('/student', StudentCheck::class)->name('student');
     Route::get('/verify', Verify::class)->name('verify')->middleware(VerificationCodePage::class);
 });
 
