@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Notification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,18 +10,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class VerificationEmail extends Mailable
+class NotificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $code;
+    private Notification $notification;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($code)
+    public function __construct(Notification $notification)
     {
-        $this->code = $code;
+        $this->notification = $notification;
     }
 
     /**
@@ -29,13 +30,13 @@ class VerificationEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Verification Mail',
+            subject: 'Notification Mail',
         );
     }
 
     public function build() {
-        return $this->view('mail.verification')
-            ->with(['code' => $this->code]);
+        return $this->view('mail.notification')
+            ->with(['notification' => $this->notification]);
     }
 
     /**
@@ -44,7 +45,7 @@ class VerificationEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.verification',
+            view: 'mail.notification',
         );
     }
 
