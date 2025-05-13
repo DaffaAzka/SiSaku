@@ -20,7 +20,7 @@
 
         <!-- Tambah Notifikasi Button -->
         <div class="col-span-12 lg:col-span-6 flex items-center justify-start lg:justify-end">
-            <button
+            <button aria-controls="notification-add-modal" data-hs-overlay="#notification-add-modal"
                 class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2 min-w-[150px] rounded-md text-sm font-medium whitespace-nowrap">
                 Tambah Notifikasi
             </button>

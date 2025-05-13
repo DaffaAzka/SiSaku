@@ -29,16 +29,13 @@ class NotificationController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'user_id' => 'required|integer',
-            'message' => 'required|string',
-            'is_read' => 'required|boolean',
-        ]);
 
         Notification::create([
             'user_id' => $request->user_id,
-            'message' => $request->title,
-            'is_read' => $request->is_read,
+            'class_id' => $request->class_id,
+            'sender_id' => $request->sender_id,
+            'sent_at' => $request->sent_at,
+            'message' => $request->message,
         ]);
         return back();
     }
@@ -65,12 +62,7 @@ class NotificationController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
-            'user_id' => 'required|integer',
-            'message' => 'required|string',
-            'is_read' => 'required|boolean',
-        ]);
-        $notification = Notification::findorFail($id)->update($request->only('user_id', 'message', 'is_read'));
+        $notification = Notification::findorFail($id)->update($request->all());
         return $notification;
     }
 
