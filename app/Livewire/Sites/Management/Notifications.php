@@ -23,7 +23,7 @@ class Notifications extends Component
         if ($this->user->hasRole('admin')) {
             $notifications = Notification::with(['user', 'sender'])->paginate(10);
         } else {
-            $notifications = Notification::where('sender_id', '==', $this->user->id)->with(['user', 'sender'])->paginate(10);
+            $notifications = Notification::where('sender_id', '=', $this->user->id)->with(['user', 'sender'])->paginate(10);
         }
         return view('livewire.sites.management.notifications', [
             'notifications' => $notifications

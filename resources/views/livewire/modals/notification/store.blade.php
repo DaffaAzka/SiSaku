@@ -30,7 +30,7 @@
                     @csrf
 
                     <!-- Class Selection -->
-                    @if (!$notification)
+                    @if (!$notification && $user->hasRole('admin'))
                         <div class="relative z-[200]" wire:ignore>
                             <select wire:model.live='class_id'
                                 data-hs-select='{
@@ -82,6 +82,19 @@
                             </p>
                         @enderror
                     @endif
+
+                    <div class="relative">
+                        <input wire:model='header' type="text" id="hs-inline-leading-pricing-select-label"
+                            name="header"
+                            class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none"
+                            placeholder="Judul Notifikasi">
+
+                        @error('header')
+                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
 
                     <!-- Date Input -->
                     <div class="relative">

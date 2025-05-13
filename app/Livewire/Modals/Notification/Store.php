@@ -25,6 +25,7 @@ class Store extends Component
     public $sent_at;
 
     public $message;
+    public $header;
 
     public function mount()
     {
@@ -34,6 +35,7 @@ class Store extends Component
 
         if ($this->user->hasRole('teacher')) {
             $this->class_id = $this->user->teacherClasses()->first()->id;
+            $this->classes = Classes::where('id', $this->class_id)->get();
         } else {
             $this->classes = Classes::get();
         }
@@ -60,7 +62,8 @@ class Store extends Component
         $this->validate([
             'class_id' => 'required|exists:classes,id',
             'sent_at' => 'required|date',
-            'message' => 'required|string|max:255'
+            'message' => 'required|string|max:255',
+            'header' => 'required|string|max:255'
         ]);
 
         if($this->notification) {
@@ -74,6 +77,7 @@ class Store extends Component
                 $request = new Request([
                     'user_id' => $this->user_id,
                     'message' => $this->message,
+                    'header' => $this->header,
                     'sent_at' => $this->sent_at,
                     'sender_id' => $this->user->id,
                 ]);
@@ -99,6 +103,7 @@ class Store extends Component
                 $request = new Request([
                     'class_id' => $this->class_id,
                     'message' => $this->message,
+                    'header' => $this->header,
                     'sent_at' => $this->sent_at,
                     'sender_id' => $this->user->id,
                 ]);
@@ -132,6 +137,7 @@ class Store extends Component
                 $request = new Request([
                     'user_id' => $this->user_id,
                     'message' => $this->message,
+                    'header' => $this->header,
                     'sent_at' => $this->sent_at,
                     'sender_id' => $this->user->id,
                 ]);
@@ -158,6 +164,7 @@ class Store extends Component
                     'class_id' => $this->class_id,
                     'message' => $this->message,
                     'sent_at' => $this->sent_at,
+                    'header' => $this->header,
                     'sender_id' => $this->user->id,
                 ]);
 

@@ -77,18 +77,10 @@
                                 role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-with-dividers">
                                 <div class="p-1 space-y-0.5">
                                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                                        href="#">
+                                        href="{{ route('notifications') }}">
                                         <x-lucide-bell class="w-4 h-4" />
                                         Notifikasi
                                     </a>
-
-                                    @if (!Auth::user()->hasRole('teacher'))
-                                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                                            href="#">
-                                            <x-lucide-printer class="w-4 h-4" />
-                                            Cetak Laporan
-                                        </a>
-                                    @endif
 
                                 </div>
 
@@ -125,14 +117,9 @@
 
 
                         <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm hover:underline text-white focus:outline-hidden"
-                            href="#">
+                            href="{{ route('notifications') }}">
                             <x-lucide-bell class="w-4 h-4" />
                             Notifikasi
-                        </a>
-                        <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm hover:underline text-white focus:outline-hidden"
-                            href="#">
-                            <x-lucide-printer class="w-4 h-4" />
-                            Cetak Laporan
                         </a>
 
                         @if (Auth::user()->role == 'teacher')

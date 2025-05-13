@@ -6,7 +6,7 @@
         <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto">
             <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200">
                 <h3 id="" class="font-bold text-gray-800">
-                    Export Transaksi
+                    Cetak Laporan Transaksi
                 </h3>
                 <button type="button"
                     class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none"

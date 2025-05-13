@@ -36,6 +36,7 @@ class NotificationController extends Controller
             'sender_id' => $request->sender_id,
             'sent_at' => $request->sent_at,
             'message' => $request->message,
+            'header' => $request->header,
         ]);
         return back();
     }

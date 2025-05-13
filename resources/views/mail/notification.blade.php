@@ -28,11 +28,11 @@
                     <tr>
                         <td style="padding: 40px 40px 20px;">
                             <h2 style="margin: 0 0 20px; font-size: 22px; font-weight: 600; color: #1f2937;">
-                                Notifikasi Baru
+                                {{ $notification->header }}
                             </h2>
 
                             <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #4b5563;">
-                                Anda menerima pesan dari sistem SiSaku. Silakan lihat detail di bawah ini:
+                                Anda menerima pesan terjadwal dari SiSaku:
                             </p>
 
                             <div
@@ -43,7 +43,8 @@
                             </div>
 
                             <p style="margin: 0 0 32px; font-size: 14px; line-height: 22px; color: #6b7280;">
-                                Pesan ini dikirim pada: {{ $notification->sent_at }}
+                                Pesan ini dikirim pada: {{ $notification->sent_at }} | Jika ingin melihat lebih detail
+                                check halaman notifikasi
                             </p>
                         </td>
                     </tr>

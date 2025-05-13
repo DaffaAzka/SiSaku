@@ -46,7 +46,7 @@
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($notifications as $notification)
                     <tr>
-                        <td class="px-3 py-3">Notifikasi</td>
+                        <td class="px-3 py-3">{{ $notification->header }}</td>
                         @if ($notification->user_id)
                             <td class="px-3 py-3">{{ $notification->user->name }}</td>
                         @elseif ($notification->class_id)
