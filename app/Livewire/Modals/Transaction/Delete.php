@@ -27,7 +27,7 @@ class Delete extends Component
             if ($transaction) {
                 session()->flash('error', [
                     'title' => 'Berhasil',
-                    'message' => 'Kelas Telah Dihapus'
+                    'message' => 'Transaksi Telah Dihapus'
                 ]);
                 return $this->redirect(request()->header('Referer'));            }
 

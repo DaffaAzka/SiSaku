@@ -4,8 +4,10 @@ namespace App\Livewire\Modals\Notification;
 
 use App\Http\Controllers\NotificationController;
 use App\Models\Classes;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Store extends Component
@@ -38,6 +40,19 @@ class Store extends Component
 
     }
 
+    #[On('notificationSelected')]
+    public function notificationSelected($id)
+    {
+        $notification = Notification::find($id);
+        $this->notification = $notification;
+        $this->class_id = $notification->class_id;
+        $this->user_id = $notification->user_id;
+        $this->sent_at = $notification->sent_at;
+        $this->message = $notification->message;
+
+        // dd($this->notification);
+    }
+
     public function storeNotification()
     {
         $controller = new NotificationController();
@@ -50,6 +65,61 @@ class Store extends Component
 
         if($this->notification) {
             // Update
+            if ($this->user_id != "") {
+
+                $this->validate([
+                    'user_id' => 'required|exists:users,id',
+                ]);
+
+                $request = new Request([
+                    'user_id' => $this->user_id,
+                    'message' => $this->message,
+                    'sent_at' => $this->sent_at,
+                    'sender_id' => $this->user->id,
+                ]);
+
+                // dd($request);
+
+
+                $n = $controller->update($request, $this->notification->id);
+
+                if($n) {
+                    return session()->flash('success', [
+                        'title' => 'Berhasil',
+                        'message' => 'Notifikasi telah diupdate'
+                    ]);
+                } else {
+                    return session()->flash('error', [
+                        'title' => 'Gagal',
+                        'message' => 'Notifikasi gagal diupdate'
+                    ]);
+                }
+
+            } else {
+                $request = new Request([
+                    'class_id' => $this->class_id,
+                    'message' => $this->message,
+                    'sent_at' => $this->sent_at,
+                    'sender_id' => $this->user->id,
+                ]);
+
+                // dd($request);
+
+                $n = $controller->update($request, $this->notification->id);
+
+                if($n) {
+                    return session()->flash('success', [
+                        'title' => 'Berhasil',
+                        'message' => 'Notifikasi telah dibuat'
+                    ]);
+                } else {
+                    return session()->flash('error', [
+                        'title' => 'Gagal',
+                        'message' => 'Notifikasi gagal dibuat'
+                    ]);
+                }
+
+            }
 
         } else {
             // Create

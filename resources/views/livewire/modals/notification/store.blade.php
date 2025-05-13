@@ -6,7 +6,7 @@
         <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto">
             <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200">
                 <h3 id="notification-add-modal-label" class="font-bold text-gray-800">
-                    Tambah Notifikasi
+                    {{ $notification ? 'Update Notifikasi' : 'Tambah Notifikasi' }}
                 </h3>
                 <button type="button"
                     class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none"
@@ -30,9 +30,10 @@
                     @csrf
 
                     <!-- Class Selection -->
-                    <div class="relative z-[200]" wire:ignore>
-                        <select wire:model.live='class_id'
-                            data-hs-select='{
+                    @if (!$notification)
+                        <div class="relative z-[200]" wire:ignore>
+                            <select wire:model.live='class_id'
+                                data-hs-select='{
                             "hasSearch": true,
                             "searchLimit": 5,
                             "searchPlaceholder": "Search...",
@@ -46,20 +47,21 @@
                             "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800\" data-title></div></div></div>",
                             "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
                             }'
-                            class="hidden focus:border-teal-500 focus:ring-teal-500">
-                            <option value="">Pilih Kelas (Opsional)</option>
-                            @foreach ($classes as $class)
-                                <option value="{{ $class->id }}">
-                                    {{ $class->grade . ' ' . $class->majors->name . ' ' . $class->class }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('class_id')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
+                                class="hidden focus:border-teal-500 focus:ring-teal-500">
+                                <option value="">Pilih Kelas (Opsional)</option>
+                                @foreach ($classes as $class)
+                                    <option value="{{ $class->id }}">
+                                        {{ $class->grade . ' ' . $class->majors->name . ' ' . $class->class }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('class_id')
+                                <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                    @endif
 
                     <!-- User Selection -->
                     @if ($class_id)

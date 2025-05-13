@@ -27,6 +27,10 @@
         </div>
     </div>
 
+    <div class="mb-4">
+        <x-utilities.error />
+    </div>
+
     <div class="overflow-x-auto border border-gray-300 rounded-md bg-white">
 
         <table class="min-w-full text-sm text-left text-gray-700">
@@ -53,9 +57,15 @@
                         <td class="px-3 py-3">{{ $notification->sender->name }}</td>
                         <td class="px-3 py-3">{{ $notification->sent_at }}</td>
                         <td class="px-3 py-3 space-x-2 whitespace-nowrap">
-                            <a href="#" class="text-blue-600 hover:underline">More</a>
-                            <a href="#" class="text-blue-600 hover:underline">Update</a>
-                            <a href="#" class="text-blue-600 hover:underline">Delete</a>
+                            <a href="#" class="text-purple-600 hover:underline">More</a>
+                            <button class="text-blue-600 hover:underline"
+                                wire:click="$dispatch('notificationSelected', { id: '{{ $notification->id }}' })"
+                                aria-expanded="false" aria-controls="notification-add-modal"
+                                data-hs-overlay="#notification-add-modal">Update</button>
+                            <button class="text-red-600 hover:underline"
+                                wire:click="$dispatch('deleteSelected', { id: '{{ $notification->id }}' })"
+                                aria-expanded="false" aria-controls="notification-delete-modal"
+                                data-hs-overlay="#notification-delete-modal">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -69,4 +79,5 @@
     </div>
 
     <livewire:modals.notification.store />
+    <livewire:modals.notification.delete />
 </div>
