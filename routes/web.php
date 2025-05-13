@@ -17,6 +17,7 @@ use App\Livewire\Pages\Teacher\ManajemenSiswa;
 use App\Livewire\Pages\Teacher\MonitoringTabungan;
 use App\Livewire\Sites\Dashboard;
 use App\Livewire\Sites\Management\Classes;
+use App\Livewire\Sites\Management\Notifications;
 use App\Livewire\Sites\Management\Students;
 use App\Livewire\Sites\Management\Users;
 use App\Livewire\Sites\Monitoring\Balance;
@@ -30,11 +31,11 @@ Route::middleware(['guest'])->group(function () {
     })->name('welcome');
 
     // Development routes
-    Route::get('manajemen-siswa', ManajemenSiswa::class)->name('manajemen-siswa');
-    Route::get('manajemen-akun', ManajemenAkun::class)->name('manajemen-siswa');
-    Route::get('monitoring-tabungan', MonitoringTabungan::class)->name('monitoring-tabungan');
-    Route::get('logs', Logs::class)->name('logs');
-    Route::get('manajemen-kelas', ManajemenKelas::class)->name('manajemen-kelas');
+    // Route::get('manajemen-siswa', ManajemenSiswa::class)->name('manajemen-siswa');
+    // Route::get('manajemen-akun', ManajemenAkun::class)->name('manajemen-siswa');
+    // Route::get('monitoring-tabungan', MonitoringTabungan::class)->name('monitoring-tabungan');
+    // Route::get('logs', Logs::class)->name('logs');
+    // Route::get('manajemen-kelas', ManajemenKelas::class)->name('manajemen-kelas');
     Route::get('manajemen-notifikasi', ManajemenNotifikasi::class)->name('manajemen-notifikasi');
     Route::get('cek-akun-siswa', CekAkunSiswa::class)->name('cek-akun-siswa');
     Route::get('notifikasi', Notifikasi::class)->name('notifikasi');
@@ -54,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('management-users', Users::class)->name('management-users')->middleware(RoleAdmin::class);
     Route::get('management-classes', Classes::class)->name('management-classes')->middleware(RoleAdmin::class);
+    Route::get('management-notifications', Notifications::class)->name('management-notifications')->middleware(RoleAdmin::class);
     Route::get('monitoring-logs', MonitoringLogs::class)->name('monitoring-logs')->middleware(RoleAdmin::class);
 
 
