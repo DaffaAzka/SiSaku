@@ -66,7 +66,10 @@
 
         <div class="bg-white rounded-xl shadow flex flex-col overflow-hidden">
             <div class="bg-teal-700 text-white text-center p-4">
-                <div class="w-16 h-16 bg-red-300 rounded-full mx-auto mb-2"></div>
+                <span
+                    class="mb-2 inline-flex items-center justify-center size-11 text-sm font-semibold rounded-full bg-blue-100 text-blue-800">
+                    {{ Str::ucfirst(Auth::user()->name[0]) }}
+                </span>
                 <p class="font-semibold">{{ Auth::user()->name }}</p>
 
                 @if (!$user->hasRole('admin'))
@@ -113,7 +116,7 @@
                     <div class="space-y-2">
                         <button aria-controls="transaction-export-modal" data-hs-overlay="#transaction-export-modal"
                             class="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-md font-semibold">
-                            Analisis Laporan
+                            Cetak Laporan
                         </button>
 
                         <button wire:click='logout'

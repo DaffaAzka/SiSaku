@@ -11,7 +11,7 @@
 
             <div class="flex items-center sm:hidden gap-x-4">
                 <span class="inline-flex items-center justify-center size-9 rounded-full bg-white font-semibold">
-                    AC
+                    {{ Str::ucfirst(Auth::user()->name[0]) }}
                 </span>
 
                 <div class="">
