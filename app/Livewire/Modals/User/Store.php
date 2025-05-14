@@ -45,7 +45,7 @@ class Store extends Component
 
         if($this->user->hasRole('teacher')) {
             $this->classes = $this->user->teacherClasses()->first();
-            $this->roleOption = '1';
+            // $this->roleOption = '1';
         } else {
             $this->classes = Classes::get();
         }
@@ -299,8 +299,14 @@ class Store extends Component
             $this->class = $this->student->studentClasses()->first()->id ?? null;
             $this->roleOption = $this->student->roles()->first()->id;;
         } else {
-            $this->student = null;
-            $this->resetForm();
+           $this->student = null;
+        $this->resetForm();
+
+        if ($this->user->hasRole('teacher')) {
+            $this->roleOption = '1';
+            $this->classes = auth()->user()->teacherClasses()->first();
+            $this->class = $this->classes->id ?? null;
+        }
         }
 
     }

@@ -47,11 +47,6 @@
                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                             Manual Input
                         </button>
-                        <button type="button" aria-expanded="false" aria-controls="user-password-modal"
-                            data-hs-overlay="#user-password-modal"
-                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
-                            Manual Input
-                        </button>
 
                     </div>
 
@@ -62,6 +57,5 @@
 
     </div>
 
-    <livewire:modals.user.forgot-password />
     <livewire:modals.user.store />
 </div>

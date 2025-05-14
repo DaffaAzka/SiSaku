@@ -106,11 +106,14 @@
                                 @endif
 
                                 <div class="p-1 space-y-0.5">
-                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                                        href="#">
+                                    <button
+                                        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                                        aria-expanded="false" aria-controls="user-store-modal"
+                                        data-hs-overlay="#user-store-modal"
+                                        wire:click="$dispatch('studentSelected', { studentId: '{{ Auth::id() }}' })">
                                         <x-lucide-settings class="w-4 h-4" />
                                         Setelan Akun
-                                    </a>
+                                    </button>
                                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                                         wire:click="logout">
                                         <x-lucide-log-out class="w-4 h-4" />
@@ -164,4 +167,9 @@
             </div>
         </div>
     </nav>
+
+    @if (Auth::check())
+        <livewire:modals.user.store />
+    @endif
+
 </header>
