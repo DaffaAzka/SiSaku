@@ -4,8 +4,7 @@
         role="dialog" tabindex="-1" aria-labelledby="user-section-modal-label">
         <div
             class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
-            <div
-                class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto">
+            <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto">
                 <div class="flex justify-between items-center py-3 px-4">
                     <button type="button"
                         class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none"
@@ -48,6 +47,12 @@
                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                             Manual Input
                         </button>
+                        <button type="button" aria-expanded="false" aria-controls="user-password-modal"
+                            data-hs-overlay="#user-password-modal"
+                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                            Manual Input
+                        </button>
+
                     </div>
 
 
@@ -57,5 +62,6 @@
 
     </div>
 
+    <livewire:modals.user.forgot-password />
     <livewire:modals.user.store />
 </div>

@@ -78,6 +78,7 @@ class Store extends Component
                 'email' => $this->email,
                 'phone_number' => $this->phone,
                 'birth_date' => $this->birth,
+                'password' => $this->password,
                 'nip' => $this->nip,
                 'nisn' => $this->nisn,
                 'gender' => $this->gender,
@@ -98,6 +99,8 @@ class Store extends Component
                 $this->classStudentController->destroy($studentClasses->id);
 
                 $class = $this->classStudentController->store($request2);
+
+                $this->password = null;
 
 
                 if($class) {
@@ -209,10 +212,12 @@ class Store extends Component
                 'birth_date' => $this->birth,
                 'nip' => $this->nip,
                 'nisn' => $this->nisn,
+                'password' => $this->password,
                 'gender' => $this->gender,
             ]);
 
             $user = $this->userController->update($request, $this->student->id);
+            $this->password = null;
             if($user) {
                 $this->dispatch('userUpdated')->to(Users::class);
                 return session()->flash('success', [
@@ -286,7 +291,6 @@ class Store extends Component
             $this->student = User::find($studentId);
             $this->name = $this->student->name;
             $this->email = $this->student->email;
-            $this->password = $this->student->password;
             $this->phone = $this->student->phone_number;
             $this->birth = $this->student->birth_date;
             $this->nip = $this->student->nip;

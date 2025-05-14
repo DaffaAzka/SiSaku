@@ -31,8 +31,6 @@ class Store extends Component
     {
         $this->user = Auth::user();
 
-
-
         if ($this->user->hasRole('teacher')) {
             $this->class_id = $this->user->teacherClasses()->first()->id;
             $this->classes = Classes::where('id', $this->class_id)->get();
@@ -51,6 +49,7 @@ class Store extends Component
         $this->user_id = $notification->user_id;
         $this->sent_at = $notification->sent_at;
         $this->message = $notification->message;
+        $this->header = $notification->header;
 
         // dd($this->notification);
     }

@@ -24,6 +24,7 @@
                     </svg>
                 </button>
             </div>
+
             <div class="p-4 overflow-y-auto">
 
                 <form action="" class="space-y-4 mb-4 relative" wire:submit="store">
@@ -73,20 +74,18 @@
                             @enderror
                         </div>
 
-                        @if (!$student)
-                            <div class="relative">
-                                <input wire:model='password' type="password" id="hs-inline-leading-pricing-select-label"
-                                    name="password"
-                                    class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none"
-                                    placeholder="Password">
+                        <div class="relative">
+                            <input wire:model='password' type="password" id="hs-inline-leading-pricing-select-label"
+                                name="password"
+                                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none"
+                                placeholder="Password">
 
-                                @error('password')
-                                    <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                        {{ $message }}
-                                    </p>
-                                @enderror
-                            </div>
-                        @endif
+                            @error('password')
+                                <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
 
                         @if ($roleOption == 1 && $user->hasRole('admin'))
                             <select id="hs-select-gender" wire:model='class'
@@ -187,6 +186,7 @@
                                 data-hs-overlay="#user-store-modal">
                                 Close
                             </button>
+
                             <button type="submit"
                                 class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none">
                                 Save
@@ -195,11 +195,15 @@
 
                     @endif
 
+
+
                 </form>
 
             </div>
         </div>
     </div>
 
+
     <x-utilities.loading />
+
 </div>

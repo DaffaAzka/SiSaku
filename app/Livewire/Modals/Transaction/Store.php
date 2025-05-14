@@ -24,7 +24,7 @@ class Store extends Component
     public $student_id;
     public $alreadySelected;
 
-    #[Validate('required|numeric|min:0')]
+    #[Validate('required|numeric|min:0|max:9999999')]
     public $amount;
 
     #[Validate('required|in:deposit,withdrawal')]

@@ -81,7 +81,7 @@ class UserController extends Controller
         ]);
 
         if ($request->filled('password')) {
-            $data['password'] = Hash::make($data['password']);
+            $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
         }
