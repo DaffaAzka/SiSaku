@@ -65,6 +65,8 @@
         {{ $studentClass->links('vendor.pagination.tailwind') }}
     </div>
 
-    <livewire:modals.user.store />
+    @if ($user->hasRole('admin'))
+        <livewire:modals.user.store />
+    @endif
     <livewire:modals.user.delete />
 </div>
