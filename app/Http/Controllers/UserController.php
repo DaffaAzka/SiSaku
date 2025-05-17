@@ -90,6 +90,20 @@ class UserController extends Controller
         return $user;
     }
 
+    public function updatePassword(Request $request, string $id)
+    {
+        $user = User::findOrFail($id);
+
+        $data = $request->validate([
+            'password' => 'required|string|min:8',
+        ]);
+
+        $data['password'] = bcrypt($data['password']);
+
+        $user->update($data);
+        return $user;
+    }
+
     /**
      * Remove the specified resource from storage.
      */

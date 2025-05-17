@@ -106,14 +106,12 @@
                                 @endif
 
                                 <div class="p-1 space-y-0.5">
-                                    <button
-                                        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                                        aria-expanded="false" aria-controls="user-store-modal"
-                                        data-hs-overlay="#user-store-modal"
-                                        wire:click="$dispatch('studentSelected', { studentId: '{{ Auth::id() }}' })">
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                                        aria-expanded="false" aria-controls="profile-modal"
+                                        data-hs-overlay="#profile-modal">
                                         <x-lucide-settings class="w-4 h-4" />
                                         Setelan Akun
-                                    </button>
+                                    </a>
                                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                                         wire:click="logout">
                                         <x-lucide-log-out class="w-4 h-4" />
@@ -145,7 +143,8 @@
                         @endif
 
                         <a class="sm:hidden flex items-center gap-x-3.5 py-2 rounded-lg font-semibold text-sm hover:underline text-white focus:outline-hidden"
-                            href="#">
+                            href="#" aria-expanded="false" aria-controls="profile-modal"
+                            data-hs-overlay="#profile-modal">
                             <x-lucide-settings class="w-4 h-4" />
                             Setelan Akun
                         </a>
@@ -169,7 +168,8 @@
     </nav>
 
     @if (Auth::check())
-        <livewire:modals.user.store />
+        {{-- <livewire:modals.user.store /> --}}
+        <livewire:modals.user.profile />
     @endif
 
 </header>

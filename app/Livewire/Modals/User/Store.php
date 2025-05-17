@@ -78,7 +78,6 @@ class Store extends Component
                 'email' => $this->email,
                 'phone_number' => $this->phone,
                 'birth_date' => $this->birth,
-                'password' => $this->password,
                 'nip' => $this->nip,
                 'nisn' => $this->nisn,
                 'gender' => $this->gender,
@@ -212,7 +211,6 @@ class Store extends Component
                 'birth_date' => $this->birth,
                 'nip' => $this->nip,
                 'nisn' => $this->nisn,
-                'password' => $this->password,
                 'gender' => $this->gender,
             ]);
 
@@ -304,7 +302,7 @@ class Store extends Component
 
         if ($this->user->hasRole('teacher')) {
             $this->roleOption = '1';
-            $this->classes = auth()->user()->teacherClasses()->first();
+            $this->classes = Auth::user()->teacherClasses()->first();
             $this->class = $this->classes->id ?? null;
         }
         }

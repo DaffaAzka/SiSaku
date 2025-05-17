@@ -31,8 +31,13 @@
                     </div>
 
                     <div class="space-y-2 text-center px-8">
-                        <h2 class="font-bold text-xl">Tambah User Baru</h2>
-                        <p class="text-sm">Silahkan pilih opsi penambahan user yang anda inginkan</p>
+                        @if (Auth::user()->hasRole('admin'))
+                            <h2 class="font-bold text-xl">Tambah User Baru</h2>
+                            <p class="text-sm">Silahkan pilih opsi penambahan user yang anda inginkan</p>
+                        @else
+                            <h2 class="font-bold text-xl">Tambah Siswa Baru</h2>
+                            <p class="text-sm">Silahkan pilih opsi penambahan siswa yang anda inginkan</p>
+                        @endif
                     </div>
 
 
@@ -48,6 +53,7 @@
                             Manual Input
                         </button>
 
+
                     </div>
 
 
@@ -58,4 +64,5 @@
     </div>
 
     <livewire:modals.user.store />
+    {{-- <livewire:modals.user.forgot-password /> --}}
 </div>

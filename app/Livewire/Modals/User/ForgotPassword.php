@@ -7,6 +7,7 @@ use App\Livewire\Sites\Management\Students;
 use App\Livewire\Sites\Management\Users;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ForgotPassword extends Component
@@ -22,7 +23,6 @@ class ForgotPassword extends Component
     public function submit()
     {
         $controller = new UserController();
-        $user = User::find($this->id);
 
         $this->validate([
             'password' => 'required|min:8|confirmed',
@@ -30,25 +30,14 @@ class ForgotPassword extends Component
         ]);
 
         $request = new Request([
-            'name' => $user->name,
-            'email' => $user->email,
-            'phone_number' => $user->phone,
-            'birth_date' => $user->birth,
-            'nip' => $user->nip,
-            'nisn' => $user->nisn,
-            'gender' => $user->gender,
             'password' => $this->password,
         ]);
 
-        $u = $controller->update($request, $this->id);
+        $u = $controller->updatePassword($request, $this->id);
 
-        if($u) {
-            $this->dispatch('userUpdated')->to(Users::class);
-            $this->dispatch('studentUpdated')->to(Students::class);
-
-            return session()->flash('success', [
+        if($u) {            return session()->flash('success', [
                 'title' => 'Berhasil',
-                'message' => 'Pengubahan password berhasi'
+                'message' => 'Pengubahan password berhasil'
             ]);
         } else {
             return session()->flash('error', [
@@ -56,8 +45,12 @@ class ForgotPassword extends Component
                 'message' => 'Pengubahan password gagal'
             ]);
         }
+    }
 
-
+    #[On('passwordSelected')]
+    public function passwordSelected($studentId)
+    {
+        $this->id = $studentId;
     }
 
     public function render()
