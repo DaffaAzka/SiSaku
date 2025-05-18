@@ -59,11 +59,20 @@ class Store extends Component
         $controller = new NotificationController();
 
         $this->validate([
-            'class_id' => 'required|exists:classes,id',
             'sent_at' => 'required|date',
             'message' => 'required|string|max:255',
             'header' => 'required|string|max:255'
         ]);
+
+        if ($this->user_id == null) {
+            $this->validate([
+                'class_id' => 'required|exists:classes,id',
+            ]);
+        }
+
+        if ($this->user_id != null) {
+            $this->class_id = null;
+        }
 
         if($this->notification) {
             // Update
@@ -75,6 +84,7 @@ class Store extends Component
 
                 $request = new Request([
                     'user_id' => $this->user_id,
+                    'class_id' => $this->class_id,
                     'message' => $this->message,
                     'header' => $this->header,
                     'sent_at' => $this->sent_at,
@@ -100,6 +110,7 @@ class Store extends Component
 
             } else {
                 $request = new Request([
+                    'user_id' => $this->user_id,
                     'class_id' => $this->class_id,
                     'message' => $this->message,
                     'header' => $this->header,

@@ -16,6 +16,8 @@ class Dashboard extends Component
     public $user;
     public $class;
 
+    public $total = 0;
+
     public $balance = 0;
 
     public function mount()
@@ -36,7 +38,8 @@ class Dashboard extends Component
             foreach ($class as $c) {
                 $balance += $balanceService->getClassBalance($c->id);
             }
-            $this->balance = $balance / count($class);
+            $this->total = $balance / count($class);
+            $this->balance = $balance;
 
 
         }

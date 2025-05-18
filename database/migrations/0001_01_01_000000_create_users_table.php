@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('nisn', 20)->nullable();
             $table->string('nip', 20)->nullable();
-            $table->date('birth_date');
+            $table->date('birth_date')->nullable();
             $table->string('phone_number');
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->timestamps();

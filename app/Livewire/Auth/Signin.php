@@ -50,7 +50,7 @@ class Signin extends Component
 
             Cache::put('email' . request()->ip(), $this->email, now()->addMinutes(30));
 
-            // Mail::to($this->email)->send(new VerificationEmail($code->code));
+            Mail::to($this->email)->send(new VerificationEmail($code->code));
 
             return redirect()->route(route: 'verify');
         }

@@ -1,5 +1,8 @@
 @php
     use Carbon\Carbon;
+    use App\Models\Classes;
+    use App\Models\User;
+    use App\Models\Transaction;
 @endphp
 
 <div class="font-sagoe p-4 sm:p-6 text-gray-800 ">
@@ -79,16 +82,12 @@
             </div>
             <div class="text-center p-4">
 
-                @if ($user->hasRole('teacher'))
+                @if ($user->hasRole('teacher') || $user->hasRole('admin'))
                     <p class="text-sm text-gray-600">Saldo Keseluruhan</p>
                 @endif
 
                 @if ($user->hasRole('student'))
                     <p class="text-sm text-gray-600">Sisa Saldo</p>
-                @endif
-
-                @if ($user->hasRole('admin'))
-                    <p class="text-sm text-gray-600">Saldo rata-rata</p>
                 @endif
 
                 <p class="text-2xl font-bold text-gray-800">Rp.
@@ -206,6 +205,43 @@
                     {{ $transaction->links('vendor.pagination.tailwind') }}
                 </div>
             </div>
+        </div>
+    @endif
+
+    @if ($user->hasRole('admin'))
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+
+            <div class="mt-2 bg-blue-100 border border-blue-200 text-sm text-blue-800 rounded-lg p-4" role="alert"
+                tabindex="-1" aria-labelledby="hs-soft-color-info-label">
+                <p id="hs-soft-color-info-label" class="font-bold">Jumlah Seluruh Kelas</p>
+                <h3 class="font-bold text-2xl">{{ Classes::count() }}</h3>
+                <p class="mt-1 text-sm">Dengan saldo rata-ratanya Rp.
+                    {{ number_format($total, 0, ',', thousands_separator: '.') }}</p>
+            </div>
+
+            <div class="mt-2 bg-teal-100 border border-teal-200 text-sm text-teal-800 rounded-lg p-4" role="alert"
+                tabindex="-1" aria-labelledby="hs-soft-color-success-label">
+                <p id="hs-soft-color-info-label" class="font-bold">Jumlah Semua Guru</p>
+                <h3 class="font-bold text-2xl">{{ User::role('teacher')->count() }}</h3>
+                <p class="mt-1 text-sm"></p>
+            </div>
+
+            <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4" role="alert"
+                tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
+                <p id="hs-soft-color-info-label" class="font-bold">Jumlah Semua Siswa</p>
+                <h3 class="font-bold text-2xl">{{ User::role('student')->count() }}</h3>
+                {{-- <p class="mt-1 text-sm">Dengan saldo rata-ratanya Rp.
+                    {{ number_format($balance, 0, ',', thousands_separator: '.') }}</p> --}}
+
+            </div>
+
+            <div class="mt-2 bg-yellow-100 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4"
+                role="alert" tabindex="-1" aria-labelledby="hs-soft-color-warning-label">
+                <p id="hs-soft-color-info-label" class="font-bold">Jumlah Seluruh Transaksi</p>
+                <h3 class="font-bold text-2xl">{{ Transaction::count() }}</h3>
+
+            </div>
+
         </div>
     @endif
 

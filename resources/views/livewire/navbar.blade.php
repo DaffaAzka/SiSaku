@@ -48,12 +48,12 @@
             aria-labelledby="hs-navbar-example-collapse">
             <div class="flex flex-col gap-6 sm:gap-8 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
                 @if (!Auth::check())
-                    <a class="font-semibold text-sm text-white hover:underline focus:outline-hidden focus:text-gray-100"
+                    {{-- <a class="font-semibold text-sm text-white hover:underline focus:outline-hidden focus:text-gray-100"
                         href="#">About</a>
                     <a class="font-semibold text-sm text-white hover:underline focus:outline-hidden focus:text-gray-100"
-                        href="#">Docs</a>
+                        href="#">Docs</a> --}}
                     <a class="font-semibold text-sm text-white hover:underline focus:outline-hidden focus:text-gray-100"
-                        href="#">Cek Akun Siswa</a>
+                        href="{{ route('student') }}">Cek Akun Siswa</a>
                     <a href="{{ route('signin') }}"
                         class="py-3 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-white  hover:bg-gray-50 focus:outline-hidden  disabled:opacity-50 disabled:pointer-events-none">
                         <x-lucide-log-in class="w-4 h-4" />
@@ -158,8 +158,8 @@
 
 
                     <span
-                        class="hidden sm:inline-flex items-center justify-center size-10 rounded-full bg-white font-semibold">
-                        AC
+                        class="inline-flex items-center justify-center size-9 text-sm font-semibold rounded-full bg-blue-100 text-blue-800">
+                        {{ Str::ucfirst(Auth::user()->name[0]) }}
                     </span>
                 @endif
 

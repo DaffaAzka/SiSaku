@@ -42,7 +42,8 @@
 
 
                     <div class="flex justify-center items-center gap-x-2 mb-8">
-                        <button type="button"
+                        <button type="button" aria-expanded="false" aria-controls="user-import-modal"
+                            data-hs-overlay="#user-import-modal"
                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none">
                             Import CSV
                         </button>
@@ -64,5 +65,6 @@
     </div>
 
     <livewire:modals.user.store />
+    <livewire:modals.user.import />
     {{-- <livewire:modals.user.forgot-password /> --}}
 </div>
