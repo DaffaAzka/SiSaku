@@ -56,26 +56,20 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="">
-                            <label for="startDate" class="block text-sm font-medium mb-2">Tanggal
-                                Mulai</label>
+                            <label for="startDate" class="block text-sm font-medium mb-2">Tanggal Mulai</label>
                             <div class="relative">
-                                <x-lucide-calendar id="startDate"
-                                    class="absolute w-4 h-4 left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-                                <input type="date" placeholder="Pilih Tanggal" wire:model.live="startDate"
+                                <input wire:model="startDate" type="date" id="startDate" name="startDate"
                                     max="{{ date('Y-m-d') }}"
-                                    class="pl-10 py-2 px-3 block w-full border border-gray-300 rounded-md text-sm focus:border-teal-600 focus:ring-teal-600" />
+                                    class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none">
                             </div>
                         </div>
 
                         <div class="">
-                            <label for="endDate" class="block text-sm font-medium mb-2">Tanggal
-                                Akhir</label>
+                            <label for="endDate" class="block text-sm font-medium mb-2">Tanggal Akhir</label>
                             <div class="relative">
-                                <x-lucide-calendar
-                                    class="absolute w-4 h-4 left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-                                <input id="endDate" type="date" placeholder="Pilih Tanggal"
-                                    wire:model.live="endDate" max="{{ date('Y-m-d') }}"
-                                    class="pl-10 py-2 px-3 block w-full border border-gray-300 rounded-md text-sm focus:border-teal-600 focus:ring-teal-600" />
+                                <input wire:model="endDate" type="date" id="endDate" name="endDate"
+                                    max="{{ date('Y-m-d') }}"
+                                    class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none">
                             </div>
                         </div>
                     </div>

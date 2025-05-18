@@ -96,7 +96,7 @@
             </div>
             <div class="p-4 mt-auto">
                 @if ($user->hasRole('student'))
-                    <button wire:click="$dispatch('studentExportSelected', { id: {{ $user->id }} })"
+                    <button wire:click="$dispatch('studentExportSelected', { id: {{ Auth::id() }} })"
                         aria-controls="transaction-export-modal" data-hs-overlay="#transaction-export-modal"
                         class="w-full bg-teal-700 hover:bg-teal-800 text-white py-2 rounded-md font-semibold">
                         Cetak Laporan
