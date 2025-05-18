@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Sisaku</title>
-
+    {{--
     @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+    @vite('resources/js/app.js') --}}
 
     <link rel="ico" href="{{ asset('logo_transparant.svg') }}" type="image/x-icon">
 
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-DzIwKna7.css') }}">
-    <script src="{{ asset('build/assets/app-CZvt5OcE.js') }}"></script> --}}
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DC9SDumM.css') }}">
+    <script src="{{ asset('build/assets/app-CZvt5OcE.js') }}"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
