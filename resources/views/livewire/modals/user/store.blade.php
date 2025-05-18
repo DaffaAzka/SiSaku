@@ -32,7 +32,7 @@
                         <x-utilities.success />
                         <x-utilities.error />
 
-                        @if ($user->hasRole('admin'))
+                        @if ($user->hasRole('admin') && $roleOption == null)
                             <div class="relative">
                                 <select wire:model.live='roleOption'
                                     class="border border-gray-300 rounded-lg px-4 py-3 text-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -185,11 +185,6 @@
                         @endif
 
                         <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200">
-                            <button type="button"
-                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                                data-hs-overlay="#user-store-modal">
-                                Close
-                            </button>
 
                             <div class="{{ $student ? '' : 'hidden' }}">
                                 <button type="button" aria-expanded="false" aria-controls="user-password-modal"
