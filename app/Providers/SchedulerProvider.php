@@ -20,6 +20,6 @@ class SchedulerProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Schedule::job(new ProcessScheduledNotifications())->hourly();
+        Schedule::job(new ProcessScheduledNotifications())->everyFiveMinutes();
     }
 }
