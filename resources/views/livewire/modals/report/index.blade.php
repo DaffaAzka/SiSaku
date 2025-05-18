@@ -26,7 +26,27 @@
 
                 <form action="" class="space-y-4 mb-4 relative" wire:submit='export'>
 
-                    @if ($student_id == null && $class_id == null)
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="">
+                            <label for="startDate" class="block text-sm font-medium mb-2">Tanggal Mulai</label>
+                            <div class="relative">
+                                <input wire:model="startDate" type="date" id="startDate" name="startDate"
+                                    max="{{ date('Y-m-d') }}"
+                                    class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <label for="endDate" class="block text-sm font-medium mb-2">Tanggal Akhir</label>
+                            <div class="relative">
+                                <input wire:model="endDate" type="date" id="endDate" name="endDate"
+                                    max="{{ date('Y-m-d') }}"
+                                    class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Auth::user()->hasRole('admin'))
                         <div class="relative z-[300]" wire:ignore>
                             <select wire:model.live='class_id'
                                 data-hs-select='{
@@ -53,26 +73,6 @@
                         </div>
 
                     @endif
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="">
-                            <label for="startDate" class="block text-sm font-medium mb-2">Tanggal Mulai</label>
-                            <div class="relative">
-                                <input wire:model="startDate" type="date" id="startDate" name="startDate"
-                                    max="{{ date('Y-m-d') }}"
-                                    class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none">
-                            </div>
-                        </div>
-
-                        <div class="">
-                            <label for="endDate" class="block text-sm font-medium mb-2">Tanggal Akhir</label>
-                            <div class="relative">
-                                <input wire:model="endDate" type="date" id="endDate" name="endDate"
-                                    max="{{ date('Y-m-d') }}"
-                                    class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none">
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="flex justify-center items-center gap-x-2 mb-8">
                         <button type="button"
