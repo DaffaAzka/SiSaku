@@ -1,6 +1,5 @@
 <div>
-    <nav
-        class="lg:hidden fixed top-0 inset-x-0 bg-teal-500 z-50">
+    <nav class="lg:hidden fixed top-0 inset-x-0 bg-teal-500 z-50">
         <div class="flex justify-end items-center px-4 h-16">
 
             <!-- Hamburger Toggle -->
@@ -36,10 +35,10 @@
 
         <!-- Header Sidebar -->
         <header class="p-2 flex justify-between items-center gap-x-2 bg-teal-500">
-           <a class="flex-none text-xl font-semibold text-white focus:outline-hidden focus:opacity-80" href="/"
+            <a class="flex-none text-xl font-semibold text-white focus:outline-hidden focus:opacity-80" href="/"
                 aria-label="Brand">
                 <span class="inline-flex items-center text-xl font-semibold text-white">
-                    <img class="w-10 h-10" src="{{ asset('logo_transparant.svg') }}" >
+                    <img class="w-10 h-10" src="{{ asset('logo_transparant.svg') }}">
                     SiSaku
                 </span>
             </a>
@@ -68,7 +67,7 @@
                             Manajemen Kelas
                         </a>
                     </li>
-                    <li class="relative">
+                    {{-- <li class="relative">
                         <button type="button"
                             class="w-full text-start flex items-center justify-between gap-x-3 py-2 px-3 text-sm font-medium text-white rounded-lg hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700">
                             <div class="flex items-center gap-x-3">
@@ -76,7 +75,7 @@
                                 Hak Akses
                             </div>
                         </button>
-                    </li>
+                    </li> --}}
                     {{-- <li>
                         <a class="flex items-center gap-x-3 py-2 px-3 text-sm font-medium text-white rounded-lg hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700"
                             href="#">

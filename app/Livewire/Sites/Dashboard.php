@@ -38,7 +38,11 @@ class Dashboard extends Component
             foreach ($class as $c) {
                 $balance += $balanceService->getClassBalance($c->id);
             }
-            $this->total = $balance / count($class);
+
+            if ($balance != 0) {
+                $this->total = $balance / count($class);
+            }
+
             $this->balance = $balance;
 
 

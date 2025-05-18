@@ -15,19 +15,22 @@ class ClassSeeder extends Seeder
      */
     public function run(): void
     {
-        Major::create([
-            'name' => 'Rekayasa Perangkat Lunak'
-        ]);
+        $majors = [
+            'Desain Gambar Mesin',
+            'Desain Pemodelan dan Informasi Bangunan',
+            'Rekayasa Perangkat Lunak',
+            'Teknik Pemeliharaan Gedung',
+            'Geomatika',
+            'Teknik Instalasi Tenaga Listrik',
+            'Teknik Konstruksi dan Perumahan',
+            'Teknik Mekanik Industri',
+            'Teknik Otomasi Industri',
+            'Teknik Permesinan',
+        ];
 
-
-        $teachers = User::role('teacher')->get();
-
-        foreach($teachers as $teacher) {
-            Classes::create([
-                'class' => $teacher->id,
-                'majors_id' => '1',
-                'grade' => 'XI',
-                'teacher_id' => $teacher->id,
+        foreach ($majors as $major) {
+            Major::create([
+                'name' => $major
             ]);
         }
     }

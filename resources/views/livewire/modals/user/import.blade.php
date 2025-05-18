@@ -77,6 +77,11 @@
                                 Close
                             </button>
 
+                            <a href="https://docs.google.com/spreadsheets/d/1ar7GBzce3CSVPuDddPysJbE2wbEIx1Du/edit?usp=drive_link&ouid=108434238093780754019&rtpof=true&sd=true"
+                                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                                Download Template
+                            </a>
+
                             <button type="submit"
                                 class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:outline-hidden focus:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none">
                                 Import
