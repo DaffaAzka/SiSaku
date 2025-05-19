@@ -32,7 +32,7 @@
                         <x-utilities.success />
                         <x-utilities.error />
 
-                        @if ($user->hasRole('admin') && $roleOption == null)
+                        @if ($user->hasRole('admin') && !$student)
                             <div class="relative">
                                 <select wire:model.live='roleOption'
                                     class="border border-gray-300 rounded-lg px-4 py-3 text-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500">

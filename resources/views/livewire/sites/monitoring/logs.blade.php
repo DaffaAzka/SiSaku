@@ -12,7 +12,6 @@
                     <th class="px-3 py-3">USER</th>
                     <th class="px-3 py-3">IP</th>
                     <th class="px-3 py-3">DATA</th>
-                    <th class="px-3 py-3">ACTION</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -36,10 +35,6 @@
                                     <span class="text-gray-500">No data available</span>
                                 @endif
                             </div>
-                        </td>
-                        <td class="px-3 py-3">
-                            <button type="button" class="text-blue-600 hover:underline"
-                                onclick="showLogDetails('{{ $log->id }}')">Detail</button>
                         </td>
                     </tr>
                 @endforeach

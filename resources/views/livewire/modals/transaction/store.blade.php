@@ -7,7 +7,7 @@
             class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto">
             <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200">
                 <h3 id="transaction-add-modal-label" class="font-bold text-gray-800">
-                    Tambah Transaksi
+                    {{ $transaction != null ? 'Edit Transaksi' : 'Tambah Transaksi' }}
                 </h3>
                 <button type="button"
                     class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none"
@@ -97,18 +97,6 @@
                                 </p>
                             @enderror
                         </div>
-                    </div>
-
-                    <div class="relative z-[100]">
-                        <textarea id="textarea-description" wire:model='description'
-                            class="py-2 px-3 sm:py-3 sm:px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:outline-none focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none"
-                            rows="3" placeholder="Masukan Deskripsi"></textarea>
-
-                        @error('description')
-                            <p class="text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-                                {{ $message }}
-                            </p>
-                        @enderror
                     </div>
 
                     <div

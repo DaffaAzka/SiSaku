@@ -49,6 +49,8 @@ class Store extends Component
     public function studentSelected($studentId)
     {
         $this->alreadySelected = $studentId;
+        $this->transaction = null;
+        $this->amount = 0;
     }
 
     #[On('transactionSelected')]
@@ -97,6 +99,7 @@ class Store extends Component
             ]);
 
             $tr = $transactionController->update($request, $this->transaction->id);
+
             if($tr) {
                 return session()->flash('success', [
                     'title' => 'Berhasil',
