@@ -47,7 +47,7 @@
         </div>
         <div>
             <button aria-controls="transaction-export-modal" data-hs-overlay="#transaction-export-modal"
-                wire:click="$dispatch('classExportSelected', { id: {{$class->id }}})"
+                wire:click="$dispatch('classExportSelected', { id: {{ $class->id }}})"
                 class="w-full md:w-auto bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-md text-sm font-medium">
                 Cetak Laporan Keseluruhan
             </button>
@@ -70,6 +70,8 @@
                     <th class="px-3 py-3">NISN</th>
                     <th class="px-3 py-3">Birth Date</th>
                     <th class="px-3 py-3">Balance</th>
+                    <th class="px-3 py-3">Details</th>
+                    <th class="px-3 py-3"></th>
                     <th class="px-3 py-3">Action</th>
                 </tr>
             </thead>
@@ -82,6 +84,24 @@
                         <td class="px-3 py-3">{{ $s->birth_date }}</td>
                         <td class="px-3 py-3">
                             Rp. {{ number_format($this->getBalance($s->id), 0, ',', thousands_separator: '.') }}</td>
+
+                        <td class="px-3 py-3">
+
+                            <span
+                                class="inline-flex gap-x-1.5 text-xs font-medium text-green-600">
+                                <x-lucide-arrow-up class="size-4" /> Rp.
+                                {{ number_format($this->getBalanceDeposit($s->id), 0, ',', thousands_separator: '.') }}
+                            </span>
+                        </td>
+
+                        <td class="px-3 py-3">
+                            <span
+                                class="inline-flex items-center gap-x-1.5 text-xs font-medium text-red-600">
+                                <x-lucide-arrow-down class="size-4" /> Rp.
+                                {{ number_format($this->getBalanceWithdrawal($s->id), 0, ',', thousands_separator: '.') }}
+                            </span>
+                        </td>
+
                         <td class="px-3 py-3 space-x-4 whitespace-nowrap">
                             <button class="text-emerald-600 hover:underline" aria-haspopup="dialog"
                                 wire:click="$dispatch('studentSelected', { studentId: '{{ $s->id }}' })"
@@ -165,14 +185,40 @@
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($transaction as $tr)
                         <tr>
-                            <td class="px-6 py-4 text-sm text-gray-800">
-                                {{ Str::upper($tr->type) }}
-                            </td>
+                            @if ($tr->type == 'deposit')
+                                <td class="px-6 py-4 text-sm text-green-600 flex">
+                                    <x-lucide-circle-arrow-up class="size-5 text-green-600 me-1.5" />
+                                    {{ Str::upper($tr->type) }}
+                                </td>
+                            @else
+                                <td class="px-6 py-4 text-sm text-red-600 flex">
+                                    <x-lucide-circle-arrow-down class="size-5 text-red-600 me-1.5" />
+
+                                    {{ Str::upper($tr->type) }}
+                                </td>
+                            @endif
                             <td class="px-6 py-4 text-sm text-gray-800">
                                 {{ Carbon::parse($tr->created_at)->translatedFormat('d F Y') }}
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-800">Rp.
-                                {{ number_format($tr->amount, 0, ',', '.') }}</td>
+                            @if ($tr->type == 'deposit')
+                                <td class="px-6 py-4 text-sm">
+                                    <span
+                                        class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md text-xs font-medium bg-teal-100 text-teal-800">
+                                        + Rp.
+                                        {{ number_format($tr->amount, 0, ',', '.') }}
+                                    </span>
+
+                                </td>
+                            @else
+                                <td class="px-6 py-4 text-sm">
+                                    <span
+                                        class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md text-xs font-medium bg-red-100 text-red-800">
+                                        - Rp.
+                                        {{ number_format($tr->amount, 0, ',', '.') }}
+                                    </span>
+
+                                </td>
+                            @endif
                             <td class="px-6 py-4 text-sm text-gray-800">
                                 {{ $tr->student->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">

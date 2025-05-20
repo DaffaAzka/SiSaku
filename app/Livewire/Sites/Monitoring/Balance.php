@@ -42,6 +42,16 @@ class Balance extends Component
         return $balanceService->getStudentBalance($student_id);
     }
 
+    public function getBalanceDeposit($student_id)
+    {
+        $balanceService = new BalanceService();
+        return $balanceService->getStudentDeposit($student_id);
+    }public function getBalanceWithdrawal($student_id)
+    {
+        $balanceService = new BalanceService();
+        return $balanceService->getStudentWithdrawal($student_id);
+    }
+
 
     public function render()
     {
@@ -55,7 +65,7 @@ class Balance extends Component
                 $query->where('student_id', $student_id); // exact match
             })->where('type', 'like', '%' . $this->type_transaction . '%')->orderByDesc('created_at')
             ->paginate(10);
-        
+
         return view('livewire.sites.monitoring.balance', [
             'studentClass' => $studentClass,
             'transaction' => $transaction

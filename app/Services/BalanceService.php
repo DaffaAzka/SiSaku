@@ -25,6 +25,38 @@ class BalanceService {
         return $balance;
     }
 
+    public function getStudentDeposit($id) {
+        $user = User::findOrFail($id);
+        $balance = 0;
+
+        $transactions = Transaction::where('student_id', $user->id)->get();
+
+        foreach ($transactions as $transaction) {
+            if ($transaction->type == 'deposit') {
+                $balance += $transaction->amount;
+            }
+        }
+
+        return $balance;
+    }
+
+    public function getStudentWithdrawal($id) {
+        $user = User::findOrFail($id);
+        $balance = 0;
+
+        $transactions = Transaction::where('student_id', $user->id)->get();
+
+        foreach ($transactions as $transaction) {
+            if ($transaction->type == 'withdrawal') {
+                $balance += $transaction->amount;
+            }
+        }
+
+        return $balance;
+    }
+
+
+
     public function getClassBalance($id) {
         $class = Classes::findOrFail($id);
 

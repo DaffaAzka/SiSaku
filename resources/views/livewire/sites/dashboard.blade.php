@@ -44,20 +44,40 @@
                         <tbody class="divide-y divide-gray-200">
                             @foreach ($transaction as $tr)
                                 <tr>
-                                    @if ($tr->type == "deposit")
-                                    <td class="px-6 py-4 text-sm text-green-600">
-                                        {{ Str::upper($tr->type) }}
-                                    </td>
+                                    @if ($tr->type == 'deposit')
+                                        <td class="px-6 py-4 text-sm text-green-600 flex">
+                                            <x-lucide-circle-arrow-up class="size-5 text-green-600 me-1.5" />
+                                            {{ Str::upper($tr->type) }}
+                                        </td>
                                     @else
-                                    <td class="px-6 py-4 text-sm text-red-600">
-                                        {{ Str::upper($tr->type) }}
-                                    </td>
+                                        <td class="px-6 py-4 text-sm text-red-600 flex">
+                                            <x-lucide-circle-arrow-down class="size-5 text-red-600 me-1.5" />
+
+                                            {{ Str::upper($tr->type) }}
+                                        </td>
                                     @endif
                                     <td class="px-6 py-4 text-sm text-gray-800">
                                         {{ Carbon::parse($tr->created_at)->translatedFormat('d F Y') }}
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-800">Rp.
-                                        {{ number_format($tr->amount, 0, ',', '.') }}</td>
+                                    @if ($tr->type == 'deposit')
+                                        <td class="px-6 py-4 text-sm">
+                                            <span
+                                                class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md text-xs font-medium bg-teal-100 text-teal-800">
+                                                + Rp.
+                                                {{ number_format($tr->amount, 0, ',', '.') }}
+                                            </span>
+
+                                        </td>
+                                    @else
+                                        <td class="px-6 py-4 text-sm">
+                                            <span
+                                                class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md text-xs font-medium bg-red-100 text-red-800">
+                                                - Rp.
+                                                {{ number_format($tr->amount, 0, ',', '.') }}
+                                            </span>
+
+                                        </td>
+                                    @endif
                                     <td class="px-6 py-4 text-end text-sm text-gray-800">
                                         {{ $tr->student->name ?? 'N/A' }}</td>
                                     <td class="px-6 py-4 text-end text-sm text-gray-800">
@@ -189,38 +209,39 @@
                             <tbody class="divide-y divide-gray-200">
                                 @foreach ($transaction as $tr)
                                     <tr>
-                                       @if ($tr->type == "deposit")
-                                    <td class="px-6 py-4 text-sm text-green-600 flex">
-                                        <x-lucide-circle-arrow-up class="size-5 text-green-600 me-1.5" />
-                                        {{ Str::upper($tr->type) }}
-                                    </td>
-                                    @else
-                                    <td class="px-6 py-4 text-sm text-red-600 flex">
-                                        <x-lucide-circle-arrow-down class="size-5 text-red-600 me-1.5" />
+                                        @if ($tr->type == 'deposit')
+                                            <td class="px-6 py-4 text-sm text-green-600 flex">
+                                                <x-lucide-circle-arrow-up class="size-5 text-green-600 me-1.5" />
+                                                {{ Str::upper($tr->type) }}
+                                            </td>
+                                        @else
+                                            <td class="px-6 py-4 text-sm text-red-600 flex">
+                                                <x-lucide-circle-arrow-down class="size-5 text-red-600 me-1.5" />
 
-                                        {{ Str::upper($tr->type) }}
-                                    </td>
-                                    @endif
+                                                {{ Str::upper($tr->type) }}
+                                            </td>
+                                        @endif
                                         <td class="px-6 py-4 text-sm text-gray-800">
                                             {{ Carbon::parse($tr->created_at)->translatedFormat('d F Y') }}
                                         </td>
-                                        @if ($tr->type == "deposit")
+                                        @if ($tr->type == 'deposit')
                                             <td class="px-6 py-4 text-sm">
-                                                <span class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md text-xs font-medium bg-teal-100 text-teal-800">
-                                                    Rp.
-                                            {{ number_format($tr->amount, 0, ',', '.') }}
+                                                <span
+                                                    class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md text-xs font-medium bg-teal-100 text-teal-800">
+                                                    + Rp.
+                                                    {{ number_format($tr->amount, 0, ',', '.') }}
                                                 </span>
 
                                             </td>
                                         @else
-                                         <td class="px-6 py-4 text-sm">
-                                                <span class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md text-xs font-medium bg-red-100 text-red-800">
-                                                    Rp.
-                                            {{ number_format($tr->amount, 0, ',', '.') }}
+                                            <td class="px-6 py-4 text-sm">
+                                                <span
+                                                    class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-md text-xs font-medium bg-red-100 text-red-800">
+                                                    - Rp.
+                                                    {{ number_format($tr->amount, 0, ',', '.') }}
                                                 </span>
 
                                             </td>
-
                                         @endif
 
                                         <td class="px-6 py-4 text-end text-sm text-gray-800">
