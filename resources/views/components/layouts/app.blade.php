@@ -7,13 +7,13 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Sisaku</title>
 
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+    {{-- @vite('resources/css/app.css')
+    @vite('resources/js/app.js') --}}
 
     <link rel="ico" href="{{ asset('logo_transparant.svg') }}" type="image/x-icon">
 
-    {{-- <link rel="stylesheet" href="{{ asset('app-DC9SDumM.css') }}">
-    <script src="{{ asset('app-CZvt5OcE.js') }}"></script> --}}
+    <link rel="stylesheet" href="{{ asset('app-BGVX2kVh.css') }}">
+    <script src="{{ asset('app-CZvt5OcE.js') }}"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
